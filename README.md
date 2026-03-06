@@ -1,10 +1,13 @@
-# リナックス研究会 : 実績公開リポジトリ
+# LINUX RESEARCH GROUP : CLASSIFIED REPOSITORY
 
-このリポジトリは、ドクターひろし（リナックス研究会）が提唱する **「Linux 攻略法図鑑（成功の三原則）」** を公開する場所です。
+This repository contains high-level intelligence assets and success protocols developed by Dr. Hiroshi.
 
-## 成功の三原則 [完全版]
-1. **Terminal Mastery**: GUIを捨て、コマンドという「直線道路」で環境を支配する。
-2. **Infrastructure Creation**: ディレクトリを構造化し、思考のノイズを消し去る。
-3. **Code Drawing**: エディタを開かず、catコマンドで考えを一瞬で「現実」へ描画する。
+## 🔴 STATUS: CLASSIFIED
+The **LCP (Linux Communication Protocol)** technology is currently under strict export control. 
+Direct access to technical specifications and implementation details is restricted to contracted partners only.
 
-[▶ 攻略法図鑑を見る（GitHub Pages）](https://h011145.github.io/hirosi-web-test-02/achievements.html)
+## 💼 SERVICES
+We provide custom LCP-Enforcer design and AI-Terminal synchronization consultancy.
+For business inquiries, please open a formal Issue on this repository.
+
+[▶ ENTER TERMINAL (RESTRICTED)](https://h011145.github.io/hirosi-web-test-02/)
