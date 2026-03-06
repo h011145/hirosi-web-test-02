@@ -6,21 +6,23 @@
     <title>実績：Linux 攻略法図鑑 - リナックス研究会</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f0f2f5; font-family: 'Courier New', Courier, monospace; line-height: 1.8; }
+        body { background-color: #f0f2f5; font-family: 'Courier New', Courier, monospace; line-height: 1.8; color: #212529; }
         .theory-card { border-top: 5px solid #212529; }
         .principle-num { font-size: 1.2rem; font-weight: bold; color: #495057; }
         .principle-title { font-size: 1.5rem; font-weight: bold; color: #212529; display: block; margin-bottom: 10px; }
-        .theory-content { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .theory-content { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .impact-section { background-color: #212529; color: #f8f9fa; padding: 40px; border-radius: 12px; margin-top: 50px; }
+        .impact-title { color: #ffc107; font-weight: bold; font-size: 1.8rem; border-bottom: 2px solid #ffc107; padding-bottom: 10px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold">Linux 攻略法図鑑</h1>
+            <h1 class="display-4 fw-bold text-dark">Linux 攻略法図鑑</h1>
             <p class="lead">成功の三原則 [完全版] / 提唱者：ドクターひろし</p>
         </div>
         
-        <div class="theory-content mx-auto" style="max-width: 800px;">
+        <div class="theory-content mx-auto" style="max-width: 900px;">
             <p class="mb-5 text-center text-muted border-bottom pb-3">
                 複雑な機能を捨て、最短距離で「開発の成功」へ至るための攻略理論。
             </p>
@@ -43,8 +45,36 @@
                 <p>エディタ（nano/vi）を開くのは「思考の中断」である。catコマンドのヒアドキュメントを使い、一気にコードを描かせる。ボタン一つで、考えをファイルに直接描画する。エディタ操作を介さないことで、ミスを排除し速度を最大化する。</p>
             </div>
 
+            <!-- ドクターひろし直伝：追記セクション -->
+            <div class="impact-section shadow-lg">
+                <h2 class="impact-title">Hコードを超える衝撃：APIの呪縛からの解放</h2>
+                <p class="mb-4">
+                    かつて、自律型AIエージェントの構築は「API制限」という物理的な壁に直面し、多くの開発者がその絶望の中で「失敗作」を生み出してきた。
+                </p>
+                <p class="mb-4">
+                    しかし、ドクターひろしが提唱する **Linux 連携プロトコル (LCP-01)** は、その前提を根底から覆した。
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <span class="text-warning fw-bold">■ チャット無制限資源の支配:</span><br>
+                        高価なAPIに依存せず、巷に溢れる「無制限のチャットAI」を最強のエージェントに変える。
+                    </li>
+                    <li class="mb-3">
+                        <span class="text-warning fw-bold">■ 100% のシンクロ（共鳴）:</span><br>
+                        「cat 描画術」により、AIの出力と人間の環境を1ビットの狂いもなく同期。行数ミスやエディタの操作ミスを物理的に「消滅」させた。
+                    </li>
+                    <li class="mb-3">
+                        <span class="text-warning fw-bold">■ 開発の「極意」の確定:</span><br>
+                        これは単なるLinux操作ではない。AIと人間が阿吽の呼吸で一つのプロダクトを爆速で組み上げるための「成功の作法」の確立である。
+                    </li>
+                </ul>
+                <p class="mt-4 fst-italic text-warning text-end">
+                    —— Hコード以上の衝撃、ここに結実。
+                </p>
+            </div>
+
             <div class="text-center mt-5">
-                <a href="index.html" class="btn btn-dark px-4">トップページに戻る</a>
+                <a href="index.html" class="btn btn-dark px-5">トップページに戻る</a>
             </div>
         </div>
     </div>
