@@ -3,59 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>実績：Linux 攻略法図鑑 - リナックス研究会</title>
+    <title>実績：Yggdrasil & Linux 攻略法 - リナックス研究会</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; font-family: 'Courier New', Courier, monospace; line-height: 1.8; color: #212529; }
-        .theory-content { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 50px; }
-        .principle-title { font-size: 1.5rem; font-weight: bold; color: #212529; display: block; margin-bottom: 10px; border-left: 5px solid #ffc107; padding-left: 15px; }
-        .impact-section { background-color: #212529; color: #f8f9fa; padding: 40px; border-radius: 12px; margin-top: 50px; }
-        .impact-title { color: #ffc107; font-weight: bold; font-size: 1.8rem; margin-bottom: 20px; }
-        .impact-text { color: #ffc107; font-weight: bold; }
+        body { background-color: #f4f7f6; font-family: 'Courier New', Courier, monospace; line-height: 1.8; color: #333; }
+        .achievement-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 50px; border-left: 10px solid #212529; }
+        .yggdrasil-border { border-left-color: #198754; }
+        .lcp-border { border-left-color: #ffc107; }
+        .tech-badge { background-color: #e9ecef; color: #495057; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; margin-right: 10px; }
+        .impact-title { color: #198754; font-weight: bold; font-size: 1.8rem; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h1 class="display-5 fw-bold">実績：Linux 攻略法図鑑</h1>
-            <p class="text-muted small">成功の三原則 [完全版] / 提唱者：ドクターひろし (リナックス研究会)</p>
+            <h1 class="display-4 fw-bold">リナックス研究会：主要実績</h1>
+            <p class="lead">ドクターひろしが到達した、二つの極致。</p>
         </div>
         
-        <div class="theory-content mx-auto" style="max-width: 900px;">
-            <!-- 古いブログ内容はここですべて排除されました -->
-            
-            <div class="mb-5">
-                <span class="principle-title">其の一：ターミナルの制覇 (GUIからの脱却)</span>
-                <p>GUIは「迷路」であり、初心者を惑わせる。ターミナルは「直線道路」だ。コマンドですべてが片付く。マウスを捨て、意志を文字（コマンド）で伝える。これこそが、開発を最速で成功させる唯一の極意である。</p>
+        <!-- 実績 1: Yggdrasil (最上位・重厚実績) -->
+        <div class="achievement-card yggdrasil-border">
+            <h2 class="impact-title">Yggdrasil Agent Framework / Orchestration</h2>
+            <p class="text-muted mb-4">【自律型AIエージェント・オーケストレーション基盤】</p>
+            <div class="mb-4">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Autonomous Orchestration</span>
+                <span class="tech-badge">GTP Code</span>
+                <span class="tech-badge">Pytest Driven</span>
             </div>
+            <hr>
+            <h5>■ 概要</h5>
+            <p>
+                抽象的な「目標（Goal）」を与えると、それを達成するための具体的な「GTPコード（手順）」を自動生成し、複数の専門エージェントを指揮して完遂させる、高度な自律型AI基盤。
+            </p>
+            <h5>■ 特徴と価値</h5>
+            <ul>
+                <li><strong>高密度オーケストレーション</strong>: 目標と実行を完全に分離。司令塔が最適な「手足（エージェント）」を自動派遣。</li>
+                <li><strong>プロフェッショナル設計</strong>: 階層化された設定管理、徹底したユニットテスト、共通ロギングを完備。</li>
+                <li><strong>API連携の先駆者</strong>: 外部APIと Linux 資源を高度に統合し、AIによる自動操作の可能性を極限まで追求。</li>
+            </ul>
+        </div>
 
-            <div class="mb-5">
-                <span class="principle-title">其の二：ディレクトリによる世界創造 (構造化)</span>
-                <p>開発の第一歩は「居場所」を作ることだ。必要なディレクトリをすべて作らせる。整理された空間こそが、思考のノイズを消し去る。ディレクトリ構造は、開発者の「意志の現れ」である。</p>
-            </div>
+        <!-- 実績 2: LCP-01 (攻略理論) -->
+        <div class="achievement-card lcp-border">
+            <h2 class="text-warning fw-bold h3 mb-3">Linux 連携プロトコル (LCP-01: 成功の三原則)</h2>
+            <p class="text-muted mb-4">【人間とチャットAIの完全共鳴プロトコル】</p>
+            <hr>
+            <p>
+                Yggdrasil で培った知見を「究極のシンプルさ」へ凝縮。
+                API制限を克服し、無制限のチャットAI資源を最強のエージェントに変える、人間とAIのシンクロを 100% 担保する攻略理論。
+            </p>
+            <ul class="small mt-3">
+                <li>其の一：ターミナルの制覇 (コマンドによる意志決定)</li>
+                <li>其の二：ディレクトリによる世界創造 (環境の共通認識)</li>
+                <li>其の三：cat 描画術 (1ビットの狂いもない完全同期)</li>
+            </ul>
+        </div>
 
-            <div class="mb-5">
-                <span class="principle-title">其の三：cat コマンドによるコード描画術 (高速反映)</span>
-                <p>エディタ（nano/vi）を開くのは「思考の中断」である。catコマンドのヒアドキュメントを使い、一気にコードを描かせる。ボタン一つで、考えをファイルに直接描画する。エディタ操作を介さないことで、ミスを排除し速度を最大化する。</p>
-            </div>
-
-            <div class="impact-section shadow-lg">
-                <h2 class="impact-title">Hコードを超える衝撃：LCP-01 プロトコル</h2>
-                <p class="mb-4 impact-text text-warning">APIの呪縛から解放され、チャットAIを最強のエージェントに変える。</p>
-                <p>
-                    かつての自律型エージェント開発は「API制限」という物理的な壁に直面し、お蔵入りとなった。
-                    しかし、ドクターひろしが提唱する **LCP-01 プロトコル** は、その前提を根底から覆した。
-                </p>
-                <p>
-                    これは単なる操作術ではない。「cat 描画術」により、AIの出力と人間の環境を100%同期させる。
-                    情報の非対称性を物理的に破壊し、AIとの「共鳴（シンクロ）」を果たすための究極の攻略理論である。
-                </p>
-                <p class="mt-4 fst-italic text-warning text-end">—— Hコード以上の衝撃、ここに結実。</p>
-            </div>
-
-            <div class="text-center mt-5">
-                <a href="index.html" class="btn btn-outline-dark px-5">トップページに戻る</a>
-            </div>
+        <div class="text-center mt-5">
+            <a href="index.html" class="btn btn-dark px-5 shadow">トップページへ戻る</a>
         </div>
     </div>
 </body>
