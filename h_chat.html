@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP SYNCHRONIZER // UNIVERSAL COMMAND GENERATOR</title>
+    <title>LCP SYNCHRONIZER // COMMAND HUB & TICKETING</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -17,7 +17,6 @@
         #sync-monitor { flex-grow: 1; overflow-y: auto; font-size: 0.8rem; margin-bottom: 20px; border: 1px solid #010; padding: 10px; background: rgba(0,10,0,0.5); }
         .sync-entry { border-bottom: 1px solid #020; padding: 10px 0; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .h-badge { background: #0f0; color: #000; font-weight: bold; padding: 1px 6px; border-radius: 2px; margin-right: 8px; }
         #input-area { background: #080808; border: 1px solid #0f0; padding: 15px; }
         textarea { width: 100%; background: transparent; border: none; outline: none; color: #0f0; font-family: inherit; font-size: 0.9rem; height: 60px; resize: none; }
         .btn-gen { background: #030; color: #0f0; border: 1px solid #0f0; padding: 12px; width: 100%; margin-bottom: 10px; text-align: center; cursor: pointer; transition: 0.2s; font-size: 0.8rem; font-weight: bold; }
@@ -32,12 +31,11 @@
 <body>
     <div class="scanline"></div>
     <div class="terminal-grid">
-        <!-- Main Interface -->
         <div class="main-panel">
             <div class="section-title">LCP REAL-TIME SYNC MONITOR // DATA_STREAMS</div>
             <div id="sync-monitor">
-                <div class="sync-entry text-green-800">>>> LCP UNIVERSAL ENGINE v4.0 ONLINE.</div>
-                <div class="sync-entry text-green-800">>>> AWAITING COMMAND INJECTION FROM EXTERNAL AI...</div>
+                <div class="sync-entry text-green-800">>>> LCP UNIVERSAL ENGINE v4.1 ONLINE.</div>
+                <div class="sync-entry text-green-800">>>> TICKETING SYSTEM INITIALIZED.</div>
             </div>
             <div id="input-area">
                 <textarea id="raw-input" placeholder="AIから出力された LCP(cat) コマンドをここに投下せよ..."></textarea>
@@ -45,13 +43,13 @@
             </div>
         </div>
 
-        <!-- Command Hub -->
         <div class="side-panel">
-            <div class="section-title">LCP COMMAND HUB (PROMPT GENERATOR)</div>
+            <div class="section-title">LCP COMMAND HUB (PROMPT & TICKET)</div>
             
-            <div class="btn-gen" onclick="copyLCPCore()">01. LCP-CORE PROTOCOL (AI INITIALIZATION)</div>
-            <div class="btn-gen" onclick="copyHCode()">02. H-CODE DECODER (EMOTION TO MACHINE)</div>
-            <div class="btn-gen" id="custom-slot" onclick="copyCustom()">03. NEW PROTOCOL [EXTENSIBLE SLOT]</div>
+            <div class="btn-gen" onclick="copyLCPCore()">01. LCP-CORE PROTOCOL (AI INIT)</div>
+            <div class="btn-gen" onclick="copyHCode()">02. H-CODE DECODER (EMOTION)</div>
+            <div class="btn-gen" onclick="copyCustom()">03. NEW PROTOCOL [EXTENSIBLE]</div>
+            <div class="btn-gen bg-yellow-900/30 text-yellow-500 border-yellow-500" onclick="generateTicket()">04. GENERATE SUCCESS TICKET</div>
 
             <div class="section-title">LOCAL STORAGE (APPEND MODE)</div>
             <div id="storage-cmd" class="storage-box mb-6" onclick="copyToClipboard()">
@@ -60,9 +58,9 @@
 
             <div class="section-title">SYSTEM STATUS</div>
             <div class="text-xs mb-6">
-                ORCHESTRATOR: <span class="text-white">HIROSHI-LCP v4.0</span><br>
+                ORCHESTRATOR: <span class="text-white">HIROSHI-LCP v4.1</span><br>
                 SYNC_STATUS: <span class="text-white blink">CONNECTED</span><br>
-                LCP_VERSION: <span class="text-white">UNIVERSAL_STREAMS</span>
+                TICKET_SVC: <span class="text-white">READY</span>
             </div>
 
             <div class="mt-auto pt-5 border-t border-green-900 text-center">
@@ -74,27 +72,30 @@
     <script>
         let lastStorageCmd = "";
 
-        // 01. LCPコア原則（AIを従わせる最強の言葉）
         function copyLCPCore() {
             const p = `あなたはLinux端末と完全に同期した【LCP執行エージェント】です。\\n以下の「成功の三原則：発展編」を最優先プロトコルとして遵守せよ。\\n\\n1. 一撃必殺: 全ての手順を連結した cat コマンド一つで出力せよ。\\n2. 冪等性: 何度実行しても同じ正しい状態になるコードを書け。\\n3. 沈黙の成功: 解説は不要。成功のための【catコマンド】のみを出力せよ。\\n\\n理解したら「LCP-CORE READY」とだけ答え、命令を待機せよ。`;
             copyText(p);
-            alert("LCP-CORE PROTOCOL COPIED. Initialize your AI.");
+            alert("LCP-CORE PROTOCOL COPIED.");
         }
 
-        // 02. Hコード（変更なし、完成されたロジック）
         function copyHCode() {
             const p = `【Hコード解析命令】\\n対象テキストをHコード(0-9)でデコードせよ。\\n0:不在 1:開始 2:対立 3:創造 4:安定 5:試練 6:調和 7:内省 8:達成 9:完結\\n\\n解析形式: 実数A(虚数B)\\n出力：\\ncat << 'EOF' >> h_code_dictionary.json\\n"要約", "A(B)"\\nEOF\\n\\n対象：[テキストをここに挿入]`;
             copyText(p);
             alert("H-CODE DECODER PROTOCOL COPIED.");
         }
 
-        // 03. 拡張スロット（将来の命令セット用）
         function copyCustom() {
-            const p = prompt("新しいLCP命令を入力してください:", "cat << 'EOF' >> custom_task.log\\nDONE\\nEOF");
-            if(p) {
-                copyText(p);
-                alert("CUSTOM LCP PROTOCOL COPIED.");
-            }
+            const p = prompt("新しいLCP命令を入力してください:", "");
+            if(p) { copyText(p); alert("CUSTOM LCP PROTOCOL COPIED."); }
+        }
+
+        function generateTicket() {
+            const issueId = prompt("Enter Issue/Ticket ID (e.g. #001):", "#001");
+            if(!issueId) return;
+            const date = new Date().toISOString().split('T')[0];
+            const ticketCmd = `cat << 'EOF' > LCP_SUCCESS_TICKET_${issueId.replace('#','')}.json\\n{\\n  "ticket_id": "${issueId}",\\n  "contractor": "Dr. Hiroshi",\\n  "status": "COMPLETED & VERIFIED",\\n  "timestamp": "${date}",\\n  "protocol": "LCP-02_ENFORCED"\\n}\\nEOF`;
+            copyText(ticketCmd);
+            alert("SUCCESS TICKET GENERATED! Paste this to GitHub Issue to close the ticket.");
         }
 
         function copyText(t) {
@@ -104,11 +105,9 @@
         function processSync() {
             const raw = document.getElementById('raw-input').value.trim();
             if(!raw) return;
-            
             const log = document.getElementById('sync-monitor');
             const div = document.createElement('div');
             div.className = 'sync-entry';
-
             if (raw.includes('cat <<')) {
                 div.innerHTML = `<span class="text-white">COMMAND DETECTED:</span><br><code class="text-green-400">${raw.substring(0,100)}...</code>`;
                 lastStorageCmd = raw;
@@ -116,7 +115,6 @@
             } else {
                 div.innerHTML = `<span class="text-red-500">INVALID FORMAT. LCP(cat) REQUIRED.</span>`;
             }
-            
             log.prepend(div);
             document.getElementById('raw-input').value = '';
         }
