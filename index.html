@@ -41,33 +41,35 @@
     <div class="max-w-5xl mx-auto">
         <header class="mb-16">
             <div id="typing-title" class="text-4xl md:text-6xl font-bold mb-4"></div>
-            <div id="typing-sub" class="text-sm text-green-800"></div>
+            <div id="typing-sub" class="text-sm text-green-800 h-6"></div>
         </header>
 
         <main class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Major Successes (Masterpieces) -->
+            <!-- Achievements -->
             <div>
                 <h2 class="section-title">Verified Masterpieces</h2>
                 <div class="flex flex-col gap-5">
-                    <a href="tesura.html" class="cmd-link">> RUN tesla_war.exe [Current War]</a>
-                    <a href="mefmeto.html" class="cmd-link">> RUN mehmet_conquest.bin [1453]</a>
-                    <a href="https://github.com/h011145/pilgrim-father" class="cmd-link" target="_blank">> FETCH pilgrim_engine.py [150KB]</a>
+                    <a href="tesura.html" class="cmd-link">> RUN tesla_war.exe</a>
+                    <a href="mefmeto.html" class="cmd-link">> RUN mehmet_conquest.bin</a>
+                    <a href="https://github.com/h011145/pilgrim-father" class="cmd-link" target="_blank">> FETCH pilgrim_engine.git</a>
+                    <a href="achievements.html" class="cmd-link">> VIEW achievement_log.txt</a>
                 </div>
             </div>
 
-            <!-- Theory & Core Protocols -->
+            <!-- Protocols -->
             <div>
                 <h2 class="section-title">Protocols & Theory</h2>
                 <div class="flex flex-col gap-4">
-                    <a href="achievements.html" class="cmd-link">> READ LCP-01_BASIC.txt</a>
-                    <a href="achievements.html" class="cmd-link">> READ LCP-02_ADVANCED.txt</a>
-                    <a href="https://github.com/h011145/yggdrasil-agent-framework" class="cmd-link" target="_blank">> ACCESS yggdrasil_orchestrator</a>
+                    <a href="achievements.html" class="cmd-link">> READ LCP-01_BASIC.md</a>
+                    <a href="achievements.html" class="cmd-link">> READ LCP-02_ADVANCED.md</a>
+                    <a href="h_code_spec.html" class="cmd-link">> DECRYPT H-CODE_SPEC</a>
+                    <a href="https://github.com/h011145/yggdrasil-agent-framework" class="cmd-link" target="_blank">> ACCESS yggdrasil_core</a>
                 </div>
             </div>
 
-            <!-- Yggdrasil Arcade (Restored Games) -->
+            <!-- Arcade (RE-ADDED) -->
             <div class="lg:col-span-2">
-                <h2 class="section-title">Yggdrasil Arcade [Legacy Assets]</h2>
+                <h2 class="section-title">Yggdrasil Arcade [Restored]</h2>
                 <div class="flex flex-wrap gap-4">
                     <a href="games/majyo/index.html" class="arcade-link">/usr/bin/majyo_sim</a>
                     <a href="games/pong/index.html" class="arcade-link">/usr/bin/classic_pong</a>
@@ -82,22 +84,21 @@
                 <div class="flex flex-wrap gap-4 opacity-60">
                     <a href="neo_world_saga.html" class="hover:text-white">neo_world_saga</a>
                     <a href="kami_no_itte.html" class="hover:text-white">kami_no_itte</a>
-                    <a href="h_code_spec.html" class="hover:text-white">h_code_spec</a>
-                    <a href="blog.html" class="hover:text-white">dev_log</a>
                     <a href="roadmap.html" class="hover:text-white">strategy_map</a>
+                    <a href="blog.html" class="hover:text-white">dev_log</a>
                 </div>
             </div>
         </main>
 
         <footer class="mt-32 pt-10 border-t border-green-900 text-[10px] opacity-40 flex justify-between">
-            <span>CONNECTION: SECURE [SYNCHRONIZED]</span>
+            <span>STATUS: 100% SYNCHRONIZED</span>
             <span>(C) 2026 LINUX RESEARCH GROUP - DR. HIROSHI</span>
         </footer>
     </div>
 
     <script>
         const titleText = "LINUX RESEARCH GROUP";
-        const subText = "SYSTEMS ONLINE. SUCCESS PROTOCOLS LCP-01/02 DETECTED. READY FOR EXECUTION.";
+        const subText = "SYSTEMS ONLINE. SUCCESS PROTOCOLS LCP-01/02 DETECTED.";
         
         function typeWriter(text, elementId, speed, callback) {
             let i = 0;
@@ -119,7 +120,7 @@
                 const cursor = document.createElement('span');
                 cursor.className = 'cursor';
                 document.getElementById('typing-title').appendChild(cursor);
-                typeWriter(subText, "typing-sub", 15);
+                typeWriter(subText, "typing-sub", 20);
             });
         };
     </script>
