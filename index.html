@@ -1,124 +1,114 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>リナックス研究会 | 公式ポータル</title>
-    <meta name="description" content="AIエージェント、Python開発、業務自動化のスペシャリスト「リナックス研究会」のポータルサイト。">
-    <meta name="keywords" content="リナックス研究会, AI, Python, 開発依頼, 業務自動化">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>LINUX RESEARCH GROUP - TERMINAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #f8f9fa; color: #333; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        .hero-section { background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%); color: white; padding: 60px 0; text-align: center; border-bottom: 5px solid #e0e1dd; }
-        .business-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: none; transition: transform 0.3s; margin-top: -40px; }
-        .content-link { text-decoration: none; color: #444; display: block; padding: 12px; border-radius: 8px; background: #fff; margin-bottom: 10px; border-left: 4px solid #1b263b; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .content-link:hover { background: #e9ecef; border-left-width: 8px; padding-left: 20px; }
-        .section-title { border-left: 5px solid #1b263b; padding-left: 15px; margin: 40px 0 20px; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        .scanline {
+            width: 100%; height: 100px; z-index: 99;
+            background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.1) 50%, rgba(0, 255, 0, 0) 100%);
+            opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 10s linear infinite;
+        }
+        @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
+        
+        .cursor { display: inline-block; width: 10px; height: 20px; background: #0f0; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+        .cmd-link {
+            color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 5px 15px;
+            display: inline-block; transition: all 0.2s; background: rgba(0, 255, 0, 0.05);
+        }
+        .cmd-link:hover { background: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
+        .section-title { border-bottom: 1px solid #0f0; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; }
     </style>
 </head>
-<body>
+<body class="p-5 md:p-20">
+    <div class="scanline"></div>
 
-<header class="hero-section">
-    <div class="container">
-        <h1 class="display-4 fw-bold">リナックス研究会</h1>
-        <p class="lead">AI、人類、そして技術の探究。ドクターひろしが率いる開発拠点。</p>
-        <a href="https://note.com/asumimutusaku" class="btn btn-outline-light btn-lg mt-2" target="_blank">📖 活動報告（note）</a>
-    </div>
-</header>
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-12">
+            <div id="typing-title" class="text-3xl md:text-5xl font-bold mb-2"></div>
+            <div id="typing-sub" class="text-sm text-green-800"></div>
+        </header>
 
-<div class="container mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-11">
-            <div class="card business-card p-4">
-                <div class="row align-items-center">
-                    <div class="col-lg-8">
-                        <h2 class="text-dark fw-bold">🛠 お仕事・開発依頼窓口</h2>
-                        <p class="lead">リナックス研究会による次世代システム構築</p>
-                        <p>AIを活用した爆速開発とGitHub/CLIによる自動化。あなたのビジョンを技術で具現化します。</p>
-                        <ul class="row list-unstyled">
-                            <li class="col-sm-6">✅ Python/Pygame システム開発</li>
-                            <li class="col-sm-6">✅ GitHub CLI 運用自動化構築</li>
-                            <li class="col-sm-6">✅ AIエージェント導入・連携</li>
-                            <li class="col-sm-6">✅ 技術コンサルティング</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-center border-start">
-                        <a href="contact.html" class="btn btn-dark btn-lg w-100 mb-3 py-3">📩 開発依頼の相談をする</a>
-<a href="roadmap.html" class="btn btn-sm btn-info text-white">戦略図</a>
-                        <div class="d-grid gap-2">
-                            <a href="https://github.com/h011145/frogmon-overload" class="btn btn-outline-dark" target="_blank">🎮 実績: Frogmon Overload</a>
-                            <div class="row g-2 mb-3">
-                                <div class="col-6"><a href="tesura.html" class="btn btn-primary fw-bold w-100 shadow py-3" target="_blank">⚡ WAR OF CURRENTS</a></div>
-                                <div class="col-6"><a href="mefmeto.html" class="btn btn-danger fw-bold w-100 shadow py-3" target="_blank">🕌 メフメトの野望</a></div>
-                            </div>
-                            <div class="row g-2 mb-3">
-                                <div class="col-12"><a href="https://github.com/h011145/pilgrim-father" class="btn btn-dark fw-bold w-100 shadow py-3" target="_blank">🚢 Pilgrim Fathers (Game Engine)</a></div>
-                            </div>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <a href="achievements.html" class="btn btn-success btn-sm">🚀 実績: Yggdrasil Orchestration</a>
-                                <a href="https://github.com/h011145/frogmon-overload" class="btn btn-outline-dark btn-sm" target="_blank">🎮 実績: Frogmon Overload</a>
-                            </div>
-                            <a href="achievements.html" class="btn btn-success btn-sm">🚀 実績: Yggdrasil Orchestration</a>
-                            <a href="https://github.com/h011145/frogmon-overload" class="btn btn-outline-dark btn-sm" target="_blank">🎮 実績: Frogmon Overload</a>
-                        </div>
-                    </div>
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <!-- Achievements -->
+            <div>
+                <h2 class="section-title">Verified Success</h2>
+                <div class="flex flex-col gap-4">
+                    <a href="tesura.html" class="cmd-link">> RUN tesla_war.exe</a>
+                    <a href="mefmeto.html" class="cmd-link">> RUN mehmet_conquest.bin</a>
+                    <a href="https://github.com/h011145/pilgrim-father" class="cmd-link" target="_blank">> FETCH pilgrim_engine.git</a>
+                    <a href="achievements.html" class="cmd-link">> VIEW achievement_log.txt</a>
                 </div>
             </div>
-        </div>
+
+            <!-- Theory & Core -->
+            <div>
+                <h2 class="section-title">Protocols & Theory</h2>
+                <div class="flex flex-col gap-4">
+                    <a href="achievements.html" class="cmd-link">> READ LCP-01_BASIC.md</a>
+                    <a href="achievements.html" class="cmd-link">> READ LCP-02_ADVANCED.md</a>
+                    <a href="h_code_spec.html" class="cmd-link">> DECRYPT H-CODE_SPEC</a>
+                    <a href="https://github.com/h011145/yggdrasil-agent-framework" class="cmd-link" target="_blank">> ACCESS yggdrasil_core</a>
+                </div>
+            </div>
+
+            <!-- Archives -->
+            <div class="md:col-span-2">
+                <h2 class="section-title">System Archives</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a href="neo_world_saga.html" class="text-xs border border-green-900 px-2 py-1 hover:border-green-400 transition-colors">neo_world_saga</a>
+                    <a href="kami_no_itte.html" class="text-xs border border-green-900 px-2 py-1 hover:border-green-400 transition-colors">kami_no_itte</a>
+                    <a href="roadmap.html" class="text-xs border border-green-900 px-2 py-1 hover:border-green-400 transition-colors">strategy_map</a>
+                    <a href="blog.html" class="text-xs border border-green-900 px-2 py-1 hover:border-green-400 transition-colors">dev_log</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-20 pt-10 border-t border-green-900 text-[10px] opacity-50 flex justify-between">
+            <span>STATUS: 100% SYNCHRONIZED</span>
+            <span>(C) 2026 LINUX RESEARCH GROUP - DR. HIROSHI</span>
+        </footer>
     </div>
 
-    <div class="row">
-        <div class="col-md-7">
-            <h3 class="section-title">📜 プロジェクト・ライブラリ</h3>
-            <a href="neo_world_saga.html" class="content-link">🌌 ネオワールドサーガ 本編</a>
-            <a href="characters.html" class="content-link">👤 登場人物紹介</a>
-            <a href="gallery.html" class="content-link">🖼 AI画像ギャラリー</a>
-            <a href="blog.html" class="content-link">📝 開発ブログ</a>
-        </div>
+    <script>
+        const titleText = "LINUX RESEARCH GROUP";
+        const subText = "ESTABLISHED 2026. PRINCIPLES: TERMINAL, MKDIR, CAT. [LCP-01/02 ENFORCED]";
         
-    <div class="row mt-5">
-        <div class="col-12">
-            <h3 class="section-title">🕹️ Yggdrasil Arcade (Play Online)</h3>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <a href="games/majyo/index.html" class="content-link text-center">
-                        <strong>🧙 majyo</strong><br><small>Magic Simulation</small>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="games/pong/index.html" class="content-link text-center">
-                        <strong>🏓 pong</strong><br><small>Classic Engine Test</small>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="games/wind/index.html" class="content-link text-center">
-                        <strong>🍃 wind</strong><br><small>Atmospheric Experience</small>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+        function typeWriter(text, elementId, speed, callback) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
 
-        <div class="col-md-5">
-            <h3 class="section-title">📂 アーカイブ</h3>
-            <div class="d-flex flex-wrap gap-2">
-<a href="roadmap.html" class="btn btn-sm btn-info text-white">戦略図</a>
-                <a href="achievements.html" class="btn btn-sm btn-outline-secondary">実績</a>
-                <a href="activity.html" class="btn btn-sm btn-outline-secondary">活動</a>
-                <a href="commands.html" class="btn btn-sm btn-outline-secondary">コマンド</a>
-                <a href="h_code_spec.html" class="btn btn-sm btn-outline-secondary">H-Code</a>
-                <a href="members.html" class="btn btn-sm btn-outline-secondary">メンバー</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer class="py-5 bg-dark text-white text-center">
-    <div class="container">
-        <p class="mb-0">&copy; 2026 リナックス研究会 | All Rights Reserved.</p>
-    </div>
-</footer>
-
+        window.onload = () => {
+            typeWriter(titleText, "typing-title", 100, () => {
+                const cursor = document.createElement('span');
+                cursor.className = 'cursor';
+                document.getElementById('typing-title').appendChild(cursor);
+                typeWriter(subText, "typing-sub", 30);
+            });
+        };
+    </script>
 </body>
 </html>
