@@ -10,10 +10,10 @@
         body { background-color: #000; color: #0f0; font-family: 'Fira Code', monospace; height: 100vh; margin: 0; display: flex; flex-direction: column; overflow: hidden; }
         .scanline { width: 100%; height: 100px; z-index: 999; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 8s linear infinite; }
         @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
-        #auth-overlay { position: fixed; inset: 0; background: #000; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .auth-box { border: 1px solid #f00; padding: 40px; background: rgba(20, 0, 0, 0.9); text-align: center; }
-        .auth-input { background: #000; border: 1px solid #f00; color: #f00; padding: 10px; text-align: center; outline: none; font-size: 1.2rem; width: 350px; }
-        .terminal-grid { display: grid; grid-template-columns: 1fr 450px; height: 100vh; gap: 1px; background: #030; filter: blur(15px); pointer-events: none; transition: filter 0.5s; }
+        /* パスワードロックを解除 */
+        #auth-overlay { display: none; }
+        .terminal-grid { display: grid; grid-template-columns: 1fr 450px; height: 100vh; gap: 1px; background: #030; filter: none; pointer-events: auto; transition: filter 0.5s; }
+        
         .main-panel { background: #000; display: flex; flex-direction: column; padding: 20px; }
         .side-panel { background: #050505; border-left: 1px solid #0f0; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; }
         .section-title { font-size: 0.8rem; color: #0f0; border-bottom: 1px solid #0f0; margin-bottom: 15px; padding-bottom: 5px; font-weight: bold; }
@@ -29,9 +29,9 @@
 </head>
 <body>
     <div class="scanline"></div>
-    <div id="auth-overlay">
-        <div class="auth-box"><div class="text-red-600 font-bold mb-4">LCP MISSION CONTROL</div><input type="password" id="access-code" class="auth-input" placeholder="ENTER MASTER KEY" onkeypress="handleAuth(event)"></div>
-    </div>
+    <!-- 認証オーバーレイは非表示に設定 -->
+    <div id="auth-overlay" style="display:none;"></div>
+
     <div id="protected-terminal" class="terminal-grid">
         <div class="main-panel">
             <div class="section-title text-yellow-500">MISSION ROADMAP // PHASE_CONTROL</div>
@@ -73,7 +73,12 @@
         let currentRoadmap = [];
         let selectedPhase = null;
 
-        function handleAuth(e) { if (e.key === 'Enter') { if (document.getElementById('access-code').value.trim() === 'sudo chmod hirosi') { document.getElementById('auth-overlay').style.display = 'none'; document.getElementById('protected-terminal').style.filter = 'none'; document.getElementById('protected-terminal').style.pointerEvents = 'auto'; } else { alert('DENIED.'); } } }
+        // 認証関数は常に成功するように変更
+        function handleAuth(e) { 
+            document.getElementById('auth-overlay').style.display = 'none'; 
+            document.getElementById('protected-terminal').style.filter = 'none'; 
+            document.getElementById('protected-terminal').style.pointerEvents = 'auto'; 
+        }
 
         // 01. ロードマップ作成用プロンプト
         function copyBlueprintPrompt() {
@@ -119,11 +124,8 @@
 
         function processSync() {
             const raw = document.getElementById('raw-input').value;
-            const log = document.getElementById('sync-monitor');
-            const div = document.createElement('div');
-            div.className = 'p-2 border-b border-purple-900 text-white text-xs';
-            div.innerText = ">>> DATA SYNCED FOR PHASE " + (selectedPhase ? selectedPhase.phase : "UNKNOWN");
-            log.prepend(div);
+            // モニター表示用の要素がないため、必要なら追加するかアラートで対応
+            alert("DATA SYNCED FOR PHASE " + (selectedPhase ? selectedPhase.phase : "UNKNOWN"));
             document.getElementById('raw-input').value = '';
         }
 
