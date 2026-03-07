@@ -3,90 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINUX RESEARCH GROUP - LCP TOTAL TERMINAL</title>
+    <title>LCP TOTAL TERMINAL // CRACK THE REALITY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
         body { background-color: #000; color: #0f0; font-family: 'Fira Code', monospace; overflow-x: hidden; margin: 0; }
         .scanline { width: 100%; height: 100px; z-index: 99; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 8s linear infinite; }
         @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
-        .cmd-link { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 15px; display: inline-block; transition: 0.2s; background: rgba(0, 255, 0, 0.05); font-size: 0.9rem; font-weight: bold; }
-        .cmd-link:hover { background: #0f0; color: #000; box-shadow: 0 0 20px #0f0; transform: scale(1.02); }
-        .section-title { border-bottom: 1px solid #0f0; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; color: #0a0; }
-        .junk-link { font-size: 0.75rem; color: #666; text-decoration: none; border: 1px solid #222; padding: 5px 10px; display: inline-block; }
-        .junk-link:hover { border-color: #444; color: #aaa; }
-        .archive-item { font-size: 0.75rem; color: #080; text-decoration: none; border: 1px solid #020; padding: 5px 10px; }
-        .archive-item:hover { border-color: #0f0; color: #0f0; }
         
-        /* Sponsor Special Style */
-        .sponsor-banner { background: linear-gradient(45deg, #110, #220); border: 2px solid #ffaa00; padding: 40px; margin-bottom: 60px; box-shadow: 0 0 30px rgba(255,170,0,0.2); position: relative; overflow: hidden; }
-        .sponsor-banner::before { content: "CLASSIFIED"; position: absolute; top: 10px; right: -30px; background: #ffaa00; color: #000; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: bold; }
+        .section-title { border-left: 5px solid #0f0; padding-left: 15px; margin-bottom: 30px; text-transform: uppercase; font-weight: bold; letter-spacing: 2px; color: #fff; font-size: 1.5rem; }
+        
+        .step-card { background: rgba(0, 255, 0, 0.05); border: 1px solid #030; padding: 25px; transition: 0.3s; position: relative; }
+        .step-card:hover { background: rgba(0, 255, 0, 0.1); border-color: #0f0; box-shadow: 0 0 20px rgba(0,255,0,0.2); }
+        .step-num { font-size: 2.5rem; font-weight: 900; color: #0f0; opacity: 0.2; position: absolute; top: 10px; right: 20px; }
+
+        .cmd-link { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 15px; display: inline-block; transition: 0.2s; background: rgba(0, 255, 0, 0.05); font-weight: bold; }
+        .cmd-link:hover { background: #0f0; color: #000; box-shadow: 0 0 20px #0f0; }
+
         .highlight-gold { color: #ffaa00; text-shadow: 0 0 10px #ffaa00; }
+        .sponsor-banner { background: #110; border: 2px solid #ffaa00; padding: 40px; margin-bottom: 60px; border-left: 10px solid #ffaa00; }
+        
+        .term-box { font-size: 0.8rem; color: #8a8; border-bottom: 1px solid #222; padding: 12px 0; }
+        .term-name { color: #0f0; font-weight: bold; width: 120px; display: inline-block; }
     </style>
 </head>
 <body class="p-5 md:p-20">
     <div class="scanline"></div>
     <div class="max-w-6xl mx-auto">
-        <header class="mb-16">
-            <div id="typing-title" class="text-4xl md:text-6xl font-bold mb-4"></div>
-            <p class="text-xs text-green-800 font-bold">>>> STATUS: 100% SYNCHRONIZED. MASTER: DR. HIROSHI</p>
+        
+        <header class="mb-20">
+            <h1 id="typing-title" class="text-4xl md:text-6xl font-bold mb-4"></h1>
+            <p class="text-xs text-green-800 font-bold tracking-widest">>>> LINUX COMMUNICATION PROTOCOL // CRACK THE SYSTEM, CHANGE THE WORLD.</p>
         </header>
 
-        <!-- LCP GRAND PRIX SPONSOR RECRUITMENT -->
-        <section class="sponsor-banner">
-            <h2 class="text-3xl font-black mb-6 highlight-gold">LCP GRAND PRIX // スポンサー募集開始</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="text-sm leading-relaxed text-gray-300">
-                    <p class="mb-4">「私はかつて、AIのコピペ作業員だった。」</p>
-                    <p class="mb-4">AIが設計図を一瞬で出しても、人間がエディタで数時間かけて実装する。この生産性の矛盾。LCP (Linux Communication Protocol) は、その鎖を破壊した。</p>
-                    <p class="mb-4 text-green-400 font-bold">「mkdirで空間を定義し、catで魂を流し込む。一撃のコマンドで、10分後には傑作が動いている。」</p>
-                    <p>この2000円のPCから放たれる『10分間の奇跡』を、世界標準へと押し上げる。最強のLCP執行者に贈る賞金 <span class="highlight-gold text-xl">$1,000,000</span> のスポンサーを求む。</p>
+        <!-- 1. SPONSOR & VISION -->
+        <section class="sponsor-banner mb-20">
+            <h2 class="text-2xl font-black mb-4 highlight-gold">LCP GRAND PRIX // $1,000,000 CRACKING</h2>
+            <p class="text-sm text-gray-300 leading-relaxed max-w-3xl">
+                エディタでの『労働』は終わった。AIにOSをクラックさせ、知能を直接OSの神経（Shell）に注入する。<br>
+                <span class="text-green-400 font-bold">「2000円のPCで、既存の生産性をクラックせよ。」</span><br>
+                この革命を加速させる最強のスポンサーを募集している。
+            </p>
+            <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="mt-6 inline-block px-10 py-4 bg-amber-500 text-black font-black hover:bg-white transition-all shadow-lg">>> ACCESS SPONSOR GATE</a>
+        </section>
+
+        <!-- 2. HOW TO CRACK (3-STEP) -->
+        <section class="mb-32">
+            <h2 class="section-title">HOW TO CRACK // 開発をクラックする3ステップ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 class="font-bold text-white mb-2">指令を抽出（Copy）</h3>
+                    <p class="text-xs leading-relaxed text-gray-400">MISSION CONTROLから「クラッキング・プロンプト」を取得。AIに投げる準備を整える。</p>
                 </div>
-                <div class="flex flex-col justify-center items-center bg-black/50 p-6 border border-amber-900">
-                    <p class="text-[10px] text-amber-600 mb-4 tracking-widest text-center">INVEST IN THE ONE-SHOT REVOLUTION</p>
-                    <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="w-full text-center px-8 py-4 bg-amber-500 text-black font-black text-lg hover:bg-white transition-all">>> CONTACT TO FOUNDER</a>
-                    <p class="mt-4 text-[9px] opacity-50 text-center">成功は、常に一撃のコマンドの先にある。</p>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 class="font-bold text-white mb-2">構造を突破（Design）</h3>
+                    <p class="text-xs leading-relaxed text-gray-400">AIがディレクトリ(mkdir)とファイル(cat)を連結した、システムを突破する『一撃のコード』を生成する。</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 class="font-bold text-white mb-2">現実に注入（Inject）</h3>
+                    <p class="text-xs leading-relaxed text-gray-400">ターミナルに貼り付け、Enter。10分後、あなたのPCには完成された『成功』が鎮座している。</p>
                 </div>
             </div>
         </section>
 
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <!-- 1. Major Successes -->
+        <!-- 3. LCP DICTIONARY -->
+        <section class="mb-32">
+            <h2 class="section-title">LCP CRACKING DICTIONARY</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20">
+                <div class="term-box"><span class="term-name">LCP</span><span>Linux Communication Protocol。知能とOSを直結するハック。</span></div>
+                <div class="term-box"><span class="term-name">OSCE</span><span>One-Shot Command Execution。システムをクラックする一撃。</span></div>
+                <div class="term-box"><span class="term-name">mkdir</span><span>空間の確保。LCPにおいて「世界」を定義する。</span></div>
+                <div class="term-box"><span class="term-name">cat</span><span>魂の注入。LCPにおいて「意志」を物質化する。</span></div>
+                <div class="term-box"><span class="term-name">GENESIS</span><span>文明の雛形。あらゆる道具をクラックして召喚する。</span></div>
+                <div class="term-box"><span class="term-name">CHRONOS</span><span>時間の支配。cronを用い、自律執行ミッションを刻む。</span></div>
+            </div>
+        </section>
+
+        <!-- 4. ACCESS ASSETS -->
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-32">
             <div class="lg:col-span-2">
-                <h2 class="section-title text-white">Verified Success Assets</h2>
+                <h2 class="section-title">CRACKED ASSETS</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="tesura.html" class="cmd-link">> RUN tesla_war.exe</a>
-                    <a href="mefmeto.html" class="cmd-link">> RUN mehmet_conquest.bin</a>
-                    <a href="hanabi.html" class="cmd-link text-white border-white">> RUN hanabi_puzzle.app</a>
-                    <a href="archer.html" class="cmd-link text-sky-400 border-sky-400">> RUN space_archer.sys</a>
+                    <a href="h_chat.html" class="cmd-link bg-fuchsia-900/20 border-fuchsia-500 text-white shadow-[0_0_20px_rgba(255,0,255,0.4)]">> ENTER MISSION_CONTROL (The Cracking Hub)</a>
+                    <a href="tesura.html" class="cmd-link">> EXEC tesla_war.bin</a>
+                    <a href="hanabi.html" class="cmd-link">> EXEC hanabi_puzzle.sh</a>
+                    <a href="archer.html" class="cmd-link">> EXEC space_archer.sys</a>
                 </div>
             </div>
-
-            <!-- 2. Core Protocols -->
             <div>
-                <h2 class="section-title">Classified Protocols</h2>
+                <h2 class="section-title">CLASSIFIED SPEC</h2>
                 <div class="flex flex-col gap-3">
-                    <a href="h_chat.html" class="cmd-link text-white border-fuchsia-500 bg-fuchsia-900/10 shadow-[0_0_15px_rgba(255,0,255,0.2)]">> OPEN MISSION_CONTROL v15.0</a>
-                    <a href="lcp_spec.html" class="cmd-link opacity-50">> VIEW lcp_family_spec.classified</a>
-                    <a href="super_lcp_spec.html" class="cmd-link text-yellow-500 border-yellow-500 font-bold">> ACCESS super_massive_lcp.core</a>
-                </div>
-            </div>
-
-            <!-- 3. Arcade -->
-            <div class="lg:col-span-3">
-                <h2 class="section-title">Yggdrasil Arcade [Recent]</h2>
-                <div class="flex flex-wrap gap-3">
-                    <a href="hanabi.html" class="archive-item">hanabi_puzzle</a>
-                    <a href="archer.html" class="archive-item">space_archer</a>
-                    <a href="games/legacy-adventure/index.html" class="archive-item">legacy_adventure</a>
-                    <a href="games/majyo/index.html" class="archive-item">majyo_sim</a>
-                    <a href="games/pong/index.html" class="archive-item">classic_pong</a>
+                    <a href="lcp_spec.html" class="cmd-link opacity-50">> READ lcp_protocol.v1</a>
+                    <a href="super_lcp_spec.html" class="cmd-link text-yellow-500 border-yellow-500">> READ super_massive_core</a>
                 </div>
             </div>
         </main>
 
-        <footer class="mt-32 pt-10 border-t border-green-900 text-[10px] opacity-40 flex justify-between">
-            <span>STATUS: 100% SYNCHRONIZED</span>
+        <footer class="pt-10 border-t border-green-900 text-[10px] opacity-40 flex justify-between">
+            <span>STATUS: SYSTEM CRACKED 100%</span>
             <span>(C) 2026 LINUX RESEARCH GROUP - DR. HIROSHI</span>
         </footer>
     </div>
