@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGACY OF ADVENTURE // REBORN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+        body { background-color: #000; color: #0f0; font-family: 'Fira Code', monospace; line-height: 1.8; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
+        .scanline { width: 100%; height: 100px; z-index: 99; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 8s linear infinite; }
+        @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
+        .game-screen { flex-grow: 1; padding: 40px; overflow-y: auto; border: 1px solid #030; margin: 20px; background: rgba(0, 20, 0, 0.5); }
+        .choice-btn { display: block; width: 100%; text-align: left; border: 1px solid #0f0; padding: 10px 20px; margin-bottom: 10px; background: rgba(0, 255, 0, 0.05); cursor: pointer; transition: 0.2s; }
+        .choice-btn:hover { background: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
+        .header { padding: 20px 40px; border-bottom: 1px solid #030; display: flex; justify-content: space-between; font-size: 0.8rem; }
+        .cursor { display: inline-block; width: 8px; height: 15px; background: #0f0; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    </style>
+</head>
+<body>
+    <div class="scanline"></div>
+    <header class="header">
+        <span class="font-bold">LEGACY_OF_ADVENTURE v2.0 // DECODED</span>
+        <span id="scene-counter">PHASE: 0/0</span>
+    </header>
+
+    <main class="game-screen" id="story-area">
+        <div id="text-display" class="mb-10 text-xl md:text-2xl whitespace-pre-wrap"></div>
+        <div id="choice-buttons"></div>
+    </main>
+
+    <footer class="p-5 text-center">
+        <button onclick="startGame()" class="text-[10px] text-green-800 hover:text-green-400 underline">REBOOT MISSION</button>
+    </footer>
+
+    <script>
+        // 統合されたシナリオデータ (ドクターひろしの遺産)
+        const gameData = {
+          "scenes": {
+            "start": {
+              "id": "start",
+              "text": "あなたは考古学者。伝説の『時の秘宝』を求めて、古代遺跡の入り口に立っている。\n\n遺跡の入り口には二つの通路が見える。",
+              "choices": [
+                { "text": "左の暗い通路へ進む", "nextScene": "left_path" },
+                { "text": "右の明るい通路へ進む", "nextScene": "right_path" }
+              ]
+            },
+            "left_path": {
+              "id": "left_path",
+              "text": "暗い通路を進むと、壁に古代の文字が刻まれている。\n\n『真実を求める者よ、光を灯せ』",
+              "choices": [
+                { "text": "松明に火を灯す", "nextScene": "torch_light" },
+                { "text": "暗闇のまま進む", "nextScene": "darkness_fall" }
+              ]
+            },
+            "right_path": {
+              "id": "right_path",
+              "text": "明るい通路を進むと、美しい庭園に出た。中央には泉が湧いている。\n\n泉の水が不思議な輝きを放っている。",
+              "choices": [
+                { "text": "泉の水を飲む", "nextScene": "drink_water" },
+                { "text": "泉を迂回して先へ進む", "nextScene": "bypass_fountain" }
+              ]
+            },
+            "torch_light": {
+              "id": "torch_light",
+              "text": "松明の明かりで壁を見ると、隠し扉が現れた！\n\n中には黄金の部屋があり、『時の秘宝』が安置されている。",
+              "choices": [
+                { "text": "秘宝を手に取る", "nextScene": "treasure_get" }
+              ]
+            },
+            "treasure_get": {
+              "id": "treasure_get",
+              "text": "あなたは『時の秘宝』を手に入れた！\n\n世界の時間はあなたの意のままに。ミッション完了。",
+              "isEnding": true
+            },
+            "darkness_fall": {
+              "id": "darkness_fall",
+              "text": "暗闇の中で足を踏み外し、あなたは深い穴に落ちてしまった...\n\nGame Over.",
+              "isEnding": true
+            },
+            "drink_water": {
+              "id": "drink_water",
+              "text": "泉の水を飲むと、全身に活力がみなぎり、古代の知恵が脳内に流れ込んできた！\n\nあなたは真理に到達した。ミッション完了。",
+              "isEnding": true
+            },
+            "bypass_fountain": {
+              "id": "bypass_fountain",
+              "text": "泉を無視して進むと、迷路のような回廊に出た。\n\n脱出できなくなり、永遠に彷徨うことになった...\n\nGame Over.",
+              "isEnding": true
+            }
+          }
+        };
+
+        let currentSceneId = 'start';
+
+        function typeWriter(text, elementId, speed, callback) {
+            let i = 0;
+            const element = document.getElementById(elementId);
+            element.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        function renderScene(sceneId) {
+            const scene = gameData.scenes[sceneId];
+            const btnArea = document.getElementById('choice-buttons');
+            const counter = document.getElementById('scene-counter');
+            
+            btnArea.innerHTML = "";
+            counter.innerText = `PHASE: ${sceneId.toUpperCase()}`;
+
+            typeWriter(scene.text, "text-display", 30, () => {
+                const cursor = document.createElement('span');
+                cursor.className = 'cursor';
+                document.getElementById('text-display').appendChild(cursor);
+
+                if (scene.isEnding) {
+                    const btn = document.createElement('button');
+                    btn.className = "choice-btn text-yellow-500 border-yellow-500";
+                    btn.innerText = "> MISSION_REBOOT";
+                    btn.onclick = startGame;
+                    btnArea.appendChild(btn);
+                } else if (scene.choices) {
+                    scene.choices.forEach(c => {
+                        const btn = document.createElement('button');
+                        btn.className = "choice-btn";
+                        btn.innerText = "> " + c.text;
+                        btn.onclick = () => renderScene(c.nextScene);
+                        btnArea.appendChild(btn);
+                    });
+                }
+            });
+        }
+
+        function startGame() {
+            renderScene('start');
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html>
