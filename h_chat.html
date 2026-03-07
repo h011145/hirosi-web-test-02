@@ -3,167 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP MISSION CONTROL // v9.0 GENESIS_EDITION</title>
+    <title>LCP MISSION CONTROL // v10.0 PURE_CONSOLE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
         body { background-color: #000; color: #0f0; font-family: 'Fira Code', monospace; height: 100vh; margin: 0; display: flex; flex-direction: column; overflow: hidden; }
         .scanline { width: 100%; height: 100px; z-index: 999; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 8s linear infinite; }
         @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
-        #auth-overlay { display: none; }
-        .terminal-grid { display: grid; grid-template-columns: 1fr 450px; height: 100vh; gap: 1px; background: #030; filter: none; pointer-events: auto; transition: filter 0.5s; }
         
-        .main-panel { background: #000; display: flex; flex-direction: column; padding: 20px; overflow-y: auto; }
-        .side-panel { background: #050505; border-left: 1px solid #0f0; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; }
-        .section-title { font-size: 0.8rem; color: #0f0; border-bottom: 1px solid #0f0; margin-bottom: 15px; padding-bottom: 5px; font-weight: bold; }
-        #roadmap-list { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; }
-        .phase-btn { background: #020; border: 1px solid #050; color: #0a0; padding: 10px; width: 100%; margin-bottom: 5px; text-align: left; cursor: pointer; font-size: 0.75rem; }
-        .phase-btn:hover { background: #050; color: #fff; }
-        .phase-btn.active { border-color: #0f0; color: #0f0; background: #030; box-shadow: 0 0 10px #0f0; }
-        .btn-gen { background: #030; color: #0f0; border: 1px solid #0f0; padding: 8px; width: 100%; margin-bottom: 8px; text-align: center; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
-        .btn-gen:hover { background: #0f0; color: #000; }
-        .btn-sync { background: #900090; color: #fff; font-weight: bold; padding: 12px; width: 100%; margin-top: 10px; text-align: center; cursor: pointer; }
+        .main-panel { background: #000; display: flex; flex-direction: column; padding: 40px; overflow-y: auto; height: 100vh; }
+        .section-title { font-size: 1rem; color: #0f0; border-bottom: 2px solid #0f0; margin-bottom: 25px; padding-bottom: 10px; font-weight: bold; letter-spacing: 3px; }
         
-        /* OSCE Button */
-        .btn-osce { background: #f0f; color: #000; font-weight: 900; padding: 15px; width: 100%; margin-bottom: 10px; text-align: center; cursor: pointer; border: 2px solid #fff; box-shadow: 0 0 20px #f0f; }
-        .btn-osce:hover { background: #fff; color: #f0f; box-shadow: 0 0 40px #fff; }
+        /* 巨大な OSCE ボタン */
+        .btn-osce { background: #f0f; color: #000; font-weight: 900; padding: 25px; width: 100%; margin-bottom: 40px; text-align: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 30px #f0f; font-size: 1.5rem; transition: 0.2s; }
+        .btn-osce:hover { background: #fff; color: #f0f; box-shadow: 0 0 60px #fff; transform: scale(1.01); }
 
-        /* Genesis Grid */
-        .genesis-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 30px; }
-        .btn-genesis { background: #003300; border: 1px solid #00ff00; color: #00ff00; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .btn-genesis:hover { background: #00ff00; color: #000; transform: scale(1.05); box-shadow: 0 0 15px #00ff00; }
-        .btn-genesis h3 { margin: 0; font-size: 0.9rem; font-weight: bold; }
-        .btn-genesis p { margin: 5px 0 0; font-size: 0.6rem; opacity: 0.7; }
+        /* 文明創成グリッド */
+        .genesis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 50px; }
+        .btn-genesis { background: #002200; border: 1px solid #00ff00; color: #00ff00; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .btn-genesis:hover { background: #00ff00; color: #000; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,255,0,0.4); }
+        .btn-genesis h3 { margin: 0; font-size: 1rem; font-weight: bold; }
+        .btn-genesis p { margin: 8px 0 0; font-size: 0.7rem; opacity: 0.6; }
 
-        textarea { width: 100%; background: #080808; border: 1px solid #333; outline: none; color: #f0f; font-family: inherit; font-size: 0.8rem; height: 100px; resize: none; padding: 10px; }
+        /* クイックコマンド */
+        .command-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 40px; }
+        .btn-command { background: #000; border: 1px solid #0a0; color: #0a0; padding: 15px; text-align: center; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
+        .btn-command:hover { border-color: #0f0; color: #0f0; background: #010; }
+
+        .footer { margin-top: auto; padding-top: 40px; text-align: center; border-t border-green-900; }
+        .back-link { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 30px; font-size: 0.8rem; }
+        .back-link:hover { background: #0f0; color: #000; }
     </style>
 </head>
 <body>
     <div class="scanline"></div>
-    <div id="auth-overlay" style="display:none;"></div>
 
-    <div id="protected-terminal" class="terminal-grid">
-        <div class="main-panel">
-            <!-- 究極の一撃必殺ボタン: OSCE -->
-            <div class="section-title text-fuchsia-500">LCP-OSCE // CUSTOM_DEPLOYER</div>
-            <div class="btn-osce" onclick="copyOSCEPrompt()">⚡ GENERATE CUSTOM TOOL (MKDIR + CAT) ⚡</div>
-            <p class="text-[9px] text-fuchsia-800 mb-8 text-center italic">"作りたいものを念じろ。AIが具現化する。"</p>
+    <div class="main-panel">
+        <header class="mb-12 text-center">
+            <h1 class="text-3xl font-black tracking-tighter text-white">LCP MISSION CONTROL <span class="text-fuchsia-500">// v10.0 PURE_CONSOLE</span></h1>
+            <p class="text-[10px] opacity-40 mt-2">NO INPUTS. NO SHADOWS. ONLY EXECUTION.</p>
+        </header>
 
-            <!-- 文明創世キット: GENESIS COLLECTION -->
-            <div class="section-title text-green-400">LCP-GENESIS // CIVILIZATION_STARTER_KIT</div>
-            <div class="genesis-grid">
-                <div class="btn-genesis" onclick="copyGenesisPrompt('WEB_SITE')">
-                    <h3>INSTANT WEBSITE</h3>
-                    <p>自分だけのHPを一撃構築</p>
-                </div>
-                <div class="btn-genesis" onclick="copyGenesisPrompt('TODO_APP')">
-                    <h3>TASK MASTER</h3>
-                    <p>最強のTODOリストを一撃構築</p>
-                </div>
-                <div class="btn-genesis" onclick="copyGenesisPrompt('DIARY')">
-                    <h3>LIFE LOGGER</h3>
-                    <p>シンプル日記帳を一撃構築</p>
-                </div>
-                <div class="btn-genesis" onclick="copyGenesisPrompt('FINANCE')">
-                    <h3>GOLD TRACKER</h3>
-                    <p>家計簿ツールを一撃構築</p>
-                </div>
-                <div class="btn-genesis" onclick="copyGenesisPrompt('GAME')">
-                    <h3>ARCADE GAME</h3>
-                    <p>暇つぶしゲームを一撃構築</p>
-                </div>
-                <div class="btn-genesis" onclick="copyGenesisPrompt('TIMER')">
-                    <h3>ZEN TIMER</h3>
-                    <p>集中タイマーを一撃構築</p>
-                </div>
+        <!-- 1. OSCE: 自由設計の一撃 -->
+        <div class="section-title text-fuchsia-500">01. LCP-OSCE // UNIVERSAL_DEPLOYER</div>
+        <div class="btn-osce" onclick="copyOSCEPrompt()">⚡ GENERATE ONE-SHOT COMMAND ⚡</div>
+
+        <!-- 2. GENESIS: 定番ツールの召喚 -->
+        <div class="section-title text-green-400">02. LCP-GENESIS // STARTER_KIT</div>
+        <div class="genesis-grid">
+            <div class="btn-genesis" onclick="copyGenesisPrompt('WEB_SITE')">
+                <h3>INSTANT WEBSITE</h3>
+                <p>ポートフォリオを一撃構築</p>
             </div>
-
-            <div class="section-title text-yellow-500 mt-auto">MISSION ROADMAP // PHASE_CONTROL</div>
-            <div id="roadmap-list">
-                <div class="p-2 text-gray-600 italic">No Roadmap loaded.</div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('TODO_APP')">
+                <h3>TASK MASTER</h3>
+                <p>高性能TODOを一撃構築</p>
+            </div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('DIARY')">
+                <h3>LIFE LOGGER</h3>
+                <p>シンプル日記帳を一撃構築</p>
+            </div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('FINANCE')">
+                <h3>GOLD TRACKER</h3>
+                <p>家計簿ツールを一撃構築</p>
+            </div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('GAME')">
+                <h3>ARCADE GAME</h3>
+                <p>Canvasゲームを一撃構築</p>
+            </div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('TIMER')">
+                <h3>ZEN TIMER</h3>
+                <p>集中タイマーを一撃構築</p>
             </div>
         </div>
 
-        <div class="side-panel">
-            <div class="section-title">COMMAND HUB [MISSION_CONTROL]</div>
-            <div class="btn-gen" onclick="copyBlueprintPrompt()">01. GENERATE BLUEPRINT (AI)</div>
-            <div class="btn-gen" onclick="copyLCPCore()">02. LCP-CORE INIT</div>
-            <div class="btn-gen border-green-500 text-green-400" onclick="copyHCode()">03. H-CODE ANALYSIS</div>
-            <div class="btn-gen border-purple-500 text-purple-400" onclick="copyShadow()">04. SHADOW PROMPT</div>
+        <!-- 3. QUICK COMMANDS: 定型執行命令 -->
+        <div class="section-title text-yellow-500">03. LCP-COMMANDS // QUICK_PHASE</div>
+        <div class="command-grid">
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_1')">PHASE 1: ARCHITECTURE (MKDIR)</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_2')">PHASE 2: CORE LOGIC (CAT)</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_3')">PHASE 3: UI/UX DESIGN</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_4')">PHASE 4: DEBUG & VERIFY</div>
+            <div class="btn-command" onclick="copyQuickCommand('HCODE')">H-CODE ANALYSIS (A(B) PROTOCOL)</div>
+            <div class="btn-command" onclick="copyQuickCommand('INIT')">LCP-CORE INITIALIZATION</div>
+        </div>
 
-            <div class="section-title">TARGETED EXECUTION PROMPT</div>
-            <div id="target-prompt-display" class="p-3 bg-black border border-blue-900 text-blue-400 text-[9px] break-all mb-6 cursor-pointer" onclick="copyTargetPrompt()">
-                SELECT A PHASE TO GENERATE PROMPT...
-            </div>
-
-            <div class="mt-auto text-center border-t border-green-900 pt-5">
-                <a href="index.html" class="text-[10px] text-green-800 hover:text-green-400">< RETURN TO TERMINAL</a>
-            </div>
+        <div class="footer">
+            <a href="index.html" class="back-link">< RETURN TO TERMINAL</a>
+            <p class="mt-12 text-[10px] opacity-20">MASTER: DR. HIROSHI // (C) 2026 LINUX RESEARCH GROUP</p>
         </div>
     </div>
+
     <script>
-        let currentRoadmap = [];
-        let selectedPhase = null;
+        // クリップボードコピー & アラート
+        function copyAndAlert(text, msg) {
+            navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
+            const alertBox = document.createElement('div');
+            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#0f0; color:#000; padding:15px; font-weight:bold; z-index:9999; box-shadow:0 0 20px #0f0;";
+            alertBox.innerText = msg;
+            document.body.appendChild(alertBox);
+            setTimeout(() => alertBox.remove(), 2000);
+        }
 
-        // 【LCP-OSCE】 カスタムデプロイヤー
         function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのツールを、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。実行可能なコードブロックのみ。\\n\\n【目的】：[ここに作りたいものを入力]`;
-            navigator.clipboard.writeText(p.replace(/\\\\n/g, '\\n'));
-            alert("CUSTOM PROMPT COPIED. Paste to AI.");
+            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのツールを、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。実行可能なコードブロックのみ。\\n\\n【目的】：[ここに入力]`;
+            copyAndAlert(p, "OSCE PROMPT COPIED.");
         }
 
-        // 【LCP-GENESIS】 文明創世プロンプト集
         function copyGenesisPrompt(type) {
-            let mission = "";
-            let tech = "";
+            let m = "", t = "";
             switch(type) {
-                case 'WEB_SITE':
-                    mission = "モダンで美しい個人のポートフォリオサイト（自己紹介、スキル、リンク集）。レスポンシブ対応。";
-                    tech = "HTML5, CSS3 (TailwindCDN), JavaScript";
-                    break;
-                case 'TODO_APP':
-                    mission = "ローカルストレージに保存される、ダークモード対応の高性能ToDoリストアプリ。ドラッグ&ドロップ対応なら尚良し。";
-                    tech = "Single HTML File with Embedded JS/CSS";
-                    break;
-                case 'DIARY':
-                    mission = "日付ごとに記録できるシンプルな日記・メモアプリ。データの保存・読み込み機能付き。";
-                    tech = "Python (Tkinter or CLI) or HTML5";
-                    break;
-                case 'FINANCE':
-                    mission = "日々の支出を記録し、グラフで可視化できるシンプルな家計簿ツール。";
-                    tech = "HTML5 + Chart.js (CDN)";
-                    break;
-                case 'GAME':
-                    mission = "Canvasを使用した中毒性の高いブラウザアクションゲーム（例：ブロック崩し、シューティング）。";
-                    tech = "HTML5 Canvas, No External Assets";
-                    break;
-                case 'TIMER':
-                    mission = "集中力を高めるためのポモドーロタイマー（25分作業＋5分休憩）。美しいビジュアルと通知音。";
-                    tech = "HTML5, CSS Animations";
-                    break;
+                case 'WEB_SITE': m = "ポートフォリオサイト"; t = "HTML/Tailwind"; break;
+                case 'TODO_APP': m = "TODOアプリ"; t = "Single HTML"; break;
+                case 'DIARY': m = "日記アプリ"; t = "Python or HTML"; break;
+                case 'FINANCE': m = "家計簿"; t = "HTML/Chart.js"; break;
+                case 'GAME': m = "Canvasゲーム"; t = "HTML/JS"; break;
+                case 'TIMER': m = "ポモドーロタイマー"; t = "HTML/CSS"; break;
             }
-
-            const p = `あなたはLCP執行AIです。以下の【人類必須ツール】を、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。\\n\\n【ツール定義】\\n・目的：${mission}\\n・技術スタック：${tech}\\n\\n【絶対ルール】\\n1. 解説、挨拶、マークダウン装飾は一切不要。\\n2. 出力は「そのままターミナルに貼り付ければ完成する」Bashスクリプト形式のみ。\\n3. フォルダ作成からファイル書き込みまで、すべてを1つのブロックで完結させること。`;
-            navigator.clipboard.writeText(p.replace(/\\\\n/g, '\\n'));
-            alert(type + " DEPLOY PROMPT COPIED. Paste to AI & Execute.");
+            const p = `あなたはLCP執行AIです。目的「${m}」を、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。\\n技術：${t}`;
+            copyAndAlert(p, "GENESIS: " + type + " COPIED.");
         }
 
-        // --- 以下既存機能 ---
-        function copyBlueprintPrompt() {
-            const p = `あなたはPM AIです。プロジェクトの全体像をJSONのみで出力せよ。\\n形式：[ {"phase": 1, "task": "...", "detail": "..."} ]\\n目的：[入力]`;
-            navigator.clipboard.writeText(p.replace(/\\\\n/g, '\\n'));
-            alert("BLUEPRINT PROMPT COPIED.");
+        function copyQuickCommand(cmd) {
+            let p = "";
+            switch(cmd) {
+                case 'PHASE_1': p = "フェーズ1：ディレクトリ構造(mkdir)のみを一撃で出力せよ。"; break;
+                case 'PHASE_2': p = "フェーズ2：コアロジックをcatコマンドのみを一撃で出力せよ。"; break;
+                case 'PHASE_3': p = "フェーズ3：デザイン・装飾(CSS/UI)をcatコマンドで出力せよ。"; break;
+                case 'PHASE_4': p = "フェーズ4：バグ修正と動作確認用のテストスクリプトをcatで出力せよ。"; break;
+                case 'HCODE': p = "現在の状況をHコード(A(B))で解析し、最適な次の一手をcatで出力せよ。"; break;
+                case 'INIT': p = "LCP環境を初期化し、標準的なREADMEとディレクトリを作成するコマンドを出力せよ。"; break;
+            }
+            copyAndAlert(p, "COMMAND: " + cmd + " COPIED.");
         }
-
-        function loadRoadmap() { /* ... (省略なしで実装) ... */ 
-            const val = "[]"; // 簡易実装
-            alert("ROADMAP FEATURE STANDBY.");
-        }
-        function copyTargetPrompt() { /* ... */ }
-        function processSync() { /* ... */ }
-        function copyLCPCore() { navigator.clipboard.writeText("LCPコア初期化..."); alert("COPIED."); }
-        function copyHCode() { navigator.clipboard.writeText("Hコード解析開始..."); alert("COPIED."); }
-        function copyShadow() { navigator.clipboard.writeText("SHADOWプロトコル発動..."); alert("COPIED."); }
     </script>
 </body>
 </html>
