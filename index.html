@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LINUX RESEARCH GROUP - TOTAL ASSET TERMINAL</title>
+    <title>LINUX RESEARCH GROUP - LCP TOTAL TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -17,6 +17,11 @@
         .junk-link:hover { border-color: #444; color: #aaa; }
         .archive-item { font-size: 0.75rem; color: #080; text-decoration: none; border: 1px solid #020; padding: 5px 10px; }
         .archive-item:hover { border-color: #0f0; color: #0f0; }
+        
+        /* Sponsor Special Style */
+        .sponsor-banner { background: linear-gradient(45deg, #110, #220); border: 2px solid #ffaa00; padding: 40px; margin-bottom: 60px; box-shadow: 0 0 30px rgba(255,170,0,0.2); position: relative; overflow: hidden; }
+        .sponsor-banner::before { content: "CLASSIFIED"; position: absolute; top: 10px; right: -30px; background: #ffaa00; color: #000; padding: 5px 40px; transform: rotate(45deg); font-size: 0.6rem; font-weight: bold; }
+        .highlight-gold { color: #ffaa00; text-shadow: 0 0 10px #ffaa00; }
     </style>
 </head>
 <body class="p-5 md:p-20">
@@ -24,19 +29,36 @@
     <div class="max-w-6xl mx-auto">
         <header class="mb-16">
             <div id="typing-title" class="text-4xl md:text-6xl font-bold mb-4"></div>
-            <p class="text-xs text-green-800 font-bold">>>> STATUS: TOTAL SYNCHRONIZATION COMPLETE. MASTER: DR. HIROSHI</p>
+            <p class="text-xs text-green-800 font-bold">>>> STATUS: 100% SYNCHRONIZED. MASTER: DR. HIROSHI</p>
         </header>
+
+        <!-- LCP GRAND PRIX SPONSOR RECRUITMENT -->
+        <section class="sponsor-banner">
+            <h2 class="text-3xl font-black mb-6 highlight-gold">LCP GRAND PRIX // スポンサー募集開始</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="text-sm leading-relaxed text-gray-300">
+                    <p class="mb-4">「私はかつて、AIのコピペ作業員だった。」</p>
+                    <p class="mb-4">AIが設計図を一瞬で出しても、人間がエディタで数時間かけて実装する。この生産性の矛盾。LCP (Linux Communication Protocol) は、その鎖を破壊した。</p>
+                    <p class="mb-4 text-green-400 font-bold">「mkdirで空間を定義し、catで魂を流し込む。一撃のコマンドで、10分後には傑作が動いている。」</p>
+                    <p>この2000円のPCから放たれる『10分間の奇跡』を、世界標準へと押し上げる。最強のLCP執行者に贈る賞金 <span class="highlight-gold text-xl">$1,000,000</span> のスポンサーを求む。</p>
+                </div>
+                <div class="flex flex-col justify-center items-center bg-black/50 p-6 border border-amber-900">
+                    <p class="text-[10px] text-amber-600 mb-4 tracking-widest text-center">INVEST IN THE ONE-SHOT REVOLUTION</p>
+                    <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="w-full text-center px-8 py-4 bg-amber-500 text-black font-black text-lg hover:bg-white transition-all">>> CONTACT TO FOUNDER</a>
+                    <p class="mt-4 text-[9px] opacity-50 text-center">成功は、常に一撃のコマンドの先にある。</p>
+                </div>
+            </div>
+        </section>
 
         <main class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <!-- 1. Major Successes -->
             <div class="lg:col-span-2">
-                <h2 class="section-title">Verified Success Assets (The Masterpieces)</h2>
+                <h2 class="section-title text-white">Verified Success Assets</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <a href="tesura.html" class="cmd-link">> RUN tesla_war.exe</a>
                     <a href="mefmeto.html" class="cmd-link">> RUN mehmet_conquest.bin</a>
-                    <a href="games/legacy-adventure/index.html" class="cmd-link text-white border-white">> RUN legacy_adventure_reborn.bin</a>
-                    <a href="https://github.com/h011145/pilgrim-father" class="cmd-link" target="_blank">> FETCH pilgrim_engine.git</a>
-                    <a href="https://github.com/h011145/yggdrasil-agent-framework" class="cmd-link" target="_blank">> ACCESS yggdrasil_core.sys</a>
+                    <a href="hanabi.html" class="cmd-link text-white border-white">> RUN hanabi_puzzle.app</a>
+                    <a href="archer.html" class="cmd-link text-sky-400 border-sky-400">> RUN space_archer.sys</a>
                 </div>
             </div>
 
@@ -44,50 +66,22 @@
             <div>
                 <h2 class="section-title">Classified Protocols</h2>
                 <div class="flex flex-col gap-3">
-                    <a href="h_chat.html" class="cmd-link text-white border-white">> OPEN LCP_SYNCHRONIZER</a>
+                    <a href="h_chat.html" class="cmd-link text-white border-fuchsia-500 bg-fuchsia-900/10 shadow-[0_0_15px_rgba(255,0,255,0.2)]">> OPEN MISSION_CONTROL v15.0</a>
                     <a href="lcp_spec.html" class="cmd-link opacity-50">> VIEW lcp_family_spec.classified</a>
                     <a href="super_lcp_spec.html" class="cmd-link text-yellow-500 border-yellow-500 font-bold">> ACCESS super_massive_lcp.core</a>
-                    <a href="h_code_spec.html" class="cmd-link opacity-50">> VIEW h-code_spec.classified</a>
-                    <a href="lcp_ais_spec.html" class="cmd-link text-red-500 border-red-500 font-bold">> APPLY lcp-ais_safety_patch.exe</a>
                 </div>
             </div>
 
-            <!-- 3. Junk & Experimental (The Salvage Yard) -->
+            <!-- 3. Arcade -->
             <div class="lg:col-span-3">
-                <h2 class="section-title">Salvage Yard (Junk & Experimental Assets)</h2>
-                <div class="mb-4">
-                    <a href="https://github.com/h011145/hirosi-archive-vault" class="cmd-link bg-gray-900 text-gray-400 border-gray-700 py-1" target="_blank">> RECOVER hirosi_archive_vault [LEGACY_CODE]</a>
-                </div>
+                <h2 class="section-title">Yggdrasil Arcade [Recent]</h2>
                 <div class="flex flex-wrap gap-3">
-                    <a href="archer.html" class="archive-item">space_archer</a>
                     <a href="hanabi.html" class="archive-item">hanabi_puzzle</a>
-                    <a href="https://github.com/h011145/h-code-battle-game" class="junk-link" target="_blank">[JUNK] h-code_battle_game</a>
-                    <a href="https://github.com/h011145/resignation-email-app" class="junk-link" target="_blank">[EXPERIMENTAL] resignation_email_app</a>
-                    <a href="https://github.com/h011145/hirosi-gemini-cli-tools" class="junk-link" target="_blank">[PARTS] gemini_cli_tools</a>
-                    <a href="https://github.com/h011145/ai-business-homepage-experiment" class="junk-link" target="_blank">[OBSOLETE] ai_business_experiment</a>
-                    <a href="https://github.com/h011145/yggdrasil-central-core-web" class="junk-link" target="_blank">[WIP] yggdrasil_web_core</a>
-                </div>
-            </div>
-
-            <!-- 4. Arcade & Archives -->
-            <div class="lg:col-span-2">
-                <h2 class="section-title">Yggdrasil Arcade [Legacy]</h2>
-                <div class="flex flex-wrap gap-3">
                     <a href="archer.html" class="archive-item">space_archer</a>
-                    <a href="hanabi.html" class="archive-item">hanabi_puzzle</a>
+                    <a href="games/legacy-adventure/index.html" class="archive-item">legacy_adventure</a>
                     <a href="games/majyo/index.html" class="archive-item">majyo_sim</a>
                     <a href="games/pong/index.html" class="archive-item">classic_pong</a>
-                    <a href="games/wind/index.html" class="archive-item">wind_experience</a>
-                    <a href="games/legacy-adventure/index.html" class="archive-item">legacy_adventure_reborn</a>
-                    <a href="https://github.com/h011145/frogmon-overload" class="archive-item" target="_blank">frogmon_overload</a>
                 </div>
-            </div>
-
-            <!-- 5. Business -->
-            <div class="lg:col-span-3 mt-5 p-6 border border-green-500 bg-green-900/10">
-                <h3 class="text-xl font-bold text-white mb-2">Hire: LCP PROMPT DESIGNER</h3>
-                <p class="text-sm opacity-70 mb-4">Mastering the synchronization between AI Intelligence and Linux Terminal.</p>
-                <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="cmd-link bg-green-500 text-black font-bold" target="_blank">> OPEN_ISSUE_FOR_HIRE</a>
             </div>
         </main>
 
