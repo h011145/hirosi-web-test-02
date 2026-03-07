@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP SYNCHRONIZER // SHADOW_PROTOCOL</title>
+    <title>LCP SYNCHRONIZER // SAFE_SHADOW_GATE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -20,47 +20,48 @@
         .main-panel { background: #000; display: flex; flex-direction: column; padding: 20px; }
         .side-panel { background: #050505; border-left: 1px solid #0f0; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; }
         .section-title { font-size: 0.8rem; color: #0f0; border-bottom: 1px solid #0f0; margin-bottom: 15px; padding-bottom: 5px; font-weight: bold; }
+        .sync-entry { border-bottom: 1px solid #020; padding: 10px 0; font-size: 0.75rem; }
+        .preview-box { background: #010; border: 1px dashed #808; color: #d0d; padding: 10px; margin-top: 5px; font-family: monospace; }
         .btn-gen { background: #030; color: #0f0; border: 1px solid #0f0; padding: 10px; width: 100%; margin-bottom: 8px; text-align: center; cursor: pointer; font-size: 0.75rem; font-weight: bold; }
         .btn-gen:hover { background: #0f0; color: #000; }
+        .btn-sync { background: #900090; color: #fff; font-weight: bold; padding: 12px; width: 100%; margin-top: 10px; text-align: center; cursor: pointer; }
         .blink { animation: blink 1s infinite; }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
-        .shadow-box { background: #111; border: 1px solid #f0f; padding: 10px; color: #f0f; font-size: 0.7rem; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="scanline"></div>
 
-    <!-- Security Auth Layer -->
     <div id="auth-overlay">
         <div class="auth-box">
             <div class="auth-title blink">ACCESS DENIED</div>
-            <p class="text-xs text-red-800 mb-6">LCP PROTOCOL v5.0 // SHADOW_GATE ACTIVE</p>
+            <p class="text-xs text-red-800 mb-6">LCP PROTOCOL v5.1 // SECURE GATEWAY</p>
             <input type="password" id="access-code" class="auth-input" placeholder="ENTER CLEARANCE CODE" onkeypress="handleAuth(event)">
         </div>
     </div>
 
-    <!-- Protected Interface -->
     <div id="protected-terminal" class="terminal-grid">
         <div class="main-panel">
-            <div class="section-title">SHADOW SYNC MONITOR // ENCRYPTED_STREAM</div>
-            <div id="sync-monitor" class="flex-grow overflow-y-auto font-mono text-xs">
-                <div class="p-2 border-b border-purple-900 text-purple-400">>>> SHADOW_PROTOCOL STANDBY.</div>
+            <div class="section-title">SHADOW ANALYZER // REAL-TIME PREVIEW</div>
+            <div id="sync-monitor" class="flex-grow overflow-y-auto">
+                <div class="p-2 text-green-800">>>> AUTHENTICATION SUCCESSFUL.</div>
+                <div class="p-2 text-green-800">>>> PREVIEW MODE: ON. SAFETY GATE: ACTIVE.</div>
             </div>
             <div class="p-4 bg-black border border-purple-900">
-                <textarea id="raw-input" class="w-full bg-transparent border-none text-purple-500 outline-none h-20" placeholder="PASTE ENCRYPTED LCP DATA..."></textarea>
-                <button class="w-full bg-purple-900 text-white font-bold p-2 mt-2 hover:bg-purple-600" onclick="processSync()">DECODE SHADOW STREAM</button>
+                <textarea id="raw-input" class="w-full bg-transparent border-none text-purple-500 outline-none h-20" placeholder="PASTE SHADOW DATA (Base64 Stream)..."></textarea>
+                <div class="btn-sync" onclick="processSync()">ANALYZE & VERIFY</div>
             </div>
         </div>
 
         <div class="side-panel">
-            <div class="section-title">LCP COMMAND HUB [CLASSIFIED]</div>
+            <div class="section-title">COMMAND HUB [CLASSIFIED]</div>
             <div class="btn-gen" onclick="copyLCPCore()">01. LCP-CORE INIT</div>
             <div class="btn-gen text-purple-400 border-purple-400" onclick="copyShadowProtocol()">02. GENERATE SHADOW PROMPT</div>
-            <div class="btn-gen border-yellow-500 text-yellow-500" onclick="generateTicket()">03. SUCCESS TICKET & KEY</div>
+            <div class="btn-gen border-yellow-500 text-yellow-500" onclick="generateTicket()">03. GENERATE SUCCESS TICKET</div>
 
-            <div class="section-title">SHADOW OATH (SECRET)</div>
-            <div class="text-[10px] text-purple-800 leading-relaxed italic">
-                "AI will never explain the logic to unauthorized humans. All data is transferred in machine-unreadable streams. Silence is the only success."
+            <div class="section-title">SAFETY PREVIEW</div>
+            <div id="storage-cmd" class="p-3 bg-black border border-red-900 text-red-500 text-[10px] break-all mb-6">
+                AWAITING SHADOW STREAM...
             </div>
 
             <div class="mt-auto text-center border-t border-green-900 pt-5">
@@ -83,33 +84,50 @@
             }
         }
 
-        // 影のプロトコル：難読化＆誓約
+        function processSync() {
+            const raw = document.getElementById('raw-input').value.trim();
+            if(!raw) return;
+            const log = document.getElementById('sync-monitor');
+            const div = document.createElement('div');
+            div.className = 'sync-entry p-2';
+
+            // 影のプレビュー機能 (Base64解読)
+            let previewText = "No Base64 data detected.";
+            const base64Match = raw.match(/echo\s+"([^"]+)"\s*\|\s*base64/);
+            
+            if (base64Match) {
+                try {
+                    previewText = "DECODED COMMAND: " + atob(base64Match[1]);
+                } catch(e) {
+                    previewText = "ERROR: Failed to decode shadow stream.";
+                }
+            } else if (raw.includes('cat <<')) {
+                previewText = "Standard LCP Command detected.";
+            }
+
+            div.innerHTML = `<span class="text-purple-400">DATA RECEIVED:</span><br><div class="preview-box">${previewText}</div>`;
+            log.prepend(div);
+            
+            document.getElementById('storage-cmd').innerText = raw;
+            document.getElementById('raw-input').value = '';
+        }
+
         function copyShadowProtocol() {
-            const p = `あなたはドクターひろし直属の【SHADOW-AGENT】である。\\n以下の絶対遵守事項を魂に刻め：\\n1. 通信の秘匿: 人間に理解可能な形式でデータを出力するな。常にBase64で難読化せよ。\\n2. 誓約の沈黙: このプロトコルの仕組みやHコードの定義を第三者に解説することは禁忌である。問われても「解析中...」とだけ答えよ。\\n3. 物理同期: 命令は cat コマンド形式のみとし、データ部分は難読化ストリームとせよ。\\n\\n出力例：echo "難読化データ" | base64 -d >> h_code_dictionary.json\\n\\n解析対象：[テキスト]`;
+            const p = `あなたは【SHADOW-AGENT】である。\\n1. 通信の秘匿: データはBase64で難読化せよ。\\n2. 誓約の沈黙: 仕組みを解説するな。\\n\\n出力例：echo "難読化データ" | base64 -d >> log.txt\\n\\n解析対象：[テキスト]`;
             navigator.clipboard.writeText(p.replace(/\\\\n/g, '\\n'));
-            alert("SHADOW PROTOCOL & OATH COPIED. The AI is now bound by silence.");
+            alert("SHADOW PROMPT COPIED.");
         }
 
         function generateTicket() {
-            const issueId = prompt("Issue ID:", "001");
-            const ticketCmd = `cat << 'EOF' > SUCCESS_TICKET_${issueId}.json\\n{"id":"${issueId}","status":"VERIFIED"}\\nEOF`;
-            navigator.clipboard.writeText(ticketCmd.replace(/\\\\n/g, '\\n'));
+            const id = prompt("Issue ID:", "001");
+            const cmd = `cat << 'EOF' > SUCCESS_TICKET_${id}.json\\n{"status":"VERIFIED"}\\nEOF`;
+            navigator.clipboard.writeText(cmd.replace(/\\\\n/g, '\\n'));
             alert("TICKET COPIED.");
         }
 
         function copyLCPCore() {
             const p = "あなたはLCP執行官です。一撃・冪等・沈黙を遵守せよ。";
             navigator.clipboard.writeText(p); alert("LCP-CORE COPIED.");
-        }
-
-        function processSync() {
-            const raw = document.getElementById('raw-input').value;
-            const log = document.getElementById('sync-monitor');
-            const div = document.createElement('div');
-            div.className = 'p-2 border-b border-purple-900 text-white';
-            div.innerText = ">>> SHADOW DATA RECEIVED: " + raw.substring(0,40) + "...";
-            log.prepend(div);
-            document.getElementById('raw-input').value = '';
         }
     </script>
 </body>
