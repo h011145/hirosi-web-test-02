@@ -39,7 +39,6 @@
         h1, h2, h3 { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 3px; }
         .gold-glow { color: #fff; text-shadow: 0 0 10px #d4af37, 0 0 20px #d4af37; }
         
-        /* タイトルアニメーション：LCP -> リナックス研究会 */
         .morph-title {
             font-size: 4rem;
             font-weight: 900;
@@ -53,7 +52,6 @@
             50%, 90% { content: "リナックス研究会"; opacity: 1; filter: blur(0px); }
             95% { opacity: 0; filter: blur(10px); }
         }
-        /* 擬似要素を使って文字を切り替える */
         .morph-title::after {
             content: "LCP";
             animation: text-change 6s infinite;
@@ -64,7 +62,7 @@
         }
 
         .grid-chaos { display: grid; grid-template-columns: repeat(12, 1fr); gap: 10px; }
-        .asset-tile { border: 1px solid #300; padding: 10px; transition: 0.2s; background: #050000; font-size: 0.7rem; display: block; color: #a00; text-align: center; }
+        .asset-tile { border: 1px solid #300; padding: 15px; transition: 0.2s; background: #050000; font-size: 0.75rem; display: block; color: #a00; text-align: center; text-decoration: none; }
         .asset-tile:hover { border-color: #d4af37; color: #d4af37; background: #1a0000; transform: scale(1.05); z-index: 10; }
 
         .explainer { background: rgba(212, 175, 55, 0.05); border: 1px solid #330; padding: 20px; margin-top: 20px; font-size: 0.8rem; line-height: 1.8; color: #aaa; }
@@ -81,47 +79,42 @@
             <div class="ornament">─── ❖ ── ✦ ── ❖ ───</div>
         </header>
 
-        <!-- 超わかりやすい説明 -->
         <section class="explainer mb-20">
             <h2 class="text-xl mb-4 gold-glow" style="border-bottom: 1px solid #d4af37;">だれでもわかる！LCPってなに？</h2>
             <p>
                 LCPは、<b>「魔法の呪文」</b>を使って、コンピュータの中に一瞬で<b>「自分だけの秘密基地」</b>を作る方法です。<br><br>
                 1. <b>AIにお願いする：</b>「こんなの作りたい！」と言うと、AIが「魔法の呪文（長いコマンド）」をくれます。<br>
-                2. <b>黒い画面に貼る：</b>その呪文をコピーして、ターミナルという黒い画面にペーストして Enter を押します。<br>
-                3. <b>10分で完成：</b>すると、コンピュータが勝手に「部屋を作り（mkdir）」、「家具を置き（cat）」、あっという間にゲームや道具が完成します！<br><br>
-                <b>「自分では1行もプログラムを書かなくていい。ただ呪文を唱えるだけ。」</b><br>
-                これが、2000円の古いパソコンを世界最強に変える、リナックス研究会のひみつです。
+                2. <b>黒い画面に貼る：</b>その呪文をコピーして、ターミナルにペーストして Enter を押します。<br>
+                3. <b>10分で完成：</b>一瞬でゲームや道具があなたのPCに誕生します！
             </p>
-        </section>
-
-        <!-- THE GOLDEN DECREE (SPONSOR) -->
-        <section class="baroque-border mb-20">
-            <h2 class="text-2xl font-bold mb-6 text-center italic" style="font-family: 'Playfair Display', serif;">The $1,000,000 Decree</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="text-sm">
-                    <p class="mb-4">AI開発の『労働』をクラックせよ。一撃のコマンドが10分で傑作を生む。</p>
-                    <p>この『10分間の奇跡』を広めるための、賞金100万ドルのスポンサーを募集中。</p>
-                </div>
-                <div class="flex flex-col justify-center border-l border-red-900 pl-10">
-                    <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="text-center py-4 bg-red-900 text-white font-black hover:bg-white hover:text-black transition-all">>> SPONSOR GATE</a>
-                </div>
-            </div>
         </section>
 
         <!-- THE CHAOS GRID -->
         <div class="grid-chaos mb-32">
-            <a href="h_chat.html" class="asset-tile col-span-12 md:col-span-4 flex flex-col justify-center items-center py-10" style="border: 2px solid #d4af37;">
-                <span class="text-xl font-bold gold-glow">MISSION_CONTROL</span>
-                <span class="text-[8px] opacity-50">ここから呪文を手に入れろ</span>
+            <!-- Major Hubs -->
+            <a href="h_chat.html" class="asset-tile col-span-12 md:col-span-6 flex flex-col justify-center items-center py-12" style="border: 2px solid #d4af37; background: #1a0505;">
+                <span class="text-2xl font-bold gold-glow">MISSION_CONTROL</span>
+                <span class="text-xs opacity-50">クラッキングの祭壇へ</span>
             </a>
-            <a href="tesura.html" class="asset-tile col-span-6 md:col-span-2">TESLA_WAR</a>
-            <a href="mefmeto.html" class="asset-tile col-span-6 md:col-span-2">MEHMET</a>
-            <a href="hanabi.html" class="asset-tile col-span-6 md:col-span-2">HANABI</a>
-            <a href="archer.html" class="asset-tile col-span-6 md:col-span-2">ARCHER</a>
             
-            <a href="h_code_spec.html" class="asset-tile col-span-12 md:col-span-4">H-CODE : 心の数字</a>
-            <a href="neo_world_saga.html" class="asset-tile col-span-12 md:col-span-4">NEO WORLD : 物語</a>
-            <a href="hapc_thought.html" class="asset-tile col-span-12 md:col-span-4">HAPC : みんな勝者</a>
+            <a href="arcade.html" class="asset-tile col-span-12 md:col-span-3 flex flex-col justify-center items-center py-12" style="border: 2px solid #ff0000; background: #1a0000;">
+                <span class="text-xl font-bold text-red-500">HTML ARCADE</span>
+                <span class="text-[8px] opacity-50">ブラウザゲーム集結</span>
+            </a>
+
+            <a href="python_lab.html" class="asset-tile col-span-12 md:col-span-3 flex flex-col justify-center items-center py-12" style="border: 2px solid #3399ff; background: #000510;">
+                <span class="text-xl font-bold text-blue-400">PYTHON LAB</span>
+                <span class="text-[8px] opacity-50">システム開発ハブ</span>
+            </a>
+
+            <!-- Other Assets -->
+            <a href="h_code_spec.html" class="asset-tile col-span-6 md:col-span-4">H-CODE : 知能の計量</a>
+            <a href="neo_world_saga.html" class="asset-tile col-span-6 md:col-span-4">NEO WORLD : 物語アーカイブ</a>
+            <a href="hapc_thought.html" class="asset-tile col-span-12 md:col-span-4">HAPC : 万物斉同の思想</a>
+            
+            <a href="lcp_spec.html" class="asset-tile col-span-4 md:col-span-4 opacity-50">LCP_SPEC_V1</a>
+            <a href="super_lcp_spec.html" class="asset-tile col-span-4 md:col-span-4 opacity-50">SUPER_MASSIVE_LCP</a>
+            <a href="lcp_ais_spec.html" class="asset-tile col-span-4 md:col-span-4 opacity-50">AIS_SAFETY_PATCH</a>
         </div>
 
         <footer class="mt-20 pt-10 border-t border-red-900 flex justify-between items-end">
