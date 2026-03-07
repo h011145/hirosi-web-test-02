@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP MISSION CONTROL // v10.0 PURE_CONSOLE</title>
+    <title>LCP MISSION CONTROL // v11.0 PUBLISHER_EDITION</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -14,25 +14,27 @@
         .main-panel { background: #000; display: flex; flex-direction: column; padding: 40px; overflow-y: auto; height: 100vh; }
         .section-title { font-size: 1rem; color: #0f0; border-bottom: 2px solid #0f0; margin-bottom: 25px; padding-bottom: 10px; font-weight: bold; letter-spacing: 3px; }
         
-        /* 巨大な OSCE ボタン */
         .btn-osce { background: #f0f; color: #000; font-weight: 900; padding: 25px; width: 100%; margin-bottom: 40px; text-align: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 30px #f0f; font-size: 1.5rem; transition: 0.2s; }
         .btn-osce:hover { background: #fff; color: #f0f; box-shadow: 0 0 60px #fff; transform: scale(1.01); }
 
-        /* 文明創成グリッド */
-        .genesis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 50px; }
-        .btn-genesis { background: #002200; border: 1px solid #00ff00; color: #00ff00; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .btn-genesis:hover { background: #00ff00; color: #000; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,255,0,0.4); }
-        .btn-genesis h3 { margin: 0; font-size: 1rem; font-weight: bold; }
-        .btn-genesis p { margin: 8px 0 0; font-size: 0.7rem; opacity: 0.6; }
+        /* Publisher Grid */
+        .publisher-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 50px; }
+        .btn-publisher { background: #001133; border: 1px solid #3399ff; color: #3399ff; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .btn-publisher:hover { background: #3399ff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(51,153,255,0.4); }
+        .btn-publisher h3 { margin: 0; font-size: 1rem; font-weight: bold; }
+        .btn-publisher p { margin: 8px 0 0; font-size: 0.7rem; opacity: 0.7; }
 
-        /* クイックコマンド */
-        .command-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 40px; }
-        .btn-command { background: #000; border: 1px solid #0a0; color: #0a0; padding: 15px; text-align: center; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
+        .genesis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 50px; }
+        .btn-genesis { background: #002200; border: 1px solid #00ff00; color: #00ff00; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .btn-genesis:hover { background: #00ff00; color: #000; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,255,0,0.3); }
+        .btn-genesis h3 { margin: 0; font-size: 0.8rem; font-weight: bold; }
+
+        .command-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 40px; }
+        .btn-command { background: #000; border: 1px solid #0a0; color: #0a0; padding: 12px; text-align: center; cursor: pointer; font-size: 0.7rem; font-weight: bold; }
         .btn-command:hover { border-color: #0f0; color: #0f0; background: #010; }
 
-        .footer { margin-top: auto; padding-top: 40px; text-align: center; border-t border-green-900; }
+        .footer { margin-top: auto; padding-top: 40px; text-align: center; }
         .back-link { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 30px; font-size: 0.8rem; }
-        .back-link:hover { background: #0f0; color: #000; }
     </style>
 </head>
 <body>
@@ -40,52 +42,55 @@
 
     <div class="main-panel">
         <header class="mb-12 text-center">
-            <h1 class="text-3xl font-black tracking-tighter text-white">LCP MISSION CONTROL <span class="text-fuchsia-500">// v10.0 PURE_CONSOLE</span></h1>
-            <p class="text-[10px] opacity-40 mt-2">NO INPUTS. NO SHADOWS. ONLY EXECUTION.</p>
+            <h1 class="text-3xl font-black tracking-tighter text-white">LCP MISSION CONTROL <span class="text-blue-500">// v11.0 PUBLISHER_EDITION</span></h1>
+            <p class="text-[10px] opacity-40 mt-2">STRUCTURAL STORYTELLING. JSON-DRIVEN PUBLISHING.</p>
         </header>
 
-        <!-- 1. OSCE: 自由設計の一撃 -->
-        <div class="section-title text-fuchsia-500">01. LCP-OSCE // UNIVERSAL_DEPLOYER</div>
-        <div class="btn-osce" onclick="copyOSCEPrompt()">⚡ GENERATE ONE-SHOT COMMAND ⚡</div>
-
-        <!-- 2. GENESIS: 定番ツールの召喚 -->
-        <div class="section-title text-green-400">02. LCP-GENESIS // STARTER_KIT</div>
-        <div class="genesis-grid">
-            <div class="btn-genesis" onclick="copyGenesisPrompt('WEB_SITE')">
-                <h3>INSTANT WEBSITE</h3>
-                <p>ポートフォリオを一撃構築</p>
+        <!-- 1. PUBLISHER: 出版革命 -->
+        <div class="section-title text-blue-400">01. LCP-PUBLISHER // STRUCTURAL_STORYTELLING</div>
+        <div class="publisher-grid">
+            <div class="btn-publisher" onclick="copyPublisherPrompt('STORY_JSON')">
+                <h3>STORY_JSON_GEN</h3>
+                <p>物語の全構造をJSONで一撃生成</p>
             </div>
-            <div class="btn-genesis" onclick="copyGenesisPrompt('TODO_APP')">
-                <h3>TASK MASTER</h3>
-                <p>高性能TODOを一撃構築</p>
+            <div class="btn-publisher" onclick="copyPublisherPrompt('CHAPTER_CAT')">
+                <h3>CHAPTER_DIRECT_CAT</h3>
+                <p>特定の章をJSONに一撃で流し込む</p>
             </div>
-            <div class="btn-genesis" onclick="copyGenesisPrompt('DIARY')">
-                <h3>LIFE LOGGER</h3>
-                <p>シンプル日記帳を一撃構築</p>
+            <div class="btn-publisher" onclick="copyPublisherPrompt('CONVERTER')">
+                <h3>MD_CONVERTER_GEN</h3>
+                <p>JSONからMDへ変換するスクリプトを生成</p>
             </div>
-            <div class="btn-genesis" onclick="copyGenesisPrompt('FINANCE')">
-                <h3>GOLD TRACKER</h3>
-                <p>家計簿ツールを一撃構築</p>
-            </div>
-            <div class="btn-genesis" onclick="copyGenesisPrompt('GAME')">
-                <h3>ARCADE GAME</h3>
-                <p>Canvasゲームを一撃構築</p>
-            </div>
-            <div class="btn-genesis" onclick="copyGenesisPrompt('TIMER')">
-                <h3>ZEN TIMER</h3>
-                <p>集中タイマーを一撃構築</p>
+            <div class="btn-publisher" onclick="copyPublisherPrompt('ARCHIVER')">
+                <h3>STORY_ARCHIVER</h3>
+                <p>物語の資材をディレクトリ整理して保存</p>
             </div>
         </div>
 
-        <!-- 3. QUICK COMMANDS: 定型執行命令 -->
-        <div class="section-title text-yellow-500">03. LCP-COMMANDS // QUICK_PHASE</div>
+        <!-- 2. OSCE: 自由設計 -->
+        <div class="section-title text-fuchsia-500">02. LCP-OSCE // UNIVERSAL_DEPLOYER</div>
+        <div class="btn-osce" onclick="copyOSCEPrompt()">⚡ GENERATE ONE-SHOT COMMAND ⚡</div>
+
+        <!-- 3. GENESIS: 定番ツール -->
+        <div class="section-title text-green-400">03. LCP-GENESIS // STARTER_KIT</div>
+        <div class="genesis-grid">
+            <div class="btn-genesis" onclick="copyGenesisPrompt('WEB_SITE')"><h3>WEB SITE</h3></div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('TODO_APP')"><h3>TASK MASTER</h3></div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('DIARY')"><h3>LIFE LOGGER</h3></div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('FINANCE')"><h3>GOLD TRACKER</h3></div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('GAME')"><h3>ARCADE GAME</h3></div>
+            <div class="btn-genesis" onclick="copyGenesisPrompt('TIMER')"><h3>ZEN TIMER</h3></div>
+        </div>
+
+        <!-- 4. QUICK COMMANDS -->
+        <div class="section-title text-yellow-500">04. LCP-COMMANDS // QUICK_PHASE</div>
         <div class="command-grid">
-            <div class="btn-command" onclick="copyQuickCommand('PHASE_1')">PHASE 1: ARCHITECTURE (MKDIR)</div>
-            <div class="btn-command" onclick="copyQuickCommand('PHASE_2')">PHASE 2: CORE LOGIC (CAT)</div>
-            <div class="btn-command" onclick="copyQuickCommand('PHASE_3')">PHASE 3: UI/UX DESIGN</div>
-            <div class="btn-command" onclick="copyQuickCommand('PHASE_4')">PHASE 4: DEBUG & VERIFY</div>
-            <div class="btn-command" onclick="copyQuickCommand('HCODE')">H-CODE ANALYSIS (A(B) PROTOCOL)</div>
-            <div class="btn-command" onclick="copyQuickCommand('INIT')">LCP-CORE INITIALIZATION</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_1')">P1: ARCHITECTURE</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_2')">P2: CORE LOGIC</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_3')">P3: UI/UX</div>
+            <div class="btn-command" onclick="copyQuickCommand('PHASE_4')">P4: DEBUG</div>
+            <div class="btn-command" onclick="copyQuickCommand('HCODE')">H-CODE ANALYSIS</div>
+            <div class="btn-command" onclick="copyQuickCommand('INIT')">LCP-CORE INIT</div>
         </div>
 
         <div class="footer">
@@ -95,44 +100,54 @@
     </div>
 
     <script>
-        // クリップボードコピー & アラート
         function copyAndAlert(text, msg) {
             navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
             const alertBox = document.createElement('div');
-            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#0f0; color:#000; padding:15px; font-weight:bold; z-index:9999; box-shadow:0 0 20px #0f0;";
+            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#007fff; color:#fff; padding:15px; font-weight:bold; z-index:9999; box-shadow:0 0 20px #007fff;";
             alertBox.innerText = msg;
             document.body.appendChild(alertBox);
             setTimeout(() => alertBox.remove(), 2000);
         }
 
+        // LCP-PUBLISHER プロンプト集
+        function copyPublisherPrompt(type) {
+            let p = "";
+            switch(type) {
+                case 'STORY_JSON':
+                    p = `あなたはLCP出版局AIです。物語の全構造を、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして、以下のJSON形式を含む形式で出力せよ。\\n\\n【JSON形式例】\\n{ "title": "タイトル", "setting": "世界観", "characters": [...], "chapters": [ { "num": 1, "title": "第1章", "h_code": "1(3)", "content": "" } ] }\\n\\n【プロジェクト目的】：[物語の概要を入力]`;
+                    break;
+                case 'CHAPTER_CAT':
+                    p = `あなたはLCP執筆AIです。現在の物語JSONファイルの第[章番号]章の中身(content)を埋め、\`cat\`コマンドを使ってJSONファイルを更新（または上書き保存）する一撃必殺のBashスクリプトを出力せよ。解説不要。\\n\\n【執筆指示】：[章の内容や展開を入力]`;
+                    break;
+                case 'CONVERTER':
+                    p = `あなたはLCPエンジニアです。物語のJSONファイルを読み込み、一撃で「Markdown形式」および「投稿用プレーンテキスト形式」に変換して、それぞれ \`output.md\` と \`output.txt\` として保存するPythonまたはBashのLCPスクリプトを一撃必殺で出力せよ。`;
+                    break;
+                case 'ARCHIVER':
+                    p = `物語の進捗（JSON、MD、設定資料）を日付ごとのディレクトリに整理し、GitHubへプッシュする一連のLCP-GITコマンドを一撃必殺で出力せよ。`;
+                    break;
+            }
+            copyAndAlert(p, "PUBLISHER: " + type + " COPIED.");
+        }
+
         function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのツールを、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。実行可能なコードブロックのみ。\\n\\n【目的】：[ここに入力]`;
+            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのツールを、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。コードブロックのみ。\\n\\n【目的】：[入力]`;
             copyAndAlert(p, "OSCE PROMPT COPIED.");
         }
 
         function copyGenesisPrompt(type) {
-            let m = "", t = "";
-            switch(type) {
-                case 'WEB_SITE': m = "ポートフォリオサイト"; t = "HTML/Tailwind"; break;
-                case 'TODO_APP': m = "TODOアプリ"; t = "Single HTML"; break;
-                case 'DIARY': m = "日記アプリ"; t = "Python or HTML"; break;
-                case 'FINANCE': m = "家計簿"; t = "HTML/Chart.js"; break;
-                case 'GAME': m = "Canvasゲーム"; t = "HTML/JS"; break;
-                case 'TIMER': m = "ポモドーロタイマー"; t = "HTML/CSS"; break;
-            }
-            const p = `あなたはLCP執行AIです。目的「${m}」を、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。\\n技術：${t}`;
+            const p = `あなたはLCP執行AIです。目的「${type}」を、\`mkdir -p\`と\`cat\`を用いた一撃必殺のBashスクリプトとして出力せよ。解説不要。`;
             copyAndAlert(p, "GENESIS: " + type + " COPIED.");
         }
 
         function copyQuickCommand(cmd) {
             let p = "";
             switch(cmd) {
-                case 'PHASE_1': p = "フェーズ1：ディレクトリ構造(mkdir)のみを一撃で出力せよ。"; break;
-                case 'PHASE_2': p = "フェーズ2：コアロジックをcatコマンドのみを一撃で出力せよ。"; break;
-                case 'PHASE_3': p = "フェーズ3：デザイン・装飾(CSS/UI)をcatコマンドで出力せよ。"; break;
-                case 'PHASE_4': p = "フェーズ4：バグ修正と動作確認用のテストスクリプトをcatで出力せよ。"; break;
-                case 'HCODE': p = "現在の状況をHコード(A(B))で解析し、最適な次の一手をcatで出力せよ。"; break;
-                case 'INIT': p = "LCP環境を初期化し、標準的なREADMEとディレクトリを作成するコマンドを出力せよ。"; break;
+                case 'PHASE_1': p = "フェーズ1：ディレクトリ構造(mkdir)を一撃出力せよ。"; break;
+                case 'PHASE_2': p = "フェーズ2：コアロジックをcatコマンドで一撃出力せよ。"; break;
+                case 'PHASE_3': p = "フェーズ3：デザイン・UIをcatで一撃出力せよ。"; break;
+                case 'PHASE_4': p = "フェーズ4：テストスクリプトをcatで一撃出力せよ。"; break;
+                case 'HCODE': p = "現状をHコード(A(B))で解析し、次の一手をcatで出力せよ。"; break;
+                case 'INIT': p = "LCP環境を初期化するコマンドを出力せよ。"; break;
             }
             copyAndAlert(p, "COMMAND: " + cmd + " COPIED.");
         }
