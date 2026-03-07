@@ -3,94 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MISSION_CONTROL // THE_CRACKING_UNIT</title>
+    <title>MISSION_CONTROL // THE_DIVINE_CRACKER</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
-        body { background-color: #050505; color: #00ff00; font-family: 'Fira Code', monospace; height: 100vh; margin: 0; display: flex; flex-direction: column; overflow: hidden; }
-        .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 2px; z-index: 100; pointer-events: none; opacity: 0.1; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fira+Code:wght@300;500&display=swap');
         
-        .main-panel { background: #000; display: flex; flex-direction: column; padding: 30px; overflow-y: auto; height: 100vh; }
-        .section-title { font-size: 0.75rem; color: #006600; border-bottom: 1px solid #003300; margin-bottom: 20px; padding-bottom: 5px; font-weight: bold; text-transform: uppercase; }
-        
-        /* Minimalist Button Style */
-        .btn-core { border: 1px solid #00ff00; padding: 15px; text-align: center; cursor: pointer; transition: 0.1s; font-size: 0.8rem; background: #000; margin-bottom: 10px; }
-        .btn-core:hover { background: #00ff00; color: #000; }
-        
-        .grid-unit { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 40px; }
-        .grid-unit-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 40px; }
+        body { 
+            background: #000;
+            color: #d4af37;
+            font-family: 'Fira Code', monospace;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-        .footer { margin-top: auto; padding-top: 30px; text-align: left; font-size: 0.7rem; color: #004400; }
-        .back-link { color: #00ff00; text-decoration: none; border: 1px solid #00ff00; padding: 5px 15px; font-size: 0.7rem; }
+        .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(50, 0, 0, 0) 50%, rgba(50, 0, 0, 0.05) 50%); background-size: 100% 4px; z-index: 100; pointer-events: none; }
+        
+        .main-panel { 
+            background: linear-gradient(180deg, #050000 0%, #000 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            overflow-y: auto;
+            border: 1px solid #300;
+            margin: 10px;
+            box-shadow: inset 0 0 50px rgba(139, 0, 0, 0.2);
+        }
+
+        .section-title { 
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #800;
+            border-bottom: 1px double #d4af37;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+        
+        .btn-divine { 
+            border: 1px solid #d4af37;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.8rem;
+            background: #000;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+        }
+        .btn-divine:hover { 
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 0 20px #d4af37;
+            transform: scale(1.02);
+        }
+        
+        .grid-chaos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 40px; }
+        .grid-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; }
+
+        .ornament { text-align: center; font-size: 0.5rem; opacity: 0.3; margin: 20px 0; }
+        .back-link { color: #800; text-decoration: none; border: 1px solid #800; padding: 5px 15px; font-size: 0.7rem; transition: 0.2s; }
+        .back-link:hover { color: #d4af37; border-color: #d4af37; background: #1a0000; }
     </style>
 </head>
 <body>
     <div class="scanline"></div>
 
     <div class="main-panel">
-        <header class="mb-10">
-            <h1 class="text-lg font-bold">[ MISSION_CONTROL v16.0 ]</h1>
-            <p class="text-[0.6rem] opacity-40">TARGET: REALITY_CRACKING // MODE: DRY_RUN_EXCLUSION</p>
+        <header class="text-center mb-10">
+            <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ SACRED_MISSION_CONTROL ]</h1>
+            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.0 // ARCHITECTURE OF CHAOS</p>
         </header>
 
-        <!-- 01. UNIVERSAL CRACKER -->
-        <div class="section-title">01. UNIVERSAL_CRACKER</div>
-        <div class="btn-core font-bold" onclick="copyOSCEPrompt()">[ EXECUTE_SYSTEM_CRACK ]</div>
+        <div class="ornament">✙ ─── ✦ ─── ✙</div>
 
-        <!-- 02. SPONSOR CRACKER -->
-        <div class="section-title">02. CAPITAL_CRACKER</div>
-        <div class="grid-unit">
-            <div class="btn-core" onclick="copyGPPrompt('PITCH_DECK')">PITCH_DECK_CRACK</div>
-            <div class="btn-core" onclick="copyGPPrompt('SHOWCASE')">EVIDENCE_CRACK</div>
+        <!-- 01. THE ATOMIC CRACKER -->
+        <div class="section-title">I. THE_ATOMIC_CRACKER</div>
+        <div class="btn-divine font-black text-white" style="border-width: 2px; border-style: double;" onclick="copyOSCEPrompt()">
+            ⚡ CRACK_SYSTEM_ATOMICALLY ⚡
         </div>
 
-        <!-- 03. DIMENSIONAL CRACKER -->
-        <div class="section-title">03. DIMENSIONAL_CRACKER</div>
-        <div class="grid-unit">
-            <div class="btn-core" onclick="copyDimPrompt('DIM_JSON')">GEN_DIM_JSON</div>
-            <div class="btn-core" onclick="copyDimPrompt('EXEC_SHELL')">BUILD_EXEC_SH</div>
+        <!-- 02. CAPITAL CRACKER -->
+        <div class="section-title">II. CAPITAL_CRACKER</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyGPPrompt('PITCH_DECK')">PITCH_DECK_CRACK</div>
+            <div class="btn-divine" onclick="copyGPPrompt('SHOWCASE')">EVIDENCE_CRACK</div>
         </div>
 
-        <!-- 04. GENESIS CRACKER -->
-        <div class="section-title">04. CIVILIZATION_CRACKER</div>
-        <div class="grid-unit-3">
-            <div class="btn-core" onclick="copyGenesisPrompt('WEB_SITE')">WEB_SITE</div>
-            <div class="btn-core" onclick="copyGenesisPrompt('TODO_APP')">TASK_MASTER</div>
-            <div class="btn-core" onclick="copyGenesisPrompt('DIARY')">LIFE_LOGGER</div>
-            <div class="btn-core" onclick="copyGenesisPrompt('FINANCE')">GOLD_TRACKER</div>
-            <div class="btn-core" onclick="copyGenesisPrompt('GAME')">ARCADE_GAME</div>
-            <div class="btn-core" onclick="copyGenesisPrompt('TIMER')">ZEN_TIMER</div>
+        <!-- 03. REALITY CRACKER -->
+        <div class="section-title">III. REALITY_CRACKER</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyDimPrompt('DIM_JSON')">GEN_DIM_JSON</div>
+            <div class="btn-divine" onclick="copyDimPrompt('EXEC_SHELL')">BUILD_DIM_SHELL</div>
         </div>
 
-        <div class="footer">
-            <div class="mb-6"><a href="index.html" class="back-link">< RETURN_TO_ROOT</a></div>
-            <span>MASTER: DR. HIROSHI // (C) 2026 LCP_UNITS</span>
+        <!-- 04. CIVILIZATION STARTER -->
+        <div class="section-title">IV. CIVILIZATION_STARTER</div>
+        <div class="grid-chaos">
+            <div class="btn-divine" onclick="copyGenesisPrompt('WEB_SITE')">WEB_SITE</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('TODO_APP')">TODO</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('DIARY')">DIARY</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('FINANCE')">GOLD</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('GAME')">ARCADE</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('TIMER')">ZEN</div>
         </div>
+
+        <div class="ornament">✙ ─── ✦ ─── ✙</div>
+
+        <footer class="mt-auto flex justify-between items-center pt-10">
+            <a href="index.html" class="back-link">< RETURN_TO_CATHEDRAL</a>
+            <div class="text-[0.6rem] text-right opacity-30">
+                MASTER: DR. HIROSHI<br>
+                STATUS: CHAOS_OPERATIONAL
+            </div>
+        </footer>
     </div>
 
     <script>
         function copyAndAlert(text, msg) {
             navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
             const alertBox = document.createElement('div');
-            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#00ff00; color:#000; padding:10px; font-size:0.7rem; font-weight:bold; z-index:9999;";
+            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#d4af37; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;";
             alertBox.innerText = msg;
             document.body.appendChild(alertBox);
-            setTimeout(() => alertBox.remove(), 1000);
+            setTimeout(() => alertBox.remove(), 1200);
         }
 
         function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。以下の【目的】を達成するために、システムをクラックするBashスクリプト（mkdir+catの一撃）を出力せよ。一切の解説を禁ずる。\\n\\n【目的】：[入力]`;
-            copyAndAlert(p, "PROMPT_EXTRACTED");
+            const p = `あなたはLCP執行AIです。システムをクラックするBashスクリプト（mkdir+cat）を出力せよ。一切の解説を禁ずる。\\n\\n【目的】：[入力]`;
+            copyAndAlert(p, "SACRED_PROMPT_COPIED");
         }
 
         function copyGPPrompt(type) {
-            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を一撃出力せよ。一切の解説を禁ずる。`;
-            copyAndAlert(p, "CAPITAL_UNIT_READY");
+            const p = `あなたはLCP経済アナリストです。資本をクラックする[${type}]を一撃出力せよ。一切の解説を禁ずる。`;
+            copyAndAlert(p, "CAPITAL_UNIT_EXTRACTED");
         }
 
         function copyDimPrompt(type) {
             const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を一撃出力せよ。一切の解説を禁ずる。`;
-            copyAndAlert(p, "DIM_UNIT_READY");
+            copyAndAlert(p, "DIMENSIONAL_UNIT_READY");
         }
 
         function copyGenesisPrompt(type) {

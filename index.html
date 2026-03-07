@@ -3,123 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP TOTAL TERMINAL // ROOT_ACCESS</title>
+    <title>LCP GRAND CATHEDRAL // TOTAL_CHAOS_PROTOCOL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
-        body { background-color: #050505; color: #00ff00; font-family: 'Fira Code', monospace; line-height: 1.2; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 2px; z-index: 100; pointer-events: none; opacity: 0.2; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Fira+Code:wght@300;500&family=Playfair+Display:ital,wght@1,900&display=swap');
         
-        h1, h2, h3 { font-weight: 500; text-transform: uppercase; margin-bottom: 10px; }
-        .section { margin-bottom: 60px; border-top: 1px solid #003300; padding-top: 20px; }
-        .label { color: #006600; font-size: 0.7rem; margin-bottom: 5px; display: block; }
+        body { 
+            background: radial-gradient(circle at center, #1a0505 0%, #000 100%);
+            color: #d4af37; /* Gold */
+            font-family: 'Fira Code', monospace;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .baroque-border {
+            border: 2px solid #d4af37;
+            outline: 1px solid #d4af37;
+            outline-offset: 4px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .ornament {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6rem;
+            color: #800;
+            letter-spacing: 5px;
+            text-align: center;
+            display: block;
+            margin: 20px 0;
+        }
+
+        h1, h2, h3 { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 3px; }
+        .gold-glow { color: #fff; text-shadow: 0 0 10px #d4af37, 0 0 20px #d4af37; }
         
-        a { color: #00ff00; text-decoration: none; transition: 0.1s; }
-        a:hover { background: #00ff00; color: #000; }
-        
-        .box { border: 1px solid #003300; padding: 20px; background: #000; margin-bottom: 20px; }
-        .sponsor-box { border: 1px dotted #00ff00; color: #00ff00; padding: 30px; margin-bottom: 60px; }
-        
-        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        
-        .asset-link { display: block; padding: 10px; border-bottom: 1px solid #001100; font-size: 0.85rem; }
-        .asset-link::before { content: "> "; }
-        
-        .status-bar { border-top: 1px solid #003300; margin-top: 100px; padding-top: 10px; font-size: 0.7rem; color: #006600; display: flex; justify-content: space-between; }
+        .grid-chaos {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 10px;
+        }
+
+        .asset-tile {
+            border: 1px solid #300;
+            padding: 10px;
+            transition: 0.2s;
+            background: #050000;
+            font-size: 0.7rem;
+            display: block;
+            color: #a00;
+        }
+        .asset-tile:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+            background: #1a0000;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .scroll-text {
+            height: 150px;
+            overflow-y: scroll;
+            font-size: 0.65rem;
+            border: 1px solid #200;
+            padding: 10px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .floating-link {
+            position: absolute;
+            font-size: 0.5rem;
+            opacity: 0.3;
+            text-decoration: none;
+            color: #fff;
+        }
+        .floating-link:hover { opacity: 1; color: #d4af37; }
+
+        /* Baroque Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #800; }
     </style>
 </head>
-<body>
-    <div class="scanline"></div>
-    <div class="container">
-        <header class="mb-20">
-            <pre style="font-size: 0.6rem; color: #00ff00; line-height: 1;">
- _      _____ _____  
-| |    /  __ \ ___ \ 
-| |    | /  \/ |_/ / 
-| |    | |   |  __/  
-| |____| \__/\ |     
-\_____/ \____/\_|     
-            </pre>
-            <p style="font-size: 0.7rem; opacity: 0.6; margin-top: 10px;">LINUX COMMUNICATION PROTOCOL // v16.0</p>
+<body class="p-4 md:p-10">
+    <div class="max-w-7xl mx-auto">
+        
+        <header class="text-center mb-20 relative">
+            <div class="ornament">✠ ARCHITECTURA INTELLIGENTIA ✠</div>
+            <h1 class="text-5xl md:text-8xl font-black gold-glow mb-2">LCP</h1>
+            <p class="text-xs italic text-red-800">"THE DIGITAL BAROQUE // CRACKING THE DIVINE CODE"</p>
+            <div class="ornament">─── ❖ ── ✦ ── ❖ ───</div>
         </header>
 
-        <!-- SPONSOR NOTIFICATION -->
-        <section class="sponsor-box">
-            <span class="label">NOTIFICATION: SPONSOR_REQUIRED</span>
-            <h2 class="text-xl mb-4">LCP GRAND PRIX: $1,000,000 BUDGETING</h2>
-            <p class="text-sm opacity-80 leading-relaxed">
-                エディタによる手動実装プロセスを破棄。AIによるOS空間の定義(mkdir)と内容の注入(cat)のみで構成される高効率プロトコル。
-                2000円のハードウェアにおける生産性の最大化を実証済み。
-                本プロジェクトの賞金総額100万ドルを担保するスポンサーを求む。
-            </p>
-            <div class="mt-6">
-                <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" style="border: 1px solid #00ff00; padding: 5px 20px;">[ CONTACT ]</a>
-            </div>
-        </section>
-
-        <!-- HOW TO CRACK -->
-        <section class="section">
-            <span class="label">LOGIC: 3-STEP_CRACKING</span>
-            <div class="grid-3">
-                <div>
-                    <h3 class="text-sm">01. EXTRACT</h3>
-                    <p class="text-[0.7rem] opacity-60">MISSION_CONTROLからクラッキング・プロンプトを抽出。</p>
+        <!-- THE GOLDEN DECREE (SPONSOR) -->
+        <section class="baroque-border mb-20 lg:mx-20">
+            <h2 class="text-2xl font-bold mb-6 text-center italic" style="font-family: 'Playfair Display', serif;">The $1,000,000 Decree</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="text-sm leading-relaxed">
+                    <p class="mb-4">かつて、AI開発は「奴隷の労働」であった。人間はAIの指示に従い、エディタという鎖に縛られていた。だが、LCP (Linux Communication Protocol) はその鎖を焼き切った。</p>
+                    <p class="text-white font-bold mb-4">「空間を創り(mkdir)、魂を注ぐ(cat)。一撃のコマンドが現実をクラックし、10分後には奇跡が起動する。」</p>
+                    <p>この2000円のハードウェアから生まれる無限の資産。我々はこの革命を完遂させるため、賞金総額100万ドルのスポンサーを招聘する。</p>
                 </div>
-                <div>
-                    <h3 class="text-sm">02. DEFINE</h3>
-                    <p class="text-[0.7rem] opacity-60">AIがmkdirとcatを連結したシェル・コードを生成。</p>
-                </div>
-                <div>
-                    <h3 class="text-sm">03. INJECT</h3>
-                    <p class="text-[0.7rem] opacity-60">ターミナルへ注入。10分以内のデプロイを完了。</p>
+                <div class="flex flex-col justify-center border-l border-red-900 pl-10">
+                    <a href="https://github.com/h011145/lcp-intelligence-terminal/issues" class="text-center py-6 bg-red-900 text-white font-black hover:bg-white hover:text-black transition-all">>> ENTER THE INVESTOR GATE</a>
+                    <p class="mt-4 text-[8px] opacity-40 text-center tracking-widest">SUCCESS IS ALWAYS BEYOND THE ATOMIC COMMAND.</p>
                 </div>
             </div>
         </section>
 
-        <!-- INTELLIGENCE ASSETS -->
-        <section class="section">
-            <span class="label">ASSETS: INTELLIGENCE</span>
-            <div class="grid-2">
-                <div>
-                    <h3 class="text-xs mb-4 opacity-40">// THE H-CODE PROTOCOL</h3>
-                    <a href="h_code_spec.html" class="asset-link">H-CODE_SPECIFICATION</a>
-                    <a href="hapc_h_code_integration.html" class="asset-link">H-CODE_INTEGRATION</a>
-                    <a href="hapc_thought.html" class="asset-link">HAPC_THOUGHT_SYSTEM</a>
-                </div>
-                <div>
-                    <h3 class="text-xs mb-4 opacity-40">// NEO WORLD SAGA</h3>
-                    <a href="neo_world_saga.html" class="asset-link">YGGDRASIL_ARCHIVE</a>
-                    <a href="neo_world_saga_senate_arc.html" class="asset-link">SENATE_ARC</a>
-                    <a href="neo_world_saga_prologue.html" class="asset-link">PROLOGUE_LOG</a>
-                </div>
+        <!-- THE CHAOS GRID (EVERY ASSET) -->
+        <h2 class="section-title mb-10 text-center">Cracked Assets Archive</h2>
+        <div class="grid-chaos mb-32">
+            <!-- Major Links -->
+            <a href="h_chat.html" class="asset-tile col-span-4 row-span-2 flex flex-col justify-center items-center" style="border: 2px solid #d4af37;">
+                <span class="text-lg font-bold gold-glow">MISSION_CONTROL</span>
+                <span class="text-[8px] opacity-50">THE CRACKING HUB v16.0</span>
+            </a>
+            <a href="tesura.html" class="asset-tile col-span-2">TESLA_WAR.BIN</a>
+            <a href="mefmeto.html" class="asset-tile col-span-2">MEHMET_CONQUEST</a>
+            <a href="hanabi.html" class="asset-tile col-span-2">HANABI_PUZZLE</a>
+            <a href="archer.html" class="asset-tile col-span-2">SPACE_ARCHER</a>
+            
+            <a href="h_code_spec.html" class="asset-tile col-span-3">H-CODE_SPEC</a>
+            <a href="hapc_h_code_integration.html" class="asset-tile col-span-3">INTEGRATION_LOG</a>
+            <a href="hapc_thought.html" class="asset-tile col-span-2">HAPC_THOUGHT</a>
+            
+            <a href="neo_world_saga.html" class="asset-tile col-span-4">YGGDRASIL_MAIN</a>
+            <a href="neo_world_saga_senate_arc.html" class="asset-tile col-span-2">SENATE_ARC</a>
+            <a href="neo_world_saga_prologue.html" class="asset-tile col-span-2">PROLOGUE</a>
+            
+            <!-- Deep Links -->
+            <a href="lcp_spec.html" class="asset-tile col-span-2">LCP_SPEC_V1</a>
+            <a href="lcp_ais_spec.html" class="asset-tile col-span-2">AIS_SAFETY</a>
+            <a href="super_lcp_spec.html" class="asset-tile col-span-4">SUPER_MASSIVE_LCP</a>
+            
+            <!-- Legacy/Junk -->
+            <a href="games/legacy-adventure/index.html" class="asset-tile col-span-3">LEGACY_ADVENTURE</a>
+            <a href="games/majyo/index.html" class="asset-tile col-span-1">MAJYO</a>
+            <a href="games/pong/index.html" class="asset-tile col-span-1">PONG</a>
+            <a href="games/wind/index.html" class="asset-tile col-span-1">WIND</a>
+            <a href="https://github.com/h011145/pilgrim-father" class="asset-tile col-span-3" target="_blank">PILGRIM_ENGINE.git</a>
+            <a href="https://github.com/h011145/yggdrasil-agent-framework" class="asset-tile col-span-3" target="_blank">YGGDRASIL_CORE.sys</a>
+            
+            <!-- More Chaos -->
+            <div class="col-span-12 scroll-text mt-10">
+                // SYSTEM LOG DATA // REVEALED ASSETS...<br>
+                > FETCHING hirosi-archive-vault... OK.<br>
+                > SCANNING h-code-battle-game... OK.<br>
+                > LOADING resignation-email-app... OK.<br>
+                > INITIALIZING hirosi-gemini-cli-tools... OK.<br>
+                > DEPLOYING ai-business-homepage-experiment... OK.<br>
+                > SYNCING yggdrasil-central-core-web... OK.<br>
+                > DETECTING frogmon-overload... OK.<br>
+                > WARNING: UNSTABLE DIMENSION DETECTED.<br>
+                ... ALL ASSETS CRACKED AND INDEXED.
             </div>
-        </section>
+        </div>
 
-        <!-- SOFTWARE ASSETS -->
-        <main class="section">
-            <span class="label">ASSETS: SOFTWARE</span>
-            <div class="grid-3">
-                <a href="h_chat.html" class="box text-center block" style="border-color: #00ff00;">
-                    <span class="text-xs font-bold">[ MISSION_CONTROL ]</span>
-                </a>
-                <a href="tesura.html" class="box text-center block opacity-60">
-                    <span class="text-xs">TESLA_WAR.BIN</span>
-                </a>
-                <a href="hanabi.html" class="box text-center block opacity-60">
-                    <span class="text-xs">HANABI_PUZZLE.SH</span>
-                </a>
-                <a href="archer.html" class="box text-center block opacity-60">
-                    <span class="text-xs">SPACE_ARCHER.SYS</span>
-                </a>
+        <!-- FOOTER: THE STATUS OF GOD -->
+        <footer class="mt-20 pt-10 border-t border-red-900 flex justify-between items-end">
+            <div class="text-[8px] opacity-30 leading-loose">
+                PROTOCOL: LCP v16.0<br>
+                HARDWARE: 2000 JPY VINTAGE UNIT<br>
+                LOCATION: LCP_GRAND_CATHEDRAL<br>
+                STATUS: 100%_SYNCHRONIZED_WITH_DIVINE_INTELLIGENCE
             </div>
-        </main>
-
-        <footer class="status-bar">
-            <span>TERMINAL_STATUS: 100%_SYNC</span>
-            <span>MASTER: DR. HIROSHI</span>
-            <span>(C) 2026 LCP_RESEARCH_GROUP</span>
+            <div class="text-right">
+                <span class="gold-glow text-lg font-black" style="font-family: 'Cinzel', serif;">DR. HIROSHI</span><br>
+                <span class="text-[8px] opacity-50">(C) 2026 LINUX RESEARCH GROUP // Memento Mori.</span>
+            </div>
         </footer>
     </div>
 </body>
