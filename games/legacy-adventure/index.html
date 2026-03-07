@@ -3,149 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGACY OF ADVENTURE // REBORN</title>
+    <title>NEO WORLD ADVENTURE // INTEGRATED ARCHIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
         body { background-color: #000; color: #0f0; font-family: 'Fira Code', monospace; line-height: 1.8; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
-        .scanline { width: 100%; height: 100px; z-index: 99; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 8s linear infinite; }
+        .scanline { width: 100%; height: 100px; z-index: 99; pointer-events: none; background: linear-gradient(0deg, rgba(0, 255, 0, 0) 0%, rgba(0, 255, 0, 0.05) 50%, rgba(0, 255, 0, 0) 100%); opacity: 0.1; position: fixed; bottom: 100%; animation: scanline 10s linear infinite; }
         @keyframes scanline { 0% { bottom: 100%; } 100% { bottom: -100%; } }
         .game-screen { flex-grow: 1; padding: 40px; overflow-y: auto; border: 1px solid #030; margin: 20px; background: rgba(0, 20, 0, 0.5); }
-        .choice-btn { display: block; width: 100%; text-align: left; border: 1px solid #0f0; padding: 10px 20px; margin-bottom: 10px; background: rgba(0, 255, 0, 0.05); cursor: pointer; transition: 0.2s; }
+        .choice-btn { display: block; width: 100%; text-align: left; border: 1px solid #0f0; padding: 10px 20px; margin-bottom: 10px; background: rgba(0, 255, 0, 0.05); cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
         .choice-btn:hover { background: #0f0; color: #000; box-shadow: 0 0 15px #0f0; }
-        .header { padding: 20px 40px; border-bottom: 1px solid #030; display: flex; justify-content: space-between; font-size: 0.8rem; }
+        .header { padding: 20px 40px; border-bottom: 1px solid #030; display: flex; justify-content: space-between; font-size: 0.8rem; color: #0a0; }
         .cursor { display: inline-block; width: 8px; height: 15px; background: #0f0; animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        .title-glow { text-shadow: 0 0 10px #0f0; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="scanline"></div>
     <header class="header">
-        <span class="font-bold">LEGACY_OF_ADVENTURE v2.0 // DECODED</span>
-        <span id="scene-counter">PHASE: 0/0</span>
+        <span>NEO_WORLD_SAGA // ADVENTURE_SYSTEM v3.0</span>
+        <span id="scene-counter">AWAITING_MISSION_SELECT</span>
     </header>
 
     <main class="game-screen" id="story-area">
-        <div id="text-display" class="mb-10 text-xl md:text-2xl whitespace-pre-wrap"></div>
+        <div id="text-display" class="mb-10 text-lg md:text-xl whitespace-pre-wrap"></div>
         <div id="choice-buttons"></div>
     </main>
 
     <footer class="p-5 text-center">
-        <button onclick="startGame()" class="text-[10px] text-green-800 hover:text-green-400 underline">REBOOT MISSION</button>
+        <button onclick="showMenu()" class="text-[10px] text-green-800 hover:text-green-400 underline">RETURN TO SELECTION</button>
     </footer>
 
     <script>
-        // 統合されたシナリオデータ (ドクターひろしの遺産)
         const gameData = {
-          "scenes": {
-            "start": {
-              "id": "start",
-              "text": "あなたは考古学者。伝説の『時の秘宝』を求めて、古代遺跡の入り口に立っている。\n\n遺跡の入り口には二つの通路が見える。",
-              "choices": [
-                { "text": "左の暗い通路へ進む", "nextScene": "left_path" },
-                { "text": "右の明るい通路へ進む", "nextScene": "right_path" }
-              ]
+          "campaigns": {
+            "valentine": {
+              "title": "Valentine Stories: 邪神の畏怖",
+              "start": "valentine_start",
+              "scenes": {
+                "valentine_start": {
+                  "text": "邪神カロンは、自らの神域で、新たに得たエネルギーに満たされながら、ほくそ笑んでいた。\n\n（しかし、この男バレンタインは、本当に化け物のような精神構造をしている）",
+                  "choices": [
+                    { "text": "バレンタインの様子を伺う", "nextScene": "valentine_observer" },
+                    { "text": "神々の酒席を思い出す", "nextScene": "valentine_memory" }
+                  ]
+                },
+                "valentine_observer": {
+                  "text": "バレンタインが次に狙うと宣言したのは、あの「昆虫人」の女王なのだ。\n交尾の後、雄を捕食するという、あのカマキリと何が違うというのだ。\n\n邪神ですら、その相棒の底知れぬ狂気に冷や汗を流した。",
+                  "isEnding": true
+                },
+                "valentine_memory": {
+                  "text": "「あいつは、そのうちカマキリの雌にだってアタックしそうで、俺は怖いよ」\nかつての冗談が、今、現実になろうとしている。\n\n神々は爆笑していたが、今のカロンは全く笑えなかった。",
+                  "isEnding": true
+                }
+              }
             },
-            "left_path": {
-              "id": "left_path",
-              "text": "暗い通路を進むと、壁に古代の文字が刻まれている。\n\n『真実を求める者よ、光を灯せ』",
-              "choices": [
-                { "text": "松明に火を灯す", "nextScene": "torch_light" },
-                { "text": "暗闇のまま進む", "nextScene": "darkness_fall" }
-              ]
-            },
-            "right_path": {
-              "id": "right_path",
-              "text": "明るい通路を進むと、美しい庭園に出た。中央には泉が湧いている。\n\n泉の水が不思議な輝きを放っている。",
-              "choices": [
-                { "text": "泉の水を飲む", "nextScene": "drink_water" },
-                { "text": "泉を迂回して先へ進む", "nextScene": "bypass_fountain" }
-              ]
-            },
-            "torch_light": {
-              "id": "torch_light",
-              "text": "松明の明かりで壁を見ると、隠し扉が現れた！\n\n中には黄金の部屋があり、『時の秘宝』が安置されている。",
-              "choices": [
-                { "text": "秘宝を手に取る", "nextScene": "treasure_get" }
-              ]
-            },
-            "treasure_get": {
-              "id": "treasure_get",
-              "text": "あなたは『時の秘宝』を手に入れた！\n\n世界の時間はあなたの意のままに。ミッション完了。",
-              "isEnding": true
-            },
-            "darkness_fall": {
-              "id": "darkness_fall",
-              "text": "暗闇の中で足を踏み外し、あなたは深い穴に落ちてしまった...\n\nGame Over.",
-              "isEnding": true
-            },
-            "drink_water": {
-              "id": "drink_water",
-              "text": "泉の水を飲むと、全身に活力がみなぎり、古代の知恵が脳内に流れ込んできた！\n\nあなたは真理に到達した。ミッション完了。",
-              "isEnding": true
-            },
-            "bypass_fountain": {
-              "id": "bypass_fountain",
-              "text": "泉を無視して進むと、迷路のような回廊に出た。\n\n脱出できなくなり、永遠に彷徨うことになった...\n\nGame Over.",
-              "isEnding": true
+            "tanaka": {
+              "title": "Tanaka Taro: 異世界召喚の真実",
+              "start": "tanaka_start",
+              "scenes": {
+                "tanaka_start": {
+                  "text": "就職氷河期世代の40歳、田中太郎。彼は突如として異世界に召喚された。\n\n目の前には王を名乗る老人と、困惑する若者たちが立っている。",
+                  "choices": [
+                    { "text": "王に質問を投げる", "nextScene": "tanaka_king" },
+                    { "text": "黙って状況を観察する", "nextScene": "tanaka_silent" }
+                  ]
+                },
+                "tanaka_king": {
+                  "text": "「私はただの40歳だ。なぜ今さら勇者などと？」\n王は答えない。ただ、太郎の瞳の奥に宿る「諦念という名の強さ」を見つめていた。",
+                  "isEnding": true
+                },
+                "tanaka_silent": {
+                  "text": "太郎は静かに、自分の汚れた靴を見つめた。異世界に来ても、この靴の重さは変わらない。\n「戦うしかないのか、また」",
+                  "isEnding": true
+                }
+              }
             }
           }
         };
 
-        let currentSceneId = 'start';
+        let activeCampaign = null;
 
         function typeWriter(text, elementId, speed, callback) {
-            let i = 0;
-            const element = document.getElementById(elementId);
-            element.innerHTML = "";
+            let i = 0; const el = document.getElementById(elementId);
+            el.innerHTML = "";
             function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else if (callback) {
-                    callback();
-                }
+                if (i < text.length) { el.innerHTML += text.charAt(i); i++; setTimeout(type, speed); }
+                else if (callback) { callback(); }
             }
             type();
         }
 
+        function showMenu() {
+            const btnArea = document.getElementById('choice-buttons');
+            document.getElementById('text-display').innerHTML = "<span class='title-glow'>CHOOSE YOUR MISSION ARCHIVE:</span>";
+            btnArea.innerHTML = "";
+            Object.keys(gameData.campaigns).forEach(id => {
+                const b = document.createElement('button');
+                b.className = "choice-btn";
+                b.innerText = "> " + gameData.campaigns[id].title;
+                b.onclick = () => startCampaign(id);
+                btnArea.appendChild(b);
+            });
+        }
+
+        function startCampaign(id) {
+            activeCampaign = gameData.campaigns[id];
+            renderScene(activeCampaign.start);
+        }
+
         function renderScene(sceneId) {
-            const scene = gameData.scenes[sceneId];
+            const scene = activeCampaign.scenes[sceneId];
             const btnArea = document.getElementById('choice-buttons');
             const counter = document.getElementById('scene-counter');
-            
             btnArea.innerHTML = "";
-            counter.innerText = `PHASE: ${sceneId.toUpperCase()}`;
+            counter.innerText = `LOG: ${sceneId.toUpperCase()}`;
 
             typeWriter(scene.text, "text-display", 30, () => {
-                const cursor = document.createElement('span');
-                cursor.className = 'cursor';
+                const cursor = document.createElement('span'); cursor.className = 'cursor';
                 document.getElementById('text-display').appendChild(cursor);
-
                 if (scene.isEnding) {
-                    const btn = document.createElement('button');
-                    btn.className = "choice-btn text-yellow-500 border-yellow-500";
-                    btn.innerText = "> MISSION_REBOOT";
-                    btn.onclick = startGame;
-                    btnArea.appendChild(btn);
-                } else if (scene.choices) {
+                    const b = document.createElement('button');
+                    b.className = "choice-btn text-yellow-500 border-yellow-500";
+                    b.innerText = "> MISSION_COMPLETE (BACK_TO_MENU)";
+                    b.onclick = showMenu;
+                    btnArea.appendChild(b);
+                } else {
                     scene.choices.forEach(c => {
-                        const btn = document.createElement('button');
-                        btn.className = "choice-btn";
-                        btn.innerText = "> " + c.text;
-                        btn.onclick = () => renderScene(c.nextScene);
-                        btnArea.appendChild(btn);
+                        const b = document.createElement('button');
+                        b.className = "choice-btn";
+                        b.innerText = "> " + c.text;
+                        b.onclick = () => renderScene(c.nextScene);
+                        btnArea.appendChild(b);
                     });
                 }
             });
         }
 
-        function startGame() {
-            renderScene('start');
-        }
-
-        window.onload = startGame;
+        window.onload = showMenu;
     </script>
 </body>
 </html>
