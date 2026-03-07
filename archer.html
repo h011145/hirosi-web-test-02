@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SPACE ARCHER - LCP ARCADE</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Press Start 2P', cursive;
+            touch-action: none;
+            color: #0f0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        canvas {
+            display: block;
+            image-rendering: pixelated;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .ui-panel {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 10px;
+            line-height: 2;
+            pointer-events: none; 
+            z-index: 20;
+        }
+
+        #power-meter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            height: 12px;
+            border: 3px solid #0f0;
+            background: #000;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        #power-fill {
+            width: 0%;
+            height: 100%;
+            background: #0f0;
+        }
+
+        .overcharge {
+            background: #f00 !important;
+        }
+
+        .overlay-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            display: none;
+            pointer-events: none;
+        }
+
+        .msg-title {
+            color: #fbbf24;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .msg-sub {
+            color: #fff;
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        .name-entry {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            pointer-events: none;
+        }
+
+        .char-slot {
+            font-size: 30px;
+            border-bottom: 4px solid #0f0;
+            padding: 5px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .char-active {
+            color: #fff;
+            border-bottom-color: #fff;
+            animation: blink 0.5s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .instruction {
+            font-size: 8px;
+            color: #888;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .back-link { position: fixed; bottom: 20px; left: 20px; color: #0f0; text-decoration: none; font-family: monospace; font-size: 0.7rem; border: 1px solid #0f0; padding: 5px 10px; background: rgba(0,0,0,0.8); pointer-events: auto; z-index: 1000; }
+        .back-link:hover { background: #0f0; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    
+    <div class="ui-panel">
+        <div>SCORE: <span id="score-text">0000</span></div>
+        <div>ARROWS: <span id="arrows-text">10</span></div>
+        <div>STAGE: <span id="level-text">1</span></div>
+    </div>
+
+    <div id="clear-screen" class="overlay-screen">
+        <div class="msg-title">STAGE CLEAR</div>
+        <div class="msg-sub">ARROWS +5 RECOVERY</div>
+    </div>
+
+    <div id="gameover-screen" class="overlay-screen">
+        <div class="msg-title">GAME OVER</div>
+        <div id="final-score-display" class="msg-sub">SCORE: 0000</div>
+        
+        <div class="name-entry" id="name-container">
+            <div class="char-slot char-active" id="slot-0">A</div>
+            <div class="char-slot" id="slot-1">A</div>
+            <div class="char-slot" id="slot-2">A</div>
+        </div>
+        
+        <div class="instruction">
+            TAP TOP HALF: NEXT SLOT<br>
+            TAP BOTTOM HALF: CHANGE CHAR
+        </div>
+    </div>
+
+    <div id="power-meter">
+        <div id="power-fill"></div>
+    </div>
+    
+    <a href="index.html" class="back-link">< RETURN TO TERMINAL</a>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const scoreText = document.getElementById('score-text');
+        const arrowsText = document.getElementById('arrows-text');
+        const levelText = document.getElementById('level-text');
+        const powerFill = document.getElementById('power-fill');
+        const clearScreen = document.getElementById('clear-screen');
+        const gameoverScreen = document.getElementById('gameover-screen');
+        const finalScoreDisplay = document.getElementById('final-score-display');
+        
+        const GRAVITY = 0.08;
+        const MAX_POWER = 24;
+        const PLAYER_SPEED = 3.5;
+        const BIRD_W = 40;
+        const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789. ";
+
+        let score = 0;
+        let arrows = 10;
+        let level = 1;
+        let birdsToKill = 1;
+        let birdsKilled = 0;
+        let power = 0;
+        let isCharging = false;
+        let isPaused = false;
+        let isGameOverMode = false;
+
+        let currentSlot = 0;
+        let nameChars = [0, 0, 0];
+
+        let ARROW_LIST = [];
+        let BIRD_LIST = [];
+        let PARTICLES = [];
+
+        const player = { x: 0, y: 0, dir: 1 };
+
+        class Bird {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = canvas.width + Math.random() * 400;
+                this.y = 80 + Math.random() * 200;
+                this.speed = 2.5 + Math.random() * (1.5 + level * 0.4);
+                this.frame = Math.random() * 100;
+                this.alive = true;
+            }
+            update() {
+                if (!this.alive || isPaused) return;
+                this.x -= this.speed;
+                this.frame++;
+                if (this.x < -BIRD_W) {
+                    this.x = canvas.width + BIRD_W;
+                    this.y = 80 + Math.random() * 200;
+                }
+            }
+            draw() {
+                if (!this.alive) return;
+                ctx.fillStyle = '#f0f';
+                const wing = Math.sin(this.frame * 0.2) * 12;
+                ctx.fillRect(this.x - 15, this.y - 5, 30, 10);
+                ctx.fillRect(this.x - 23, this.y - 2, 8, 5);
+                ctx.fillRect(this.x - 5, this.y - 5 + wing, 10, -15);
+            }
+        }
+
+        class Arrow {
+            constructor(x, y, p) {
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = -p * 0.95;
+                this.active = true;
+            }
+            update() {
+                if (!this.active) return;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += GRAVITY;
+
+                BIRD_LIST.forEach(bird => {
+                    if (bird.alive) {
+                        const dx = this.x - bird.x;
+                        const dy = this.y - bird.y;
+                        if (Math.abs(dx) < 25 && Math.abs(dy) < 25) {
+                            this.active = false;
+                            bird.alive = false;
+                            onBirdHit(bird);
+                        }
+                    }
+                });
+
+                if (this.y > canvas.height + 50 || this.y < -1200) {
+                    this.active = false;
+                }
+            }
+            draw() {
+                if (!this.active) return;
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x, this.y + 15);
+                ctx.stroke();
+            }
+        }
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.x = canvas.width / 2;
+            player.y = canvas.height - 80;
+            startLevel();
+        }
+
+        function startLevel() {
+            birdsToKill = level;
+            birdsKilled = 0;
+            BIRD_LIST = [];
+            ARROW_LIST = [];
+            for (let i = 0; i < birdsToKill; i++) BIRD_LIST.push(new Bird());
+            levelText.innerText = level;
+            isPaused = false;
+            isGameOverMode = false;
+            gameoverScreen.style.display = 'none';
+            clearScreen.style.display = 'none';
+        }
+
+        function onBirdHit(bird) {
+            score += 1000 * level;
+            scoreText.innerText = score.toString().padStart(4, '0');
+            createExplosion(bird.x, bird.y, '#f0f');
+            birdsKilled++;
+
+            if (birdsKilled >= birdsToKill) {
+                isPaused = true;
+                arrows += 5;
+                arrowsText.innerText = arrows;
+                clearScreen.style.display = 'flex';
+                setTimeout(() => {
+                    if (!isGameOverMode) {
+                        level++;
+                        startLevel();
+                    }
+                }, 2000);
+            }
+        }
+
+        function triggerGameOver() {
+            if (isGameOverMode) return;
+            isGameOverMode = true;
+            isPaused = true;
+            finalScoreDisplay.innerText = "FINAL SCORE: " + score;
+            gameoverScreen.style.display = 'flex';
+            currentSlot = 0;
+            updateNameUI();
+        }
+
+        function updateNameUI() {
+            for (let i = 0; i < 3; i++) {
+                const el = document.getElementById(`slot-${i}`);
+                el.innerText = CHARS[nameChars[i]];
+                el.className = 'char-slot' + (i === currentSlot ? ' char-active' : '');
+            }
+        }
+
+        function createExplosion(x, y, color) {
+            for (let i = 0; i < 20; i++) {
+                PARTICLES.push({
+                    x, y,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.5) * 12,
+                    life: 1,
+                    color: color
+                });
+            }
+        }
+
+        function update() {
+            if (isPaused && !isGameOverMode) return;
+            if (isGameOverMode) return;
+
+            if (!isCharging) {
+                player.x += PLAYER_SPEED * player.dir;
+                if (player.x > canvas.width - 50 || player.x < 50) player.dir *= -1;
+            } else {
+                power += 0.35;
+                if (power > MAX_POWER) {
+                    power = 0;
+                    powerFill.classList.add('overcharge');
+                    setTimeout(() => powerFill.classList.remove('overcharge'), 50);
+                }
+            }
+            powerFill.style.width = (power / MAX_POWER * 100) + '%';
+
+            BIRD_LIST.forEach(b => b.update());
+            ARROW_LIST.forEach(a => a.update());
+            
+            if (arrows <= 0 && ARROW_LIST.every(a => !a.active) && birdsKilled < birdsToKill) {
+                triggerGameOver();
+            }
+
+            for (let i = PARTICLES.length - 1; i >= 0; i--) {
+                const p = PARTICLES[i];
+                p.x += p.vx; p.y += p.vy;
+                p.life -= 0.03;
+                if (p.life <= 0) PARTICLES.splice(i, 1);
+            }
+        }
+
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#fff';
+            for(let i=0; i<30; i++) ctx.fillRect((i*137)%canvas.width, (i*243)%canvas.height, 2, 2);
+
+            BIRD_LIST.forEach(b => b.draw());
+            
+            ctx.fillStyle = isCharging ? '#fff' : '#0f0';
+            const px = player.x;
+            const py = player.y;
+            ctx.fillRect(px - 20, py, 40, 10);
+            ctx.fillRect(px - 15, py - 5, 30, 5);
+            ctx.fillRect(px - 5, py - 10, 10, 5);
+            ctx.fillRect(px - 25, py + 5, 10, 10);
+            ctx.fillRect(px + 15, py + 5, 10, 10);
+
+            if (isCharging && !isGameOverMode) {
+                ctx.strokeStyle = 'rgba(0, 255, 0, 0.4)';
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(px, py - 20);
+                ctx.lineTo(px, 0);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
+
+            ARROW_LIST.forEach(a => a.draw());
+
+            PARTICLES.forEach(p => {
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.life;
+                ctx.fillRect(p.x, p.y, 4, 4);
+            });
+            ctx.globalAlpha = 1;
+
+            ctx.strokeStyle = '#0f0';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, player.y + 20);
+            ctx.lineTo(canvas.width, player.y + 20);
+            ctx.stroke();
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+
+        const handleStart = (clientX, clientY) => {
+            if (isGameOverMode) {
+                if (clientY < window.innerHeight / 2) {
+                    advanceSlot();
+                } else {
+                    nameChars[currentSlot] = (nameChars[currentSlot] + 1) % CHARS.length;
+                    updateNameUI();
+                }
+                return;
+            }
+            if (isPaused || arrows <= 0) return;
+            isCharging = true;
+            power = 0;
+        };
+
+        const handleEnd = () => {
+            if (isGameOverMode || !isCharging) return;
+            isCharging = false;
+            if (power > 2) {
+                ARROW_LIST.push(new Arrow(player.x, player.y - 10, power));
+                arrows--;
+                arrowsText.innerText = arrows;
+            }
+            power = 0;
+        };
+
+        const advanceSlot = () => {
+            currentSlot++;
+            if (currentSlot > 2) {
+                location.reload();
+            } else {
+                updateNameUI();
+            }
+        };
+
+        window.addEventListener('pointerdown', (e) => {
+            handleStart(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('pointerup', (e) => {
+            handleEnd();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                if (isGameOverMode) advanceSlot();
+                else handleStart(0, window.innerHeight);
+            }
+            if (isGameOverMode) {
+                if (e.code === 'ArrowUp') { nameChars[currentSlot] = (nameChars[currentSlot] + 1) % CHARS.length; updateNameUI(); }
+                if (e.code === 'ArrowDown') { nameChars[currentSlot] = (nameChars[currentSlot] - 1 + CHARS.length) % CHARS.length; updateNameUI(); }
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'Space' && !isGameOverMode) handleEnd();
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            player.y = canvas.height - 80;
+        });
+        
+        init();
+        loop();
+    </script>
+</body>
+</html>
