@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEO WORLD ADVENTURE // LCP_INJECTOR</title>
+    <title>NEO WORLD ADVENTURE // MISSION_SYNCHRONIZED</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -23,15 +23,13 @@
 <body>
     <div class="scanline"></div>
     <header class="header">
-        <span>NEO_WORLD_SAGA // ADVENTURE_SYSTEM v4.0</span>
-        <span id="scene-counter">LCP_READY</span>
+        <span>NEO_WORLD_SAGA // ADVENTURE_HUB v4.1</span>
+        <span id="scene-counter">SYSTEM_ONLINE</span>
     </header>
 
     <main class="game-screen" id="story-area">
         <div id="text-display" class="mb-10 text-lg md:text-xl whitespace-pre-wrap"></div>
         <div id="choice-buttons"></div>
-        
-        <!-- LCP Injector -->
         <div id="inject-container" class="inject-area">
             <div class="text-[9px] text-purple-700 mb-1">// PASTE LCP STORY DATA (cat << 'EOF' ...)</div>
             <textarea id="lcp-input" placeholder="AIから出力された物語コマンドをここに貼り付け、Ctrl+Enterで執行せよ..."></textarea>
@@ -44,14 +42,24 @@
     </footer>
 
     <script>
-        // 初期物語データ
         let gameData = {
           "campaigns": {
-            "genesis": {
-              "title": "Genesis: 再起動の刻",
+            "galaxy": {
+              "title": "銀河の彼方へ: 第1話 目覚めの惑星",
               "scenes": {
-                "start": { "text": "全てはここから始まった。ドクターひろしの意志が、冷え切ったサーバーに火を灯す。", "choices": [{ "text": "歴史を閲覧する", "nextScene": "end" }] },
-                "end": { "text": "物語はあなたの手で更新されるのを待っている。", "isEnding": true }
+                "start": { "text": "【宇宙ステーション・オリオン】\n西暦3024年。人類は銀河系全体に居住区を広げていた。\n\n主人公カイは、記憶を失った状態で隔離区画で目を覚ます。\nカイ「ここは…？ 俺は誰だ…？」", "choices": [{ "text": "部屋を出て探索する", "nextScene": "scene_2" }] },
+                "scene_2": { "text": "【ステーション・制御室】\nアンドロイドのリリが部屋に入ってくる。\n\nリリ「目が覚めたのですね、カイ。私はリリ、あなたのパートナーです。」\nカイ「パートナー？ 俺に何が起きたんだ？」", "choices": [{ "text": "リリに詳しく尋ねる", "nextScene": "scene_3" }] },
+                "scene_3": { "text": "【宇宙空間】\n突然、ステーション全体に警報が鳴り響く。窓の外にはヴォイド帝国の巨大戦艦群が！\n\nリリ「来たわね… ヴォイド帝国。行きましょう、カイ！」", "choices": [{ "text": "格納庫へ向かう", "nextScene": "scene_4" }] },
+                "scene_4": { "text": "【宇宙ステーション・格納庫】\nそこには、白銀の戦闘機『イノセンス』が停めてあった。\n機体に触れた瞬間、カイの脳裏に激しいフラッシュバックが走る！", "choices": [{ "text": "イノセンスに搭乗する", "nextScene": "scene_5" }] },
+                "scene_5": { "text": "【戦闘機コックピット】\nカイ「そうだ… 俺は戦っていた。ヴォイドと…！」\n\n本能的に蘇る操縦技術。イノセンスが黄金色に輝き、圧倒的な力で敵を撃破していく！", "choices": [{ "text": "決戦を制する", "nextScene": "scene_6" }] },
+                "scene_6": { "text": "【宇宙ステーション・展望室】\n戦いは終わった。カイとリリは星空を見上げる。\n\nカイ「俺の記憶が戻るまで… いや、それからもずっと、君と共に戦おう。」\n\n一方、銀河の闇深くでヴォイドの帝王が不気味に笑っていた。\n「計画通りに進め...」", "isEnding": true }
+              }
+            },
+            "centuries": {
+              "title": "百世紀編：邪神の畏怖",
+              "scenes": {
+                "start": { "text": "邪神カロンは、バレンタインの底知れぬ狂気に冷や汗を流していた。\n「あいつは昆虫人の女王にまで手を出すつもりか？」", "choices": [{ "text": "詳細を閲覧する", "nextScene": "ep1" }] },
+                "ep1": { "text": "「あいつは、そのうちカマキリの雌にだってアタックしそうで、俺は怖いよ」\nかつての冗談が、今、現実になろうとしている。", "isEnding": true }
               }
             }
           }
@@ -115,18 +123,15 @@
             });
         }
 
-        // LCPインジェクターの開閉
         function toggleInjector() {
             const el = document.getElementById('inject-container');
             el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
-        // データの注入（執行）
         document.getElementById('lcp-input').addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 const raw = this.value;
                 try {
-                    // LCP(cat)形式からJSONを抽出する簡易パーサー
                     const jsonMatch = raw.match(/\{[\s\S]*\}/);
                     if (jsonMatch) {
                         const newCampaign = JSON.parse(jsonMatch[0]);
@@ -137,9 +142,7 @@
                         toggleInjector();
                         showMenu();
                     }
-                } catch(err) {
-                    alert("INJECTION FAILED: Invalid LCP data format.");
-                }
+                } catch(err) { alert("INJECTION FAILED."); }
             }
         });
 
