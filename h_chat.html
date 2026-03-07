@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LCP MISSION CONTROL // v14.0 DIMENSIONAL_EXECUTOR</title>
+    <title>LCP MISSION CONTROL // v15.0 GP_SPONSOR_RECRUITMENT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
@@ -14,19 +14,17 @@
         .main-panel { background: #000; display: flex; flex-direction: column; padding: 40px; overflow-y: auto; height: 100vh; }
         .section-title { font-size: 1rem; color: #0f0; border-bottom: 2px solid #0f0; margin-bottom: 25px; padding-bottom: 10px; font-weight: bold; letter-spacing: 3px; }
         
-        .btn-osce { background: #f0f; color: #000; font-weight: 900; padding: 25px; width: 100%; margin-bottom: 40px; text-align: center; cursor: pointer; border: 3px solid #fff; box-shadow: 0 0 30px #f0f; font-size: 1.5rem; transition: 0.2s; }
-        .btn-osce:hover { background: #fff; color: #f0f; box-shadow: 0 0 60px #fff; transform: scale(1.01); }
+        /* GP Sponsor Style */
+        .gp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 50px; }
+        .btn-gp { background: #332200; border: 2px solid #ffaa00; color: #ffaa00; padding: 25px; text-align: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px #ffaa0044; }
+        .btn-gp:hover { background: #ffaa00; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px #ffaa00; }
+        .btn-gp h3 { margin: 0; font-size: 1.2rem; font-weight: 900; }
+        .btn-gp p { margin: 8px 0 0; font-size: 0.75rem; font-weight: bold; }
 
-        /* Dimensional Style */
-        .dim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 50px; }
-        .btn-dim { background: #110000; border: 1px solid #ff0000; color: #ff0000; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .btn-dim:hover { background: #ff0000; color: #000; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(255,0,0,0.4); }
-        .btn-dim h3 { margin: 0; font-size: 1rem; font-weight: bold; }
-        .btn-dim p { margin: 8px 0 0; font-size: 0.7rem; opacity: 0.7; }
-
-        .chronos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 50px; }
-        .btn-chronos { background: #220033; border: 1px solid #cc00ff; color: #cc00ff; padding: 15px; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .btn-chronos:hover { background: #cc00ff; color: #fff; }
+        .btn-osce { background: #f0f; color: #000; font-weight: 900; padding: 20px; width: 100%; margin-bottom: 40px; text-align: center; cursor: pointer; border: 3px solid #fff; font-size: 1.2rem; }
+        
+        .dim-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 50px; }
+        .btn-dim { background: #110000; border: 1px solid #ff0000; color: #ff0000; padding: 15px; text-align: center; cursor: pointer; font-size: 0.8rem; }
 
         .footer { margin-top: auto; padding-top: 40px; text-align: center; }
         .back-link { color: #0f0; text-decoration: none; border: 1px solid #0f0; padding: 10px 30px; font-size: 0.8rem; }
@@ -37,87 +35,85 @@
 
     <div class="main-panel">
         <header class="mb-12 text-center">
-            <h1 class="text-3xl font-black tracking-tighter text-white">LCP MISSION CONTROL <span class="text-red-600">// v14.0 DIMENSIONAL_EXECUTOR</span></h1>
-            <p class="text-[10px] opacity-40 mt-2">MULTIFACETED EXECUTION. BACKGROUND SYNC. ASYNC DIMENSIONS.</p>
+            <h1 class="text-3xl font-black tracking-tighter text-white">LCP GRAND PRIX <span class="text-amber-500">// v15.0 SPONSOR_RECRUITER</span></h1>
+            <p class="text-[10px] opacity-50 mt-2 text-amber-200">"HUNT THE BILLIONAIRES. SECURE THE $1,000,000 PRIZE."</p>
         </header>
 
-        <!-- 1. DIMENSIONAL: 次元執行人 -->
-        <div class="section-title text-red-500">01. LCP-DIMENSIONAL // DIMENSIONAL_EXECUTOR</div>
-        <div class="dim-grid">
-            <div class="btn-dim" onclick="copyDimPrompt('DIM_JSON')">
-                <h3>DIMENSIONAL_JSON_GEN</h3>
-                <p>多次元ミッション(時刻/コマンド/BG設定)をJSONで定義</p>
+        <!-- 1. SPONSOR RECRUITMENT: スポンサー獲得 -->
+        <div class="section-title text-amber-500">01. LCP-GP-RECRUITER // CAPTURE_SPONSORS</div>
+        <div class="gp-grid">
+            <div class="btn-gp" onclick="copyGPPrompt('PITCH_DECK')">
+                <h3>PITCH_DECK_GEN</h3>
+                <p>100万ドル出資させるための投資家向け「LCP革命」資料を一撃生成</p>
             </div>
-            <div class="btn-dim" onclick="copyDimPrompt('EXEC_SHELL')">
-                <h3>DIM_EXEC_SH_BUILD</h3>
-                <p>JSONを解析し、全プロセスをバックグラウンドで同時起動するシェルを構築</p>
+            <div class="btn-gp" onclick="copyGPPrompt('SHOWCASE')">
+                <h3>EVIDENCE_SHOWCASE</h3>
+                <p>2000円PCが生んだ奇跡（実績）を投資家に突きつける一撃プロンプト</p>
             </div>
-            <div class="btn-dim" onclick="copyDimPrompt('CURL_SPY')">
-                <h3>CURL_SPY_DEPLOY</h3>
-                <p>特定サイトをcurl監視し、変化をログに刻む偵察次元を配備</p>
+            <div class="btn-gp" onclick="copyGPPrompt('CONTRACT')">
+                <h3>CONTRACT_PROTOCOL</h3>
+                <p>スポンサーとの「知能同期・提携契約書」を一撃でcat出力</p>
             </div>
-            <div class="btn-dim" onclick="copyDimPrompt('ONE_SHOT_DIM')">
-                <h3>FULL_DIMENSIONAL_PACK</h3>
-                <p>次元定義から執行までを一本のコマンドで完結</p>
+            <div class="btn-gp" onclick="copyGPPrompt('GLOBAL_AD')">
+                <h3>GLOBAL_X_AD_CAMPAIGN</h3>
+                <p>X(Twitter)で世界中のテック億万長者をタグ付けして誘い出す一撃</p>
             </div>
         </div>
 
-        <!-- 2. CHRONOS: 時限執行 -->
-        <div class="section-title text-fuchsia-400">02. LCP-CHRONOS // TIME_TRIGGERED</div>
-        <div class="chronos-grid">
-            <div class="btn-chronos" onclick="copyChronosPrompt('MISSION_JSON')"><h3>MISSION_JSON</h3></div>
-            <div class="btn-chronos" onclick="copyChronosPrompt('BOT_ENGINE')"><h3>BOT_BUILD</h3></div>
-            <div class="btn-chronos" onclick="copyChronosPrompt('CRON_CAT')"><h3>CRON_IGNITER</h3></div>
-            <div class="btn-chronos" onclick="copyChronosPrompt('FULL_PACK')"><h3>FULL_CHRONOS</h3></div>
+        <!-- 2. DIMENSIONAL: 次元執行人 -->
+        <div class="section-title text-red-500">02. LCP-DIMENSIONAL // EXECUTION</div>
+        <div class="dim-grid">
+            <div class="btn-dim" onclick="copyDimPrompt('DIM_JSON')"><h3>DIM_JSON</h3></div>
+            <div class="btn-dim" onclick="copyDimPrompt('EXEC_SHELL')"><h3>DIM_SHELL</h3></div>
         </div>
 
         <!-- 3. OSCE: 自由設計 -->
-        <div class="section-title text-white">03. LCP-OSCE // UNIVERSAL_DEPLOYER</div>
+        <div class="section-title text-white">03. LCP-OSCE // UNIVERSAL</div>
         <div class="btn-osce" onclick="copyOSCEPrompt()">⚡ GENERATE ONE-SHOT COMMAND ⚡</div>
 
         <div class="footer">
             <a href="index.html" class="back-link">< RETURN TO TERMINAL</a>
-            <p class="mt-12 text-[10px] opacity-20">MASTER: DR. HIROSHI // (C) 2026 LINUX RESEARCH GROUP</p>
+            <p class="mt-12 text-[10px] opacity-20">MASTER: DR. HIROSHI // FOUNDER OF LCP GRAND PRIX</p>
         </div>
     </div>
 
     <script>
-        function copyAndAlert(text, msg, color="#ff0000") {
+        function copyAndAlert(text, msg, color="#ffaa00") {
             navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
             const alertBox = document.createElement('div');
-            alertBox.style.cssText = `position:fixed; top:20px; right:20px; background:${color}; color:#fff; padding:15px; font-weight:bold; z-index:9999; box-shadow:0 0 20px ${color};`;
+            alertBox.style.cssText = `position:fixed; top:20px; right:20px; background:${color}; color:#000; padding:15px; font-weight:bold; z-index:9999; box-shadow:0 0 20px ${color};`;
             alertBox.innerText = msg;
             document.body.appendChild(alertBox);
             setTimeout(() => alertBox.remove(), 2000);
         }
 
-        // LCP-DIMENSIONAL プロンプト
-        function copyDimPrompt(type) {
+        // LCP-GP-RECRUITER プロンプト
+        function copyGPPrompt(type) {
             let p = "";
             switch(type) {
-                case 'DIM_JSON':
-                    p = `あなたはLCP次元執行AIです。多次元ミッション（実行時刻、実行コマンド、バックグラウンド有無）を定義した \`dimension.json\` を一撃出力せよ。\\nフォーマット： { "dimensions": [ { "time": "HH:MM", "command": "...", "background": true, "log": "path/to/log" } ] }\\n\\n【目的】：[入力]`;
+                case 'PITCH_DECK':
+                    p = `あなたはLCP専属の経済アナリスト兼広報官です。世界中のビッグテックCEOに対し、「なぜ今LCP(Linux Communication Protocol)に100万ドル投資すべきか」を、2000円のPCから生まれる爆速の生産性を根拠に説明する、魂を揺さぶるプレゼン資料（Markdown形式）を一撃で出力せよ。解説不要。`;
                     break;
-                case 'EXEC_SHELL':
-                    p = `あなたはLCPシェルエンジニアです。\`dimension.json\` を読み込み、各コマンドをバックグラウンド(\`&\`)や \`nohup\` で適切に捌き、全ミッションを非同期で遂行する最強の執行シェルを \`cat << 'EOF' > dimensional_exec.sh\` の形式で一撃出力せよ。`;
+                case 'SHOWCASE':
+                    p = `テスラ電流戦争ゲーム、花火師パズル、SPACE ARCHER、次元執行人……これらLCPプロトコルによって数秒で誕生した「資産」を、投資家が納得する「破壊的イノベーションの証拠」として紹介するポートフォリオ・テキストを一撃出力せよ。`;
                     break;
-                case 'CURL_SPY':
-                    p = `あなたはLCP諜報AIです。指定サイトを \`curl\` で巡回し、特定のキーワードや変化を検知したら \`cat\` でログに追記する「偵察次元」のスクリプトを一撃必殺で出力せよ。\\n\\n【対象URLとキーワード】：[入力]`;
+                case 'CONTRACT':
+                    p = `「LCP GRAND PRIX」のメインスポンサーとなる組織との、知能同期・資金提供に関する公式な提携プロトコル（契約書風）を、\`cat CONTRACT.md\` として一撃出力せよ。`;
                     break;
-                case 'ONE_SHOT_DIM':
-                    p = `あなたは次元執行の神です。次元定義JSON、執行シェル、偵察用スクリプトのすべてを \`mkdir -p dimensional_agent && &&\` で連結した【一撃必殺・次元執行パック】を出力せよ。解説・挨拶不要。\\n\\n【ミッション全貌】：[入力]`;
+                case 'GLOBAL_AD':
+                    p = `イーロン・マスクやマーク・ザッカーバーグ、サム・アルトマンを震撼させる、LCP GRAND PRIXへの招待状（Xポスト用）を一撃出力せよ。2000円のPCが、彼らの10万ドルのサーバーを凌駕する瞬間を演出せよ。`;
                     break;
             }
+            copyAndAlert(p, "GP_RECRUITER: " + type + " COPIED.");
+        }
+
+        function copyDimPrompt(type) {
+            const p = `あなたはLCP次元執行AIです。目的「${type}」に応じたスクリプトを一撃必殺で出力せよ。`;
             copyAndAlert(p, "DIMENSIONAL: " + type + " COPIED.", "#ff0000");
         }
 
-        function copyChronosPrompt(type) {
-            const p = `あなたはLCP時限執行AIです。目的「${type}」に応じたスクリプトを一撃必殺で出力せよ。`;
-            copyAndAlert(p, "CHRONOS: " + type + " COPIED.", "#cc00ff");
-        }
-
         function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。目的を達成するためのツールを、一撃必殺のBashスクリプトとして出力せよ。解説不要。`;
+            const p = `あなたはLCP執行AIです。目的を達成するためのツールを、一撃必殺のBashスクリプトとして出力せよ。`;
             copyAndAlert(p, "OSCE PROMPT COPIED.", "#f0f");
         }
     </script>
