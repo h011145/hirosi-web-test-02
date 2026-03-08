@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCP-GIT-PORTAL // REPO_SYNCHRONIZER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Fira+Code:wght@300;500&display=swap');
+        body { background: #000; color: #d4af37; font-family: 'Fira Code', monospace; padding: 40px 20px; }
+        .portal-box { border: 1px solid #d4af37; padding: 40px; background: radial-gradient(circle, #05001a 0%, #000 100%); max-width: 1000px; margin: 0 auto; box-shadow: 0 0 40px rgba(51, 153, 255, 0.2); }
+        h1 { font-family: 'Cinzel', serif; text-align: center; margin-bottom: 40px; text-shadow: 0 0 15px #3399ff; color: #fff; font-size: 2rem; }
+        .grid-portal { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .section-title { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #3399ff; border-bottom: 1px solid #002244; margin-bottom: 15px; padding-bottom: 5px; }
+        .btn-git { border: 1px solid #002244; padding: 12px; text-align: center; cursor: pointer; transition: 0.2s; font-size: 0.8rem; background: #000510; display: block; margin-bottom: 10px; color: #3399ff; }
+        .btn-git:hover { border-color: #3399ff; background: #001122; color: #fff; transform: scale(1.02); }
+        .link-portal { display: block; padding: 10px; border-bottom: 1px solid #001122; font-size: 0.8rem; }
+        .link-portal:hover { background: #001122; }
+        .back-link { display: block; text-align: center; margin-top: 50px; color: #3399ff; text-decoration: none; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="portal-box">
+        <h1>✠ LCP GIT-PORTAL ✠</h1>
+        <div class="grid-portal">
+            <!-- GitHub Command Unit -->
+            <div>
+                <h2 class="section-title">GIT_COMMAND_UNIT</h2>
+                <div class="btn-git" onclick="copyGitCommand('STATUS')">[ git status ]</div>
+                <div class="btn-git" onclick="copyGitCommand('ADD_COMMIT')">[ git add . && git commit -m "..." ]</div>
+                <div class="btn-git" onclick="copyGitCommand('PUSH')">[ git push origin main ]</div>
+                <div class="btn-git" onclick="copyGitCommand('PULL')">[ git pull origin main ]</div>
+                <div class="btn-git" onclick="copyGitCommand('SYNC_PAGES')">[ SYNC gh-pages ]</div>
+                <div class="btn-git" onclick="copyGitCommand('REPO_CREATE')">[ gh repo create ]</div>
+            </div>
+            <!-- Cathedral Gateway -->
+            <div>
+                <h2 class="section-title">CATHEDRAL_GATEWAY</h2>
+                <a href="index.html" class="link-portal">> ROOT: THE GRAND CATHEDRAL</a>
+                <a href="h_chat.html" class="link-portal">> HUB: MISSION CONTROL</a>
+                <a href="arcade.html" class="link-portal">> WING: HTML ARCADE</a>
+                <a href="python_lab.html" class="link-portal">> WING: PYTHON DEV LAB</a>
+                <a href="sales.html" class="link-portal">> WING: ASSET STORE</a>
+                <a href="https://github.com/h011145/lcp-intelligence-terminal" class="link-portal" target="_blank">> REPO: GITHUB SOURCE</a>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">[ RETURN TO CATHEDRAL ]</a>
+    </div>
+
+    <script>
+        function copyAndAlert(text, msg) {
+            navigator.clipboard.writeText(text);
+            const alertBox = document.createElement('div');
+            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#3399ff; color:#fff; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999;";
+            alertBox.innerText = msg;
+            document.body.appendChild(alertBox);
+            setTimeout(() => alertBox.remove(), 1200);
+        }
+
+        function copyGitCommand(type) {
+            let cmd = "";
+            switch(type) {
+                case 'STATUS': cmd = "git status"; break;
+                case 'ADD_COMMIT': cmd = 'git add . && git commit -m "New LCP Crack: "'; break;
+                case 'PUSH': cmd = "git push origin main"; break;
+                case 'PULL': cmd = "git pull origin main"; break;
+                case 'SYNC_PAGES': cmd = "git checkout gh-pages && git merge main && git push origin gh-pages && git checkout main"; break;
+                case 'REPO_CREATE': cmd = 'gh repo create [REPO_NAME] --public --clone -y'; break;
+            }
+            copyAndAlert(cmd, `GIT COMMAND COPIED: ${cmd}`);
+        }
+    </script>
+</body>
+</html>
