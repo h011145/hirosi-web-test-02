@@ -11,13 +11,13 @@
         .store-box { border: 2px solid #d4af37; padding: 40px; background: radial-gradient(circle, #1a0505 0%, #000 100%); max-width: 1200px; margin: 0 auto; box-shadow: 0 0 40px rgba(212, 175, 55, 0.2); }
         h1 { font-family: 'Cinzel', serif; text-align: center; margin-bottom: 40px; text-shadow: 0 0 15px #d4af37; color: #fff; font-size: 2rem; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { border: 1px solid #300; background: #050000; transition: 0.2s; text-decoration: none; color: #d4af37; }
+        .product-card { border: 1px solid #300; background: #050000; transition: 0.2s; text-decoration: none; color: #d4af37; display: flex; flex-direction: column; }
         .product-card:hover { border-color: #d4af37; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2); }
-        .product-card-body { padding: 20px; }
+        .product-card-body { padding: 20px; flex-grow: 1; }
         .product-card h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; margin-bottom: 10px; color: #fff; }
         .product-card p { font-size: 0.75rem; opacity: 0.7; margin-bottom: 20px; line-height: 1.6; }
         .price-tag { font-size: 1.2rem; font-weight: bold; }
-        .buy-button { display: block; text-align: center; padding: 10px; background: #800; color: #fff; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; transition: 0.2s; }
+        .buy-button { display: block; text-align: center; padding: 12px; background: #800; color: #fff; text-transform: uppercase; font-size: 0.8rem; font-weight: bold; transition: 0.2s; text-decoration: none; }
         .buy-button:hover { background: #d4af37; color: #000; }
         .back-link { display: block; text-align: center; margin-top: 50px; color: #d4af37; text-decoration: none; font-size: 0.8rem; }
     </style>
@@ -27,32 +27,32 @@
         <h1>✠ LCP ASSET STORE ✠</h1>
         <div class="product-grid">
             <!-- Product Example 1 -->
-            <div class="product-card">
+            <a href="https://github.com/h011145/lcp-intelligence-terminal/issues/new?template=purchase_request.md&title=[Request]%20DIMENSIONAL_EXECUTOR.json" class="product-card" target="_blank">
                 <div class="product-card-body">
                     <h3>DIMENSIONAL_EXECUTOR.json</h3>
                     <p>バックグラウンドで複数タスクを非同期実行させる「次元執行人」の設計図。curlでの偵察、cronでの自動起動を含む完全パッケージ。</p>
                     <div class="price-tag">$199</div>
                 </div>
-                <div class="buy-button">ACCESS VIA GUMROAD</div>
-            </div>
+                <div class="buy-button">ACCESS VIA GITHUB ISSUE</div>
+            </a>
             <!-- Product Example 2 -->
-            <div class="product-card">
+            <a href="https://github.com/h011145/lcp-intelligence-terminal/issues/new?template=purchase_request.md&title=[Request]%20GAME_ENGINE_LCP.json" class="product-card" target="_blank">
                 <div class="product-card-body">
                     <h3>GAME_ENGINE_LCP.json</h3>
                     <p>外部AIがリアルタイムで介入可能なPyGameベースのゲームエンジン。人間とAIのハイブリッド実行環境の基盤。</p>
                     <div class="price-tag">$99</div>
                 </div>
-                <div class="buy-button">ACCESS VIA GUMROAD</div>
-            </div>
+                <div class="buy-button">ACCESS VIA GITHUB ISSUE</div>
+            </a>
             <!-- Product Example 3 -->
-            <div class="product-card">
+            <a href="https://github.com/h011145/lcp-intelligence-terminal/issues/new?template=purchase_request.md&title=[Request]%20BAROQUE_UI_KIT.json" class="product-card" target="_blank">
                 <div class="product-card-body">
                     <h3>BAROQUE_UI_KIT.json</h3>
                     <p>このサイトで使われている荘厳なデジタル・バロック様式のUIキット。TailwindCSSとカスタムフォントを定義。</p>
                     <div class="price-tag">$49</div>
                 </div>
-                <div class="buy-button">ACCESS VIA GUMROAD</div>
-            </div>
+                <div class="buy-button">ACCESS VIA GITHUB ISSUE</div>
+            </a>
             <!-- More products... -->
             <div class="product-card opacity-50">
                 <div class="product-card-body">
