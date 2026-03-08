@@ -89,12 +89,67 @@
         </a>
         
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
-        
+
+        <!-- Remaining sections from original h_chat.html -->
+        <!-- 03. UNIVERSAL CRACKER -->
+        <div class="section-title">III. UNIVERSAL_CRACKER</div>
+        <div class="btn-divine font-black text-white" style="border-width: 2px; border-style: double;" onclick="copyOSCEPrompt()">
+            ⚡ CRACK_SYSTEM_ATOMICALLY ⚡
+        </div>
+
+        <!-- 04. CAPITAL CRACKER -->
+        <div class="section-title">IV. CAPITAL_CRACKER</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyGPPrompt('PITCH_DECK')">PITCH_DECK_CRACK</div>
+            <div class="btn-divine" onclick="copyGPPrompt('SHOWCASE')">EVIDENCE_CRACK</div>
+        </div>
+
+        <!-- 05. REALITY CRACKER -->
+        <div class="section-title">V. REALITY_CRACKER</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyDimPrompt('DIM_JSON')">GEN_DIM_JSON</div>
+            <div class="btn-divine" onclick="copyDimPrompt('EXEC_SHELL')">BUILD_DIM_SHELL</div>
+        </div>
+
+        <!-- 06. CIVILIZATION STARTER -->
+        <div class="section-title">VI. CIVILIZATION_STARTER</div>
+        <div class="grid-chaos">
+            <div class="btn-divine" onclick="copyGenesisPrompt('WEB_SITE')">WEB_SITE</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('TODO_APP')">TODO</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('DIARY')">DIARY</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('FINANCE')">FINANCE</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('GAME')">GAME</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('TIMER')">TIMER</div>
+        </div>
+
+        <!-- 07. PUBLISHER -->
+        <div class="section-title">VII. LCP_PUBLISHER</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyPublisherPrompt('STORY_JSON')">STORY_JSON_GEN</div>
+            <div class="btn-divine" onclick="copyPublisherPrompt('CHAPTER_CAT')">CHAPTER_CAT</div>
+        </div>
+
+        <!-- 08. CHRONOS -->
+        <div class="section-title">VIII. LCP_CHRONOS</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copyChronosPrompt('MISSION_JSON')">MISSION_JSON</div>
+            <div class="btn-divine" onclick="copyChronosPrompt('BOT_ENGINE')">BOT_ENGINE</div>
+        </div>
+
+        <!-- 09. SALES GATE -->
+        <div class="section-title">IX. LCP_SALES_GATE</div>
+        <div class="grid-duo">
+            <div class="btn-divine" onclick="copySalesPrompt('PRODUCT_GEN')">PRODUCT_PAGE_GEN</div>
+            <div class="btn-divine" onclick="copySalesPrompt('ACCESS_GRANT')">ACCESS_GRANT</div>
+        </div>
+
+        <div class="ornament">✙ ─── ✦ ─── ✙</div>
+
         <footer class="mt-auto flex justify-between items-center pt-10">
             <a href="index.html" class="back-link">< RETURN_TO_CATHEDRAL</a>
             <div class="text-[0.6rem] text-right opacity-30">
                 MASTER: DR. HIROSHI<br>
-                STATUS: TRACKER_OPERATIONAL
+                STATUS: LCP_PROTO_V1.1_LOADED
             </div>
         </footer>
     </div>
@@ -122,6 +177,77 @@
             const timestamp = new Date().toISOString().replace(/[-:.]/g, "").replace("T", "_");
             const p = `mkdir lcp_session_${timestamp} && cd lcp_session_${timestamp}`;
             copyAndAlert(p, "NEW SESSION COMMAND COPIED.");
+        }
+
+        function copyRPGCrack(type) {
+            let p = "";
+            let mission = "";
+            switch(type) {
+                case 'FULL_PACKAGE': mission = "PyGameベースのタイルマップRPGに必要な全てのファイル群"; break;
+                case 'GAME_ENGINE': mission = "PyGameのメインループ、画面描画、イベント処理を含むコアエンジン"; break;
+                case 'MAP_SYSTEM': mission = "タイルマップデータを読み込み、描画し、当たり判定を管理するシステム"; break;
+                case 'SCENARIO_ENGINE': mission = "JSONやテキストからシナリオを読み込み、会話イベントを制御するエンジン"; break;
+                case 'CHARACTER': mission = "プレイヤーとNPCのステータス（HP, MP, Level）を管理するクラス"; break;
+                case 'BATTLE_SYSTEM': mission = "シンプルなターン制の戦闘システム"; break;
+                case 'ITEM_DB': mission = "アイテム、武器、防具のデータを格納するJSONデータベース"; break;
+                case 'UI_SYSTEM': mission = "メッセージウィンドウとメニュー"; break;
+                case 'SOUND_ENGINE': mission = "BGMと効果音を再生・管理するシンプルなサウンドシステム"; break;
+                case 'SAVE_LOAD': mission = "ゲームの進捗をJSONファイルに保存・読み込みする機能"; break;
+            }
+            p = `あなたはLCP-RPG開発AIです。目的「${mission}」を達成するためのPythonスクリプトをクラックせよ。` + RULES;
+            copyAndAlert(p, `RPG CRACKER: ${type} PROMPT COPIED.`);
+        }
+
+        function copyOSCEPrompt() {
+            const p = `あなたはLCP(Linux Communication Protocol)執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `
+
+【目的】：[入力]`;
+            copyAndAlert(p, "ATOMIC_PROMPT_EXTRACTED");
+        }
+
+        function copyGPPrompt(type) {
+            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を生成せよ。` + RULES + `
+
+【ミッション】：100万ドルのスポンサー獲得`;
+            copyAndAlert(p, "CAPITAL_CRACKER_READY");
+        }
+
+        function copyDimPrompt(type) {
+            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を構築せよ。` + RULES + `
+
+【ミッション】：バックグラウンドでの自律ミッション遂行`;
+            copyAndAlert(p, "DIMENSIONAL_UNIT_READY");
+        }
+
+        function copyGenesisPrompt(type) {
+            const p = `あなたはLCP執行AIです。文明をクラックし、道具「${type}」を召喚せよ。` + RULES;
+            copyAndAlert(p, "CIVILIZATION_STARTER_READY");
+        }
+
+        function copyPublisherPrompt(type) {
+            const p = `あなたはLCP出版局AIです。物語の[${type}]をクラックせよ。` + RULES;
+            copyAndAlert(p, "PUBLISHER_UNIT_READY");
+        }
+
+        function copyChronosPrompt(type) {
+            const p = `あなたはLCP時限執行AIです。目的「${type}」に応じたスクリプトをクラックせよ。` + RULES;
+            copyAndAlert(p, "CHRONOS_UNIT_READY");
+        }
+
+        function copySalesPrompt(type) {
+            let p = "";
+            switch(type) {
+                case 'PRODUCT_GEN':
+                    p = `あなたはLCP販売AIです。新しいJSONコード製品の販売ページをクラックせよ。製品名、説明、価格、デモ画像を含む sales.html のレイアウトを更新するコマンドを出力せよ。` + RULES;
+                    break;
+                case 'ACCESS_GRANT':
+                    p = `あなたはLCPアクセス管理AIです。決済が完了した購入者のGitHubアカウントに対し、指定したプライベートリポジトリへの読み取りアクセス権を注入する `gh repo grant` コマンドをクラックせよ。` + RULES + `
+
+【購入者ID】：[入力]
+【リポジトリ名】：[入力]`;
+                    break;
+            }
+            copyAndAlert(p, "SALES_GATE_PROMPT_COPIED");
         }
     </script>
 </body>
