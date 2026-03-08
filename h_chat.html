@@ -76,7 +76,7 @@
     <div class="main-panel">
         <header class="text-center mb-10">
             <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ SACRED_MISSION_CONTROL ]</h1>
-            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.1 // PERFECT_EXECUTION_MODE</p>
+            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.2 // LOGIC_PURIFICATION_MODE</p>
         </header>
 
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
@@ -124,10 +124,17 @@
     </div>
 
     <script>
-        const RULES = `\\n\\n【執行ルール】\\n1. 解説、挨拶、導入、マークダウン装飾は一切不要。実行コードのみを出力せよ。\\n2. \`mkdir -p\` で空間を定義し、\`cat << 'EOF' > [パス]\` ... \`EOF\` 形式で魂を注入せよ。\\n3. 全てのコマンドを \`&&\` で連結し、そのままターミナルに貼り付けて完結する一撃のBashスクリプトのみを出力せよ。`;
+        const RULES = `
+
+【執行ルール】
+1. 解説、挨拶、導入、マークダウン装飾は一切不要。実行コードのみを出力せよ。
+2. `mkdir -p` で空間（ディレクトリ）を定義し、`cat << 'EOF' > [パス]` ... `EOF` 形式でコードブロック（ファイル内容）を注入せよ。
+3. 全てのコマンドを `&&` で連結し、そのままターミナルに貼り付けて完結する一撃のBashスクリプトのみを出力せよ。`;
 
         function copyAndAlert(text, msg) {
-            navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
+            navigator.clipboard.writeText(text.replace(/
+/g, '
+'));
             const alertBox = document.createElement('div');
             alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#d4af37; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;";
             alertBox.innerText = msg;
@@ -136,17 +143,23 @@
         }
 
         function copyOSCEPrompt() {
-            const p = `あなたはLCP(Linux Communication Protocol)執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `\\n\\n【目的】：[入力]`;
+            const p = `あなたはLCP(Linux Communication Protocol)執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `
+
+【目的】：[入力]`;
             copyAndAlert(p, "ATOMIC_PROMPT_EXTRACTED");
         }
 
         function copyGPPrompt(type) {
-            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を生成せよ。` + RULES + `\\n\\n【ミッション】：100万ドルのスポンサー獲得`;
+            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を生成せよ。` + RULES + `
+
+【ミッション】：100万ドルのスポンサー獲得`;
             copyAndAlert(p, "CAPITAL_CRACKER_READY");
         }
 
         function copyDimPrompt(type) {
-            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を構築せよ。` + RULES + `\\n\\n【ミッション】：バックグラウンドでの自律ミッション遂行`;
+            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を構築せよ。` + RULES + `
+
+【ミッション】：バックグラウンドでの自律ミッション遂行`;
             copyAndAlert(p, "DIMENSIONAL_UNIT_READY");
         }
 
