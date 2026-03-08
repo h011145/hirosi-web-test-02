@@ -19,8 +19,6 @@
             overflow: hidden;
         }
 
-        .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(50, 0, 0, 0) 50%, rgba(50, 0, 0, 0.05) 50%); background-size: 100% 4px; z-index: 100; pointer-events: none; }
-        
         .main-panel { 
             background: linear-gradient(180deg, #050000 0%, #000 100%);
             display: flex;
@@ -70,45 +68,33 @@
     </style>
 </head>
 <body>
-    <div class="scanline"></div>
-
     <div class="main-panel">
         <header class="text-center mb-10">
-            <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ SACRED_MISSION_CONTROL ]</h1>
-            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V17.0 // LCP_SALES_GATE_PROTOCOL</p>
+            <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ LCP TRACKER SYSTEM ]</h1>
+            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V18.0 // INSTANCE_GENERATOR</p>
         </header>
 
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
 
-        <!-- 01. SALES GATE -->
-        <div class="section-title">I. LCP_SALES_GATE</div>
-        <div class="grid-duo">
-            <div class="btn-divine" onclick="copySalesPrompt('PRODUCT_GEN')">PRODUCT_PAGE_GEN</div>
-            <div class="btn-divine" onclick="copySalesPrompt('ACCESS_GRANT')">ACCESS_INJECTOR</div>
+        <!-- 01. NEW SESSION -->
+        <div class="section-title">I. NEW_SESSION_CRACK</div>
+        <div class="btn-divine font-black text-white" style="border-width: 2px; border-style: double;" onclick="copyTrackerPrompt()">
+            ⚡ CRACK NEW DIMENSION (mkdir + cd) ⚡
         </div>
 
-        <!-- 02. UNIVERSAL CRACKER -->
-        <div class="section-title">II. THE_ATOMIC_CRACKER</div>
-        <div class="btn-divine font-bold" onclick="copyOSCEPrompt()">[ CRACK_SYSTEM_ATOMICALLY ]</div>
-
-        <!-- 03. CIVILIZATION STARTER -->
-        <div class="section-title">III. CIVILIZATION_STARTER</div>
-        <div class="grid-chaos">
-            <div class="btn-divine" onclick="copyGenesisPrompt('WEB_SITE')">WEB_SITE</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('TODO_APP')">TODO</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('DIARY')">DIARY</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('FINANCE')">FINANCE</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('GAME')">GAME</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('TIMER')">TIMER</div>
-        </div>
-
+        <!-- 02. RPG CRACKER -->
+        <div class="section-title">II. RPG_CRACKER_HUB</div>
+        <a href="rpg_cracker.html" class="btn-divine" style="color: #ff5555; border-color: #ff5555;">
+            [ ENTER RPG MAKER'S SANCTUM ]
+        </a>
+        
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
-
+        
         <footer class="mt-auto flex justify-between items-center pt-10">
             <a href="index.html" class="back-link">< RETURN_TO_CATHEDRAL</a>
             <div class="text-[0.6rem] text-right opacity-30">
                 MASTER: DR. HIROSHI<br>
-                STATUS: GATE_OPERATIONAL
+                STATUS: TRACKER_OPERATIONAL
             </div>
         </footer>
     </div>
@@ -117,47 +103,25 @@
         const RULES = `
 
 【執行ルール】
-1. 解説、挨拶、導入、マークダウン装飾は一切不要。実行コードのみを出力せよ。
-2. `mkdir -p` で空間を定義し、`cat << 'EOF' > [パス]` 形式でコードブロックを注入せよ。
+1. 解説、挨拶、マークダウン装飾は一切不要。実行コードのみを出力せよ。
+2. `mkdir -p` で空間（ディレクトリ）を定義し、`cat << 'EOF' > [パス]` 形式でコードブロック（ファイル内容）を注入せよ。
 3. 全てのコマンドを `&&` で連結し、一撃のBashスクリプトのみを出力せよ。`;
 
-        function copyAndAlert(text, msg, color = "#d4af37") {
+        function copyAndAlert(text, msg) {
             navigator.clipboard.writeText(text.replace(/
 /g, '
 '));
             const alertBox = document.createElement('div');
-            alertBox.style.cssText = `position:fixed; top:20px; right:20px; background:${color}; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;`;
+            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#d4af37; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;";
             alertBox.innerText = msg;
             document.body.appendChild(alertBox);
             setTimeout(() => alertBox.remove(), 1200);
         }
 
-        function copySalesPrompt(type) {
-            let p = "";
-            switch(type) {
-                case 'PRODUCT_GEN':
-                    p = `あなたはLCP販売AIです。新しいJSONコード製品の販売ページをクラックせよ。製品名、説明、価格、デモ画像を含む sales.html のレイアウトを更新するコマンドを出力せよ。` + RULES;
-                    break;
-                case 'ACCESS_GRANT':
-                    p = `あなたはLCPアクセス管理AIです。決済が完了した購入者のGitHubアカウントに対し、指定したプライベートリポジトリへの読み取りアクセス権を注入する `gh repo grant` コマンドをクラックせよ。
-
-【購入者ID】：[入力]
-【リポジトリ名】：[入力]`;
-                    break;
-            }
-            copyAndAlert(p, "SALES_GATE_PROMPT_COPIED");
-        }
-
-        function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `
-
-【目的】：[入力]`;
-            copyAndAlert(p, "ATOMIC_PROMPT_EXTRACTED");
-        }
-
-        function copyGenesisPrompt(type) {
-            const p = `あなたはLCP執行AIです。文明をクラックし、道具「${type}」を召喚せよ。` + RULES;
-            copyAndAlert(p, "CIVILIZATION_STARTER_READY");
+        function copyTrackerPrompt() {
+            const timestamp = new Date().toISOString().replace(/[-:.]/g, "").replace("T", "_");
+            const p = `mkdir lcp_session_${timestamp} && cd lcp_session_${timestamp}`;
+            copyAndAlert(p, "NEW SESSION COMMAND COPIED.");
         }
     </script>
 </body>
