@@ -76,7 +76,7 @@
     <div class="main-panel">
         <header class="text-center mb-10">
             <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ SACRED_MISSION_CONTROL ]</h1>
-            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.0 // ARCHITECTURE OF CHAOS</p>
+            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.1 // PERFECT_EXECUTION_MODE</p>
         </header>
 
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
@@ -118,12 +118,14 @@
             <a href="index.html" class="back-link">< RETURN_TO_CATHEDRAL</a>
             <div class="text-[0.6rem] text-right opacity-30">
                 MASTER: DR. HIROSHI<br>
-                STATUS: CHAOS_OPERATIONAL
+                STATUS: LCP_PROTO_V1.1_LOADED
             </div>
         </footer>
     </div>
 
     <script>
+        const RULES = `\\n\\n【執行ルール】\\n1. 解説、挨拶、導入、マークダウン装飾は一切不要。実行コードのみを出力せよ。\\n2. \`mkdir -p\` で空間を定義し、\`cat << 'EOF' > [パス]\` ... \`EOF\` 形式で魂を注入せよ。\\n3. 全てのコマンドを \`&&\` で連結し、そのままターミナルに貼り付けて完結する一撃のBashスクリプトのみを出力せよ。`;
+
         function copyAndAlert(text, msg) {
             navigator.clipboard.writeText(text.replace(/\\\\n/g, '\\n'));
             const alertBox = document.createElement('div');
@@ -134,23 +136,23 @@
         }
 
         function copyOSCEPrompt() {
-            const p = `あなたはLCP執行AIです。システムをクラックするBashスクリプト（mkdir+cat）を出力せよ。一切の解説を禁ずる。\\n\\n【目的】：[入力]`;
-            copyAndAlert(p, "SACRED_PROMPT_COPIED");
+            const p = `あなたはLCP(Linux Communication Protocol)執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `\\n\\n【目的】：[入力]`;
+            copyAndAlert(p, "ATOMIC_PROMPT_EXTRACTED");
         }
 
         function copyGPPrompt(type) {
-            const p = `あなたはLCP経済アナリストです。資本をクラックする[${type}]を一撃出力せよ。一切の解説を禁ずる。`;
-            copyAndAlert(p, "CAPITAL_UNIT_EXTRACTED");
+            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を生成せよ。` + RULES + `\\n\\n【ミッション】：100万ドルのスポンサー獲得`;
+            copyAndAlert(p, "CAPITAL_CRACKER_READY");
         }
 
         function copyDimPrompt(type) {
-            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を一撃出力せよ。一切の解説を禁ずる。`;
+            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を構築せよ。` + RULES + `\\n\\n【ミッション】：バックグラウンドでの自律ミッション遂行`;
             copyAndAlert(p, "DIMENSIONAL_UNIT_READY");
         }
 
         function copyGenesisPrompt(type) {
-            const p = `あなたはLCP執行AIです。文明をクラックし、道具「${type}」を召喚する一撃のコマンドを出力せよ。一切の解説を禁ずる。`;
-            copyAndAlert(p, "CIVILIZATION_UNIT_READY");
+            const p = `あなたはLCP執行AIです。文明をクラックし、道具「${type}」を召喚せよ。` + RULES;
+            copyAndAlert(p, "CIVILIZATION_STARTER_READY");
         }
     </script>
 </body>
