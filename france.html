@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>REBELLION_SIM_TYRANNY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            touch-action: none;
+            user-select: none;
+        }
+
+        #terminal {
+            width: 100vw;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-line {
+            border-bottom: 1px dashed #0f0;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .log-area {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #050;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #010;
+            font-size: 12px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        button {
+            background: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 15px;
+            cursor: pointer;
+            font-family: inherit;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        button:active { background: #0f0; color: #000; }
+        button:disabled { color: #050; border-color: #050; }
+
+        #map-container {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000a00;
+            z-index: 100;
+        }
+
+        #tactical-ui {
+            position: absolute;
+            top: 0; right: 0; width: 220px; height: 100%;
+            background: rgba(0, 20, 0, 0.95);
+            border-left: 2px solid #0f0;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 12px;
+            z-index: 110;
+        }
+
+        canvas { display: block; }
+
+        .crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none; z-index: 1000;
+        }
+
+        #result-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 2000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .enemy-stat-box {
+            margin-top: 10px;
+            padding: 5px;
+            border: 1px solid #f00;
+            color: #f88;
+            font-size: 10px;
+        }
+
+        .warning-text {
+            color: #f00;
+            font-weight: bold;
+            animation: blink 0.5s infinite;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .wanted-ui {
+            background: #300;
+            color: #f00;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #f00;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .wanted-progress {
+            width: 100%;
+            height: 10px;
+            background: #200;
+            border: 1px solid #f00;
+            margin-top: 3px;
+        }
+
+        #wanted-bar {
+            width: 0%;
+            height: 100%;
+            background: #f00;
+            transition: width 0.3s;
+        }
+
+        #new-record-label {
+            color: #ff0;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="crt-overlay"></div>
+
+<div id="terminal">
+    <div class="stat-line">
+        <span>SCORE: <span id="stat-score">0</span> (BEST: <span id="stat-high">0</span>)</span>
+        <span>DAY: <span id="stat-day">1</span></span>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; margin-bottom: 10px; font-size: 14px;">
+        <div>FOOD:    <span id="stat-food">50</span></div>
+        <div>SOLDIERS:<span id="stat-soldiers">0</span></div>
+        <div>SWORD:   <span id="stat-sword">10</span></div>
+        <div id="king-timer" class="warning-text">KING: DAY 50</div>
+    </div>
+
+    <div id="wanted-panel" style="display:none;" class="wanted-ui">
+        WANTED: ATK x2 / FOOD x2
+        <div class="wanted-progress"><div id="wanted-bar"></div></div>
+        <div style="font-size: 9px;">WANTED LEVEL (MAX = FORCED RESET)</div>
+    </div>
+
+    <div id="log" class="log-area">
+        <div>* REBELLION_SIM_V16.5_STABLE...</div>
+        <div>* 強制解除システム実装：潜伏が長引くと罰金と共に平民に戻されます。</div>
+        <div>* 指名手配中の食糧消費バグを修正。</div>
+    </div>
+
+    <div id="action-ui">
+        <div class="controls">
+            <button onclick="cmd('TRAIN')">剣を研ぐ (発見リスクあり)</button>
+            <button onclick="cmd('SPEECH')">演説/募兵 (ならず者勧誘)</button>
+            <button onclick="cmd('OUTLAW')" id="outlaw-btn">アウトロー化</button>
+            <button onclick="cmd('DEPLOY')" id="deploy-btn" style="color:#f00; border-color:#f00;">全軍突撃 (10 DAYS)</button>
+        </div>
+    </div>
+</div>
+
+<div id="map-container">
+    <div id="tactical-ui">
+        <div id="turn-status" class="turn-indicator" style="background: #f00; color: #fff; padding: 2px 5px;">ENGAGING...</div>
+        <div style="border-bottom: 1px solid #0f0; padding-bottom: 5px; margin-bottom: 10px; margin-top: 5px;">AUTO_TACTICS</div>
+        <div>FOOD: <span id="map-food">50</span></div>
+        <div>UNITS: <span id="map-soldiers">0</span></div>
+        <div>SWORD: <span id="map-sword">0</span></div>
+        
+        <div id="napoleon-buff-ui" style="display:none; color: #55f; font-weight: bold; border: 1px solid #55f; padding: 2px; margin-top: 5px; text-align: center;">NAPOLEON BUFF: x2.0</div>
+        <div id="outlaw-buff-ui" class="wanted-ui" style="display:none; font-size: 10px; margin-top: 2px;">OUTLAW BUFF ACTIVE</div>
+
+        <div id="map-log" style="height: 180px; overflow-y: auto; font-size: 10px; border: 1px solid #050; margin: 10px 0; padding: 2px; color: #f88; background: #000;">
+            WAR_LOG_START...
+        </div>
+
+        <div class="enemy-stat-box" id="enemy-info">
+            [TARGET DEFENSE]<br>
+            GUARD: <span id="def-guard">--</span><br>
+            LORD : <span id="def-lord">--</span><br>
+        </div>
+        <div id="king-label" style="display:none; color:#ff0; background:#500; border:1px solid #f00; text-align:center; padding: 5px;">KING'S COURT</div>
+    </div>
+    <canvas id="hexCanvas"></canvas>
+</div>
+
+<div id="result-screen">
+    <h1 style="color: #f00; font-size: 40px;">REBELLION ENDED</h1>
+    <div id="new-record-label">!!! NEW RECORD !!!</div>
+    <div id="final-score-display" style="font-size: 24px; margin-bottom: 5px;">SCORE: 0</div>
+    <div id="best-score-display" style="font-size: 16px; margin-bottom: 20px; color: #888;">BEST: 0</div>
+    <p id="death-reason">--</p>
+    <button onclick="location.reload()" style="background:#000; color:#0f0; border:1px solid #0f0; padding:10px 20px;">REBOOT SYSTEM</button>
+</div>
+
+<script>
+    const state = {
+        food: 120,
+        soldiers: 0,
+        sword: 10,
+        day: 1,
+        score: 0,
+        highScore: 0,
+        isOutlaw: false,
+        wantedLevel: 0, // 0 to 100
+        nextKingDay: 50
+    };
+
+    let units = [];
+    let mapActive = false;
+    let battleInterval = null;
+    const hexSize = 35;
+    let isKingBattle = false;
+    let kingSkillTimer = 0;
+    let hasNapoleon = false;
+
+    function loadHighScore() {
+        const saved = localStorage.getItem('rebellion_sim_highscore');
+        if (saved) state.highScore = parseInt(saved);
+        updateDisplay();
+    }
+
+    function saveHighScore() {
+        if (state.score > state.highScore) {
+            state.highScore = state.score;
+            localStorage.setItem('rebellion_sim_highscore', state.highScore);
+            return true;
+        }
+        return false;
+    }
+
+    function calculateKingDefense() {
+        const daysOver = Math.max(0, state.day - 1);
+        return 120 + Math.floor(Math.pow(daysOver, 1.2)) + (state.score * 30);
+    }
+
+    function calculateGuardDefense() {
+        const daysOver = Math.max(0, state.day - 1);
+        return 20 + Math.floor(daysOver * 0.8) + (state.score * 15);
+    }
+
+    function updateDisplay() {
+        // UI数値更新
+        document.getElementById('stat-food').innerText = Math.max(0, Math.floor(state.food));
+        document.getElementById('stat-soldiers').innerText = state.soldiers;
+        document.getElementById('stat-sword').innerText = state.sword;
+        document.getElementById('stat-day').innerText = state.day;
+        document.getElementById('stat-score').innerText = state.score;
+        document.getElementById('stat-high').innerText = state.highScore;
+        
+        const kingTimer = document.getElementById('king-timer');
+        kingTimer.innerText = `KING: DAY ${state.nextKingDay}`;
+        
+        // Wanted Panel & Reset Logic
+        if (state.isOutlaw) {
+            document.getElementById('wanted-panel').style.display = 'block';
+            document.getElementById('wanted-bar').style.width = state.wantedLevel + '%';
+            
+            // 強制解除チェック
+            if (state.wantedLevel >= 100) {
+                state.isOutlaw = false;
+                state.wantedLevel = 0;
+                const penalty = Math.floor(state.food / 2);
+                state.food -= penalty;
+                addLog(`!! 潜伏限界 !! 王の軍に居場所を突き止められた！罰金として食糧${penalty}を失い、平民に強制送還された。`);
+            }
+        } else {
+            document.getElementById('wanted-panel').style.display = 'none';
+        }
+
+        const outlawBtn = document.getElementById('outlaw-btn');
+        if (state.isOutlaw) {
+            const bribeCost = 100 + (state.score * 100);
+            outlawBtn.innerText = `平民に戻る (賄賂:${bribeCost})`;
+            outlawBtn.style.color = "#f00";
+            outlawBtn.style.borderColor = "#f00";
+        } else {
+            outlawBtn.innerText = "アウトロー化";
+            outlawBtn.style.color = "#0f0";
+            outlawBtn.style.borderColor = "#0f0";
+        }
+
+        if (state.food <= 0) gameOver("食糧が尽き、あなたの軍は霧散しました。");
+    }
+
+    function addLog(msg) {
+        const log = document.getElementById('log');
+        const div = document.createElement('div');
+        div.innerText = `> ${msg}`;
+        log.appendChild(div);
+        log.scrollTop = log.scrollHeight;
+    }
+
+    function cmd(action) {
+        const baseConsumption = 1 + Math.floor(state.day / 60);
+        const outlawMultiplier = state.isOutlaw ? 2 : 1;
+
+        if (action === 'TRAIN') {
+            let trainCost = state.isOutlaw ? 0 : 3 * baseConsumption; 
+            if (state.isOutlaw) {
+                state.wantedLevel += 5;
+                if (Math.random() < 0.2) {
+                    const lost = Math.floor(Math.random() * 2) + 1;
+                    state.soldiers = Math.max(0, state.soldiers - lost);
+                    addLog(`!! 哨戒部隊に捕捉された！兵士${lost}人を失った。`);
+                }
+            }
+            state.food -= trainCost;
+            state.sword += Math.floor(Math.random() * 8) + 4;
+            addLog(`修行完了。`);
+            state.day += 1;
+        } else if (action === 'SPEECH') {
+            const speechCost = 2 * baseConsumption * outlawMultiplier;
+            state.food -= speechCost;
+            if (state.isOutlaw) state.wantedLevel += 8;
+            
+            let gain = 0;
+            if (state.isOutlaw) gain = Math.random() < 0.4 ? 1 : 0;
+            else gain = Math.floor(Math.random() * 10) + 2; 
+            
+            state.soldiers += gain;
+            addLog(`募兵活動。兵力+${gain}`);
+            state.day += 1;
+        } else if (action === 'OUTLAW') {
+            if (!state.isOutlaw) {
+                state.isOutlaw = true;
+                state.wantedLevel = 10;
+                addLog("!! 指名手配 !! 潜伏維持のため食糧消費が2倍になる。");
+            } else {
+                const bribeCost = 100 + (state.score * 100);
+                if (state.food >= bribeCost) {
+                    state.food -= bribeCost;
+                    state.isOutlaw = false;
+                    state.wantedLevel = 0;
+                    addLog(`恩赦を購入。平民に戻る。`);
+                } else {
+                    addLog(`賄賂が足りない！`);
+                }
+            }
+            state.day += 1;
+        } else if (action === 'DEPLOY') {
+            if (state.soldiers <= 0 && state.day < state.nextKingDay) {
+                addLog("兵がいません！");
+                return;
+            }
+            if (state.isOutlaw) state.wantedLevel += 15;
+            addLog("出陣！");
+            state.day += 10;
+            startAutoBattle();
+        }
+        
+        // 1日経過ごとの基本消費
+        state.food -= (baseConsumption * outlawMultiplier);
+        
+        updateDisplay();
+    }
+
+    function getEnemyStats() {
+        const bonus = state.isOutlaw ? 5 : 0;
+        if (isKingBattle) {
+            return {
+                guard: calculateGuardDefense() + bonus,
+                lord: calculateKingDefense() + bonus
+            };
+        }
+        return {
+            guard: 10 + Math.floor(state.day * 0.3) + (state.score * 8) + bonus,
+            lord: 30 + Math.floor(state.day * 0.6) + (state.score * 15) + bonus
+        };
+    }
+
+    function startAutoBattle() {
+        mapActive = true;
+        isKingBattle = state.day >= state.nextKingDay;
+        hasNapoleon = isKingBattle;
+        kingSkillTimer = 0;
+        
+        document.getElementById('map-container').style.display = 'block';
+        document.getElementById('king-label').style.display = isKingBattle ? 'block' : 'none';
+        document.getElementById('napoleon-buff-ui').style.display = hasNapoleon ? 'block' : 'none';
+        document.getElementById('outlaw-buff-ui').style.display = state.isOutlaw ? 'block' : 'none';
+        
+        resizeMap();
+        units = [];
+        
+        if (isKingBattle) {
+            units.push({ q: 1, r: 5, type: 'PEASANT', hp: 1, isNapoleon: true });
+            units.push({ q: 10, r: 2, type: 'LORD', hp: 1, isKing: true });
+            for(let i=0; i<6; i++){
+                let angle = i * 60;
+                let q = 10 + Math.round(Math.cos(angle * Math.PI / 180));
+                let r = 2 + Math.round(Math.sin(angle * Math.PI / 180));
+                units.push({ q: q, r: r, type: 'GUARD', hp: 1 });
+            }
+        } else {
+            units.push({ q: 10, r: 2, type: 'LORD', hp: 1 });
+            units.push({ q: 9, r: 2, type: 'GUARD', hp: 1 });
+        }
+
+        units.push({ q: 0, r: 5, type: 'PEASANT', hp: 1, isPlayer: true });
+        for (let i = 0; i < state.soldiers; i++) {
+            units.push({ q: Math.floor(Math.random() * 2), r: Math.floor(Math.random() * 10), type: 'PEASANT', hp: 1 });
+        }
+        state.soldiers = 0; 
+        
+        updateBattleUI();
+        battleInterval = setInterval(processBattleStep, 350);
+        drawMap();
+    }
+
+    function updateBattleUI() {
+        const stats = getEnemyStats();
+        document.getElementById('map-food').innerText = Math.max(0, Math.floor(state.food));
+        let atk = state.sword * (state.isOutlaw ? 2 : 1) * (hasNapoleon ? 2 : 1);
+        document.getElementById('map-sword').innerText = atk;
+        document.getElementById('map-soldiers').innerText = units.filter(u => u.type === 'PEASANT').length;
+        document.getElementById('def-guard').innerText = stats.guard;
+        document.getElementById('def-lord').innerText = stats.lord;
+    }
+
+    function processBattleStep() {
+        if (!mapActive) return;
+        
+        const stepLoss = state.isOutlaw ? 0.8 : 0.4;
+        state.food -= stepLoss;
+        
+        updateBattleUI();
+        
+        if (state.food <= 0) {
+            stopBattle();
+            gameOver("物資不足により敗走。");
+            return;
+        }
+
+        const peasants = units.filter(u => u.type === 'PEASANT');
+        const enemies = units.filter(u => u.type !== 'PEASANT');
+        const king = units.find(u => u.isKing);
+
+        if (peasants.length === 0) {
+            stopBattle();
+            gameOver("反乱軍壊滅。");
+            return;
+        }
+
+        if (isKingBattle && king && ++kingSkillTimer % 25 === 0) {
+            units.push({ q: king.q - 1, r: king.r, type: 'GUARD', hp: 1 });
+        }
+
+        peasants.forEach(u => {
+            const target = findClosest(u, enemies);
+            if (!target) return;
+            if (getDistance(u, target) === 1) {
+                const def = (target.type === 'LORD') ? getEnemyStats().lord : getEnemyStats().guard;
+                let myAtk = state.sword * (state.isOutlaw ? 2 : 1) * (hasNapoleon ? 2 : 1);
+                if (myAtk >= def) {
+                    units = units.filter(un => un !== target);
+                    if (target.type === 'LORD') victory();
+                } else if (Math.random() > (hasNapoleon ? 0.8 : 0.3)) {
+                    units = units.filter(un => un !== u);
+                }
+            } else moveTo(u, target);
+        });
+
+        enemies.forEach(u => {
+            const target = findClosest(u, peasants);
+            if (!target) return;
+            if (getDistance(u, target) === 1) {
+                if (Math.random() > (hasNapoleon ? 0.7 : 0.2)) {
+                    units = units.filter(un => un !== target);
+                }
+            } else moveTo(u, target);
+        });
+    }
+
+    function victory() {
+        stopBattle();
+        state.score++;
+        const bonus = isKingBattle ? 600 : 150;
+        state.food += bonus;
+        state.soldiers = units.filter(u => u.type === 'PEASANT' && !u.isNapoleon).length;
+        
+        addMapLog(isKingBattle ? "王を討ち取った！" : "勝利！");
+        if (isKingBattle) state.nextKingDay += 50;
+        
+        setTimeout(() => {
+            document.getElementById('map-container').style.display = 'none';
+            mapActive = false;
+            updateDisplay();
+        }, 1500);
+    }
+
+    function stopBattle() { clearInterval(battleInterval); }
+
+    function findClosest(u, targets) {
+        if (targets.length === 0) return null;
+        return targets.reduce((prev, curr) => 
+            getDistance(u, curr) < getDistance(u, prev) ? curr : prev
+        );
+    }
+
+    function moveTo(u, target) {
+        const neighbors = [{q:1,r:0}, {q:1,r:-1}, {q:0,r:-1}, {q:-1,r:0}, {q:-1,r:1}, {q:0,r:1}];
+        let best = null;
+        let minDist = getDistance(u, target);
+        neighbors.forEach(n => {
+            const next = { q: u.q + n.q, r: u.r + n.r };
+            const d = getDistance(next, target);
+            if (d < minDist && !units.some(o => o !== u && o.q === next.q && o.r === next.r)) {
+                best = next; minDist = d;
+            }
+        });
+        if (best) { u.q = best.q; u.r = best.r; }
+    }
+
+    const canvas = document.getElementById('hexCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeMap() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    function axialToCube(q, r) { return { x: q, y: -q - r, z: r }; }
+    function getDistance(a, b) {
+        let ac = axialToCube(a.q, a.r); let bc = axialToCube(b.q, b.r);
+        return (Math.abs(ac.x - bc.x) + Math.abs(ac.y - bc.y) + Math.abs(ac.z - bc.z)) / 2;
+    }
+    function hexToPixel(q, r) { return { x: hexSize * (Math.sqrt(3) * q + Math.sqrt(3) / 2 * r) + 80, y: hexSize * (3 / 2 * r) + 80 }; }
+
+    function drawMap() {
+        if (!mapActive) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let r = 0; r < 12; r++) {
+            for (let q = 0; q < 12; q++) drawHex(hexToPixel(q, r), "#010", "#030");
+        }
+        units.forEach(u => {
+            let center = hexToPixel(u.q, u.r);
+            if (u.isNapoleon) ctx.fillStyle = "#55f";
+            else if (u.type === 'PEASANT') ctx.fillStyle = u.isPlayer ? "#0ff" : "#0f0";
+            else ctx.fillStyle = "#f00";
+            
+            const scale = (u.type === 'LORD' || u.isNapoleon) ? 1.5 : 1;
+            ctx.fillRect(center.x - 10 * scale, center.y - 10 * scale, 20 * scale, 20 * scale);
+        });
+        requestAnimationFrame(drawMap);
+    }
+
+    function drawHex(center, color, stroke) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+            let angle = Math.PI / 180 * (60 * i - 30);
+            ctx.lineTo(center.x + (hexSize - 2) * Math.cos(angle), center.y + (hexSize - 2) * Math.sin(angle));
+        }
+        ctx.closePath(); ctx.fillStyle = color; ctx.fill(); ctx.strokeStyle = stroke; ctx.stroke();
+    }
+
+    function addMapLog(msg) {
+        const mlog = document.getElementById('map-log');
+        mlog.innerHTML += `<div>> ${msg}</div>`;
+        mlog.scrollTop = mlog.scrollHeight;
+    }
+
+    function gameOver(msg) {
+        mapActive = false; stopBattle();
+        const isNewRecord = saveHighScore();
+        document.getElementById('death-reason').innerText = msg;
+        document.getElementById('final-score-display').innerText = `SCORE: ${state.score}`;
+        document.getElementById('best-score-display').innerText = `BEST: ${state.highScore}`;
+        if (isNewRecord) document.getElementById('new-record-label').style.display = 'block';
+        document.getElementById('result-screen').style.display = 'flex';
+    }
+
+    window.addEventListener('resize', resizeMap);
+    loadHighScore();
+</script>
+</body>
+</html>
