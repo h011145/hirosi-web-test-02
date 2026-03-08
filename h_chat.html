@@ -67,7 +67,6 @@
 
         .ornament { text-align: center; font-size: 0.5rem; opacity: 0.3; margin: 20px 0; }
         .back-link { color: #800; text-decoration: none; border: 1px solid #800; padding: 5px 15px; font-size: 0.7rem; transition: 0.2s; }
-        .back-link:hover { color: #d4af37; border-color: #d4af37; background: #1a0000; }
     </style>
 </head>
 <body>
@@ -76,40 +75,31 @@
     <div class="main-panel">
         <header class="text-center mb-10">
             <h1 class="text-xl font-bold italic" style="font-family: 'Cinzel', serif; color: #fff; text-shadow: 0 0 10px #d4af37;">[ SACRED_MISSION_CONTROL ]</h1>
-            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V16.2 // LOGIC_PURIFICATION_MODE</p>
+            <p class="text-[0.5rem] tracking-[10px] opacity-40 mt-2">V17.0 // LCP_SALES_GATE_PROTOCOL</p>
         </header>
 
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
 
-        <!-- 01. THE ATOMIC CRACKER -->
-        <div class="section-title">I. THE_ATOMIC_CRACKER</div>
-        <div class="btn-divine font-black text-white" style="border-width: 2px; border-style: double;" onclick="copyOSCEPrompt()">
-            ⚡ CRACK_SYSTEM_ATOMICALLY ⚡
-        </div>
-
-        <!-- 02. CAPITAL CRACKER -->
-        <div class="section-title">II. CAPITAL_CRACKER</div>
+        <!-- 01. SALES GATE -->
+        <div class="section-title">I. LCP_SALES_GATE</div>
         <div class="grid-duo">
-            <div class="btn-divine" onclick="copyGPPrompt('PITCH_DECK')">PITCH_DECK_CRACK</div>
-            <div class="btn-divine" onclick="copyGPPrompt('SHOWCASE')">EVIDENCE_CRACK</div>
+            <div class="btn-divine" onclick="copySalesPrompt('PRODUCT_GEN')">PRODUCT_PAGE_GEN</div>
+            <div class="btn-divine" onclick="copySalesPrompt('ACCESS_GRANT')">ACCESS_INJECTOR</div>
         </div>
 
-        <!-- 03. REALITY CRACKER -->
-        <div class="section-title">III. REALITY_CRACKER</div>
-        <div class="grid-duo">
-            <div class="btn-divine" onclick="copyDimPrompt('DIM_JSON')">GEN_DIM_JSON</div>
-            <div class="btn-divine" onclick="copyDimPrompt('EXEC_SHELL')">BUILD_DIM_SHELL</div>
-        </div>
+        <!-- 02. UNIVERSAL CRACKER -->
+        <div class="section-title">II. THE_ATOMIC_CRACKER</div>
+        <div class="btn-divine font-bold" onclick="copyOSCEPrompt()">[ CRACK_SYSTEM_ATOMICALLY ]</div>
 
-        <!-- 04. CIVILIZATION STARTER -->
-        <div class="section-title">IV. CIVILIZATION_STARTER</div>
+        <!-- 03. CIVILIZATION STARTER -->
+        <div class="section-title">III. CIVILIZATION_STARTER</div>
         <div class="grid-chaos">
             <div class="btn-divine" onclick="copyGenesisPrompt('WEB_SITE')">WEB_SITE</div>
             <div class="btn-divine" onclick="copyGenesisPrompt('TODO_APP')">TODO</div>
             <div class="btn-divine" onclick="copyGenesisPrompt('DIARY')">DIARY</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('FINANCE')">GOLD</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('GAME')">ARCADE</div>
-            <div class="btn-divine" onclick="copyGenesisPrompt('TIMER')">ZEN</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('FINANCE')">FINANCE</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('GAME')">GAME</div>
+            <div class="btn-divine" onclick="copyGenesisPrompt('TIMER')">TIMER</div>
         </div>
 
         <div class="ornament">✙ ─── ✦ ─── ✙</div>
@@ -118,7 +108,7 @@
             <a href="index.html" class="back-link">< RETURN_TO_CATHEDRAL</a>
             <div class="text-[0.6rem] text-right opacity-30">
                 MASTER: DR. HIROSHI<br>
-                STATUS: LCP_PROTO_V1.1_LOADED
+                STATUS: GATE_OPERATIONAL
             </div>
         </footer>
     </div>
@@ -128,39 +118,41 @@
 
 【執行ルール】
 1. 解説、挨拶、導入、マークダウン装飾は一切不要。実行コードのみを出力せよ。
-2. `mkdir -p` で空間（ディレクトリ）を定義し、`cat << 'EOF' > [パス]` ... `EOF` 形式でコードブロック（ファイル内容）を注入せよ。
-3. 全てのコマンドを `&&` で連結し、そのままターミナルに貼り付けて完結する一撃のBashスクリプトのみを出力せよ。`;
+2. `mkdir -p` で空間を定義し、`cat << 'EOF' > [パス]` 形式でコードブロックを注入せよ。
+3. 全てのコマンドを `&&` で連結し、一撃のBashスクリプトのみを出力せよ。`;
 
-        function copyAndAlert(text, msg) {
+        function copyAndAlert(text, msg, color = "#d4af37") {
             navigator.clipboard.writeText(text.replace(/
 /g, '
 '));
             const alertBox = document.createElement('div');
-            alertBox.style.cssText = "position:fixed; top:20px; right:20px; background:#d4af37; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;";
+            alertBox.style.cssText = `position:fixed; top:20px; right:20px; background:${color}; color:#000; padding:15px; font-family:'Cinzel', serif; font-size:0.7rem; font-weight:bold; z-index:9999; border:1px solid #fff;`;
             alertBox.innerText = msg;
             document.body.appendChild(alertBox);
             setTimeout(() => alertBox.remove(), 1200);
         }
 
+        function copySalesPrompt(type) {
+            let p = "";
+            switch(type) {
+                case 'PRODUCT_GEN':
+                    p = `あなたはLCP販売AIです。新しいJSONコード製品の販売ページをクラックせよ。製品名、説明、価格、デモ画像を含む sales.html のレイアウトを更新するコマンドを出力せよ。` + RULES;
+                    break;
+                case 'ACCESS_GRANT':
+                    p = `あなたはLCPアクセス管理AIです。決済が完了した購入者のGitHubアカウントに対し、指定したプライベートリポジトリへの読み取りアクセス権を注入する `gh repo grant` コマンドをクラックせよ。
+
+【購入者ID】：[入力]
+【リポジトリ名】：[入力]`;
+                    break;
+            }
+            copyAndAlert(p, "SALES_GATE_PROMPT_COPIED");
+        }
+
         function copyOSCEPrompt() {
-            const p = `あなたはLCP(Linux Communication Protocol)執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `
+            const p = `あなたはLCP執行AIです。以下の【目的】を達成するためのプロジェクト全構造をクラックせよ。` + RULES + `
 
 【目的】：[入力]`;
             copyAndAlert(p, "ATOMIC_PROMPT_EXTRACTED");
-        }
-
-        function copyGPPrompt(type) {
-            const p = `あなたはLCP経済アナリストです。資本をクラックするための[${type}]を生成せよ。` + RULES + `
-
-【ミッション】：100万ドルのスポンサー獲得`;
-            copyAndAlert(p, "CAPITAL_CRACKER_READY");
-        }
-
-        function copyDimPrompt(type) {
-            const p = `あなたは次元執行AIです。現実をクラックし、多次元で並行稼働する[${type}]を構築せよ。` + RULES + `
-
-【ミッション】：バックグラウンドでの自律ミッション遂行`;
-            copyAndAlert(p, "DIMENSIONAL_UNIT_READY");
         }
 
         function copyGenesisPrompt(type) {
